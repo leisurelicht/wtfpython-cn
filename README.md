@@ -27,7 +27,7 @@ So, here we go...
     - [Section: Strain your brain!](#section-strain-your-brain)
         - [> Strings can be tricky sometimes/微妙的字符串 *](#-strings-can-be-tricky-sometimes微妙的字符串-)
         - [> Time for some hash brownies!/是时候来点蛋糕了!](#-time-for-some-hash-brownies是时候来点蛋糕了)
-        - [> Return return everywhere!](#-return-return-everywhere)
+        - [> Return return everywhere!/到处返回！](#-return-return-everywhere到处返回)
         - [> Deep down, we're all the same. *](#-deep-down-were-all-the-same-)
         - [> For what?](#-for-what)
         - [> Evaluation time discrepancy](#-evaluation-time-discrepancy)
@@ -248,7 +248,7 @@ some_dict[5] = "Python"
 
 ---
 
-### > Return return everywhere!
+### > Return return everywhere!/到处返回！
 
 ```py
 def some_func():
@@ -264,10 +264,10 @@ def some_func():
 'from_finally'
 ```
 
-#### 💡 Explanation:
+#### 💡 说明:
 
-- When a `return`, `break` or `continue` statement is executed in the `try` suite of a "try…finally" statement, the `finally` clause is also executed ‘on the way out.
-- The return value of a function is determined by the last `return` statement executed. Since the `finally` clause always executes, a `return` statement executed in the `finally` clause will always be the last one executed.
+- 当在 "try...finally" 语句的 `try` 中执行 `return`, `break` 或 `continue` 后, `finally` 子句依然会执行.
+- 函数的返回值由最后执行的 `return` 语句决定. 由于 `finally` 子句一定会执行, 所以 `finally` 子句中的 `return` 将始终是最后执行的语句.
 
 ---
 
