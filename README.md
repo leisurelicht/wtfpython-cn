@@ -26,7 +26,7 @@ So, here we go...
 - [👀 Examples](#👀-examples)
     - [Section: Strain your brain!](#section-strain-your-brain)
         - [> Strings can be tricky sometimes/微妙的字符串 *](#-strings-can-be-tricky-sometimes微妙的字符串-)
-        - [> Time for some hash brownies!](#-time-for-some-hash-brownies)
+        - [> Time for some hash brownies!/是时候来点蛋糕了!](#-time-for-some-hash-brownies是时候来点蛋糕了)
         - [> Return return everywhere!](#-return-return-everywhere)
         - [> Deep down, we're all the same. *](#-deep-down-were-all-the-same-)
         - [> For what?](#-for-what)
@@ -209,7 +209,8 @@ False
 
 ---
 
-### > Time for some hash brownies!
+### > Time for some hash brownies!/是时候来点蛋糕了!
+* hash brownie指一种含有大麻成分的蛋糕, 所以这里是句双关
 
 1\.
 ```py
@@ -229,21 +230,21 @@ some_dict[5] = "Python"
 "Python"
 ```
 
-"Python" destroyed the existence of "JavaScript"?
+"Python" 消除了 "JavaScript" 的存在?
 
-#### 💡 Explanation
+#### 💡 说明:
 
-* Python dictionaries check for equality and compare the hash value to determine if two keys are the same.
-* Immutable objects with same value always have the same hash in Python.
+* Python 字典通过检查键值是否相等和比较哈希值来确定两个键是否相同.
+* 具有相同值的不可变对象在Python中始终具有相同的哈希值.
   ```py
   >>> 5 == 5.0
   True
   >>> hash(5) == hash(5.0)
   True
   ```
-  **Note:** Objects with different values may also have same hash (known as hash collision).
-* When the statement `some_dict[5] = "Python"` is executed, the existing value "JavaScript" is overwritten with "Python" because Python recognizes `5` and `5.0` as the same keys of the dictionary `some_dict`.
-* This StackOverflow [answer](https://stackoverflow.com/a/32211042/4354153) explains beautifully the rationale behind it.
+  **注意:** 具有不同值的对象也可能具有相同的哈希值（哈希冲突）.
+* 当执行 `some_dict[5] = "Python"` 语句时, 因为Python将 `5` 和 `5.0` 识别为 `some_dict` 的同一个键, 所以已有值 "JavaScript" 就被 "Python" 覆盖了.
+* 这个 StackOverflow的 [回答](https://stackoverflow.com/a/32211042/4354153) 漂亮的解释了这背后的基本原理.
 
 ---
 
