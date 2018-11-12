@@ -29,7 +29,7 @@ So, here we go...
         - [> Time for some hash brownies!/是时候来点蛋糕了!](#-time-for-some-hash-brownies是时候来点蛋糕了)
         - [> Return return everywhere!/到处返回！](#-return-return-everywhere到处返回)
         - [> Deep down, we're all the same./本质上,我们都一样. *](#-deep-down-were-all-the-same本质上我们都一样-)
-        - [> For what?](#-for-what)
+        - [> For what?/为什么?](#-for-what为什么)
         - [> Evaluation time discrepancy](#-evaluation-time-discrepancy)
         - [> `is` is not what it is!](#-is-is-not-what-it-is)
         - [> A tic-tac-toe where X wins in the first attempt!](#-a-tic-tac-toe-where-x-wins-in-the-first-attempt)
@@ -321,7 +321,7 @@ True
 
 ---
 
-### > For what?
+### > For what?/为什么?
 
 ```py
 some_string = "wtf"
@@ -332,18 +332,19 @@ for i, some_dict[i] in enumerate(some_string):
 
 **Output:**
 ```py
->>> some_dict # An indexed dict is created.
+>>> some_dict # 创建了索引字典.
 {0: 'w', 1: 't', 2: 'f'}
 ```
 
-####  💡 Explanation:
+####  💡 说明:
 
-* A `for` statement is defined in the [Python grammar](https://docs.python.org/3/reference/grammar.html) as:
+* [Python 语法](https://docs.python.org/3/reference/grammar.html) 中对 `for` 的定义是:
   ```
   for_stmt: 'for' exprlist 'in' testlist ':' suite ['else' ':' suite]
   ```
-  Where `exprlist` is the assignment target. This means that the equivalent of `{exprlist} = {next_value}` is **executed for each item** in the iterable.
-  An interesting example that illustrates this:
+  其中 `exprlist` 指分配目标. 这意味着对可迭代对象中的**每一项都会执行**类似 `{exprlist} = {next_value}` 的操作.
+
+  一个有趣的例子说明了这一点:
   ```py
   for i in range(4):
       print(i)
@@ -358,13 +359,13 @@ for i, some_dict[i] in enumerate(some_string):
   3
   ```
 
-  Did you expect the loop to run just once?
+  你可曾觉得这个循环只会运行一次?
 
-  **💡 Explanation:**
+  **💡 说明:**
 
-  - The assignment statement `i = 10` never affects the iterations of the loop because of the way for loops work in Python. Before the beginning of every iteration, the next item provided by the iterator (`range(4)` this case) is unpacked and assigned the target list variables (`i` in this case).
+  - 由于循环在Python中工作方式, 赋值语句 `i = 10` 并不会影响迭代循环, 在每次迭代开始之前, 迭代器(这里指 `range(4)`) 生成的下一个元素就被解包并赋值给目标列表的变量(这里指 `i`)了.
 
-* The `enumerate(some_string)` function yields a new value `i` (A counter going up) and a character from the `some_string` in each iteration. It then sets the (just assigned) `i` key of the dictionary `some_dict` to that character. The unrolling of the loop can be simplified as:
+* 在每一次的迭代中, `enumerate(some_string)` 函数就生成一个新值 `i` (计数器增加) 并从 `some_string` 中获取一个字符. 然后将字典 `some_dict` 键 `i` (刚刚分配的) 的值设为该字符. 本例中循环的展开可以简化为:
   ```py
   >>> i, some_dict[i] = (0, 'w')
   >>> i, some_dict[i] = (1, 't')
