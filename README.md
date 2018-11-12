@@ -28,7 +28,7 @@ So, here we go...
         - [> Strings can be tricky sometimes/微妙的字符串 *](#-strings-can-be-tricky-sometimes微妙的字符串-)
         - [> Time for some hash brownies!/是时候来点蛋糕了!](#-time-for-some-hash-brownies是时候来点蛋糕了)
         - [> Return return everywhere!/到处返回！](#-return-return-everywhere到处返回)
-        - [> Deep down, we're all the same. *](#-deep-down-were-all-the-same-)
+        - [> Deep down, we're all the same./本质上,我们都一样. *](#-deep-down-were-all-the-same本质上我们都一样-)
         - [> For what?](#-for-what)
         - [> Evaluation time discrepancy](#-evaluation-time-discrepancy)
         - [> `is` is not what it is!](#-is-is-not-what-it-is)
@@ -271,7 +271,7 @@ def some_func():
 
 ---
 
-### > Deep down, we're all the same. *
+### > Deep down, we're all the same./本质上,我们都一样. *
 
 ```py
 class WTF:
@@ -280,22 +280,22 @@ class WTF:
 
 **Output:**
 ```py
->>> WTF() == WTF() # two different instances can't be equal
+>>> WTF() == WTF() # 两个不同的对象应该不相等
 False
->>> WTF() is WTF() # identities are also different
+>>> WTF() is WTF() # 也不相同
 False
->>> hash(WTF()) == hash(WTF()) # hashes _should_ be different as well
+>>> hash(WTF()) == hash(WTF()) # 哈希值也应该不同
 True
 >>> id(WTF()) == id(WTF())
 True
 ```
 
-#### 💡 Explanation:
+#### 💡 说明:
 
-* When `id` was called, Python created a `WTF` class object and passed it to the `id` function. The `id` function takes its `id` (its memory location), and throws away the object. The object is destroyed.
-* When we do this twice in succession, Python allocates the same memory location to this second object as well. Since (in CPython) `id` uses the memory location as the object id, the id of the two objects is the same.
-* So, object's id is unique only for the lifetime of the object. After the object is destroyed, or before it is created, something else can have the same id.
-* But why did the `is` operator evaluated to `False`? Let's see with this snippet.
+* 当调用 `id` 函数时, Python 创建了一个 `WTF` 类的对象并传给 `id` 函数. 然后 `id` 函数获取其id值 (也就是内存地址), 然后丢弃该对象. 该对象就被销毁了.
+* 当我们连续两次进行这个操作时, Python会将相同的内存地址分配给第二个对象. 因为 (在CPython中) `id` 函数使用对象的内存地址作为对象的id值, 所以两个对象的id值是相同的.
+* 综上, 对象的id值仅仅在对象的生命周期内唯一. 在对象被销毁之后, 或被创建之前, 其他对象可以具有相同的id值.
+* 那为什么 `is` 操作的结果为 `False` 呢? 让我们看看这段代码.
   ```py
   class WTF(object):
     def __init__(self): print("I")
@@ -317,7 +317,7 @@ True
   D
   True
   ```
-  As you may observe, the order in which the objects are destroyed is what made all the difference here.
+  正如你所看到的, 对象销毁的顺序是造成所有不同之处的原因.
 
 ---
 
