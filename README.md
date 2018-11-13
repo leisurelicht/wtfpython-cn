@@ -31,7 +31,7 @@ So, here we go...
         - [> Deep down, we're all the same./本质上,我们都一样. *](#-deep-down-were-all-the-same本质上我们都一样-)
         - [> For what?/为什么?](#-for-what为什么)
         - [> Evaluation time discrepancy/执行时机差异](#-evaluation-time-discrepancy执行时机差异)
-        - [> `is` is not what it is!](#-is-is-not-what-it-is)
+        - [> `is` is not what it is!/出人意料的`is`!](#-is-is-not-what-it-is出人意料的is)
         - [> A tic-tac-toe where X wins in the first attempt!](#-a-tic-tac-toe-where-x-wins-in-the-first-attempt)
         - [> The sticky output function](#-the-sticky-output-function)
         - [> `is not ...` is not `is (not ...)`](#-is-not--is-not-is-not-)
@@ -421,9 +421,9 @@ array_2[:] = [1,2,3,4,5]
 
 ---
 
-### > `is` is not what it is!
+### > `is` is not what it is!/出人意料的`is`!
 
-The following is a very famous example present all over the internet.
+下面是一个在互联网上非常有名的例子.
 
 ```py
 >>> a = 256
@@ -441,26 +441,26 @@ False
 True
 ```
 
-#### 💡 Explanation:
+#### 💡 说明:
 
-**The difference between `is` and `==`**
+**`is` 和 `==` 的区别**
 
-* `is` operator checks if both the operands refer to the same object (i.e., it checks if the identity of the operands matches or not).
-* `==` operator compares the values of both the operands and checks if they are the same.
-* So `is` is for reference equality and `==` is for value equality. An example to clear things up,
+* `is` 运算符检查两个运算对象是否引用自同一对象 (即, 它检查两个预算对象是否相同).
+* `==` 运算符比较两个运算对象的值是否相等.
+* 因此 `is` 代表引用相同, `==` 代表值相等. 下面的例子可以很好的说明这点,
   ```py
   >>> [] == []
   True
-  >>> [] is [] # These are two empty lists at two different memory locations.
+  >>> [] is [] # 这两个空列表位于不同的内存地址.
   False
   ```
 
-**`256` is an existing object but `257` isn't**
+**`256` 是一个已经存在的对象, 而 `257` 不是**
 
-When you start up python the numbers from `-5` to `256` will be allocated. These numbers are used a lot, so it makes sense just to have them ready.
+当你启动Python 的时候, `-5` 到 `256` 的数值就已经被分配好了. 这些数字因为经常使用所以适合被提前准备好.
 
-Quoting from https://docs.python.org/3/c-api/long.html
-> The current implementation keeps an array of integer objects for all integers between -5 and 256, when you create an int in that range you just get back a reference to the existing object. So it should be possible to change the value of 1. I suspect the behavior of Python, in this case, is undefined. :-)
+引用自 https://docs.python.org/3/c-api/long.html
+> 当前的实现为-5到256之间的所有整数保留一个整数对象数组, 当你创建了一个该范围内的整数时, 你只需要返回现有对象的引用. 所以改变1的值是有可能的. 我怀疑这种行为在Python中是未定义行为. :-)
 
 ```py
 >>> id(256)
@@ -481,9 +481,9 @@ Quoting from https://docs.python.org/3/c-api/long.html
 140084850247344
 ```
 
-Here the interpreter isn't smart enough while executing `y = 257` to recognize that we've already created an integer of the value `257,` and so it goes on to create another object in the memory.
+这里解释器并没有智能到能在执行 `y = 257` 时意识到我们已经创建了一个整数 `257`, 所以它在内存中又新建了另一个对象.
 
-**Both `a` and `b` refer to the same object when initialized with same value in the same line.**
+**当 `a` 和 `b` 在同一行中使用相同的值初始化时，会指向同一个对象.**
 
 ```py
 >>> a, b = 257, 257
@@ -499,8 +499,8 @@ Here the interpreter isn't smart enough while executing `y = 257` to recognize t
 140640774013488
 ```
 
-* When a and b are set to `257` in the same line, the Python interpreter creates a new object, then references the second variable at the same time. If you do it on separate lines, it doesn't "know" that there's already `257` as an object.
-* It's a compiler optimization and specifically applies to the interactive environment. When you enter two lines in a live interpreter, they're compiled separately, therefore optimized separately. If you were to try this example in a `.py` file, you would not see the same behavior, because the file is compiled all at once.
+* 当 a 和 b 在同一行中被设置为 `257` 时, Python 解释器会创建一个新对象, 然后同时引用第二个变量. 如果你在不同的行上进行, 它就不会 "知道" 已经存在一个 `257` 对象了.
+* 这是一种特别为交互式环境做的编译器优化. 当你在实时解释器中输入两行的时候, 他们会单独编译, 因此也会单独进行优化. 如果你在 `.py` 文件中尝试这个例子, 则不会看到相同的行为, 因为文件是一次性编译的.
 
 ---
 
