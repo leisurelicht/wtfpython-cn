@@ -33,7 +33,7 @@ So, here we go...
         - [> Evaluation time discrepancy/执行时机差异](#-evaluation-time-discrepancy执行时机差异)
         - [> `is` is not what it is!/出人意料的`is`!](#-is-is-not-what-it-is出人意料的is)
         - [> A tic-tac-toe where X wins in the first attempt!/一蹴即至!](#-a-tic-tac-toe-where-x-wins-in-the-first-attempt一蹴即至)
-        - [> The sticky output function](#-the-sticky-output-function)
+        - [> The sticky output function/麻烦的输出](#-the-sticky-output-function麻烦的输出)
         - [> `is not ...` is not `is (not ...)`](#-is-not--is-not-is-not-)
         - [> The surprising comma](#-the-surprising-comma)
         - [> Backslashes at the end of string](#-backslashes-at-the-end-of-string)
@@ -549,7 +549,7 @@ board = [row]*3
 
 ---
 
-### > The sticky output function
+### > The sticky output function/麻烦的输出
 
 ```py
 funcs = []
@@ -558,7 +558,7 @@ for x in range(7):
     def some_func():
         return x
     funcs.append(some_func)
-    results.append(some_func()) # note the function call here
+    results.append(some_func()) # 注意这里函数被执行了
 
 funcs_results = [func() for func in funcs]
 ```
@@ -570,9 +570,10 @@ funcs_results = [func() for func in funcs]
 >>> funcs_results
 [6, 6, 6, 6, 6, 6, 6]
 ```
-Even when the values of `x` were different in every iteration prior to appending `some_func` to `funcs`, all the functions return 6.
 
-//OR
+即使每次在迭代中将 `some_func` 加入 `funcs` 前的 `x` 值都不相同, 所有的函数还是都返回6.
+
+// 再换个例子
 
 ```py
 >>> powers_of_x = [lambda x: x**i for i in range(10)]
@@ -580,11 +581,11 @@ Even when the values of `x` were different in every iteration prior to appending
 [512, 512, 512, 512, 512, 512, 512, 512, 512, 512]
 ```
 
-#### 💡 Explanation
+#### 💡 说明:
 
-- When defining a function inside a loop that uses the loop variable in its body, the loop function's closure is bound to the variable, not its value. So all of the functions use the latest value assigned to the variable for computation.
+- 当在循环内部定义一个函数时, 如果该函数在其主体中使用了循环变量, 则闭包函数将与循环变量绑定, 而不是它的值. 因此, 所有的函数都是使用最后分配给变量的值来进行计算的.
 
-- To get the desired behavior you can pass in the loop variable as a named variable to the function. **Why this works?** Because this will define the variable again within the function's scope.
+- 可以通过将循环变量作为命名变量传递给函数来获得预期的结果. **为什么这样可行?** 因为这会在函数内再次定义一个局部变量.
 
     ```py
     funcs = []
