@@ -32,7 +32,7 @@ So, here we go...
         - [> For what?/为什么?](#-for-what为什么)
         - [> Evaluation time discrepancy/执行时机差异](#-evaluation-time-discrepancy执行时机差异)
         - [> `is` is not what it is!/出人意料的`is`!](#-is-is-not-what-it-is出人意料的is)
-        - [> A tic-tac-toe where X wins in the first attempt!](#-a-tic-tac-toe-where-x-wins-in-the-first-attempt)
+        - [> A tic-tac-toe where X wins in the first attempt!/一蹴即至!](#-a-tic-tac-toe-where-x-wins-in-the-first-attempt一蹴即至)
         - [> The sticky output function](#-the-sticky-output-function)
         - [> `is not ...` is not `is (not ...)`](#-is-not--is-not-is-not-)
         - [> The surprising comma](#-the-surprising-comma)
@@ -504,12 +504,12 @@ True
 
 ---
 
-### > A tic-tac-toe where X wins in the first attempt!
+### > A tic-tac-toe where X wins in the first attempt!/一蹴即至!
 
 ```py
-# Let's initialize a row
+# 我们先初始化一个变量row
 row = [""]*3 #row i['', '', '']
-# Let's make a board
+# 并创建一个变量board
 board = [row]*3
 ```
 
@@ -526,19 +526,19 @@ board = [row]*3
 [['X', '', ''], ['X', '', ''], ['X', '', '']]
 ```
 
-We didn't assign 3 "X"s or did we?
+我们有没有赋值过3个 "X" 呢？
 
-#### 💡 Explanation:
+#### 💡 说明:
 
-When we initialize `row` variable, this visualization explains what happens in the memory
+当我们初始化 `row` 变量时, 下面这张图展示了内存中的情况。
 
 ![image](/images/tic-tac-toe/after_row_initialized.png)
 
-And when the `board` is initialized by multiplying the `row`, this is what happens inside the memory (each of the elements `board[0]`, `board[1]` and `board[2]` is a reference to the same list referred by `row`)
+而当通过对 `row` 做乘法来初始化 `board` 时, 内存中的情况则如下图所示 (每个元素 `board[0]`, `board[1]` 和 `board[2]` 都和 `row` 一样引用了同一列表.)
 
 ![image](/images/tic-tac-toe/after_board_initialized.png)
 
-We can avoid this scenario here by not using `row` variable to generate `board`. (Asked in [this](https://github.com/satwikkansal/wtfpython/issues/68) issue).
+我们可以通过不使用变量 `row` 生成 `board` 来避免这种情况. ([这个](https://github.com/satwikkansal/wtfpython/issues/68)issue提出了这个需求.)
 
 ```py
 >>> board = [['']*3 for _ in range(3)]
