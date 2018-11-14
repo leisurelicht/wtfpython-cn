@@ -34,7 +34,7 @@ So, here we go...
         - [> `is` is not what it is!/出人意料的`is`!](#-is-is-not-what-it-is出人意料的is)
         - [> A tic-tac-toe where X wins in the first attempt!/一蹴即至!](#-a-tic-tac-toe-where-x-wins-in-the-first-attempt一蹴即至)
         - [> The sticky output function/麻烦的输出](#-the-sticky-output-function麻烦的输出)
-        - [> `is not ...` is not `is (not ...)`](#-is-not--is-not-is-not-)
+        - [> `is not ...` is not `is (not ...)`/`is not ...` 不是 `is (not ...)`](#-is-not--is-not-is-not-is-not--不是-is-not-)
         - [> The surprising comma](#-the-surprising-comma)
         - [> Backslashes at the end of string](#-backslashes-at-the-end-of-string)
         - [> not knot!](#-not-knot)
@@ -604,7 +604,7 @@ funcs_results = [func() for func in funcs]
 
 ---
 
-### > `is not ...` is not `is (not ...)`
+### > `is not ...` is not `is (not ...)`/`is not ...` 不是 `is (not ...)`
 
 ```py
 >>> 'something' is not None
@@ -613,10 +613,10 @@ True
 False
 ```
 
-#### 💡 Explanation
+#### 💡 说明:
 
-- `is not` is a single binary operator, and has behavior different than using `is` and `not` separated.
-- `is not` evaluates to `False` if the variables on either side of the operator point to the same object and `True` otherwise.
+- `is not` 是个单独的二元运算符, 与分别使用 `is` 和 `not` 不同.
+-  如果操作符两侧的变量指向同一个对象, 则 `is not` 的结果为 `False`, 否则结果为 `True`.
 
 ---
 
