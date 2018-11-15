@@ -35,7 +35,7 @@ So, here we go...
         - [> A tic-tac-toe where X wins in the first attempt!/一蹴即至!](#-a-tic-tac-toe-where-x-wins-in-the-first-attempt一蹴即至)
         - [> The sticky output function/麻烦的输出](#-the-sticky-output-function麻烦的输出)
         - [> `is not ...` is not `is (not ...)`/`is not ...` 不是 `is (not ...)`](#-is-not--is-not-is-not-is-not--不是-is-not-)
-        - [> The surprising comma](#-the-surprising-comma)
+        - [> The surprising comma/意外的逗号](#-the-surprising-comma意外的逗号)
         - [> Backslashes at the end of string](#-backslashes-at-the-end-of-string)
         - [> not knot!](#-not-knot)
         - [> Half triple-quoted strings](#-half-triple-quoted-strings)
@@ -620,7 +620,7 @@ False
 
 ---
 
-### > The surprising comma
+### > The surprising comma/意外的逗号
 
 **Output:**
 ```py
@@ -642,12 +642,11 @@ SyntaxError: invalid syntax
 SyntaxError: invalid syntax
 ```
 
-#### 💡 Explanation:
+#### 💡 说明:
 
-- Trailing comma is not always legal in formal parameters list of a Python function.
--  In Python, the argument list is defined partially with leading commas and partially with trailing commas. This conflict causes situations where a comma is trapped in the middle, and no rule accepts it.
--  **Note:** The trailing comma problem is [fixed in Python 3.6](https://bugs.python.org/issue9232). The remarks in [this](https://bugs.python.org/issue9232#msg248399) post discuss in brief different usages of trailing commas in Python.
-
+- 在Python函数的形式参数列表中, 尾随逗号并不一定是合法的.
+- 在Python中, 参数列表部分用前置逗号定义, 部分用尾随逗号定义. 这种冲突导致逗号被夹在中间, 没有规则定义它.(译:这一句看得我也很懵逼,只能强翻了.详细解释看下面的讨论帖会一目了然.)
+- **注意:** 尾随逗号的问题已经在Python 3.6中被[修复](https://bugs.python.org/issue9232)了. 而这篇[帖子](https://bugs.python.org/issue9232#msg248399)中则简要讨论了Python中尾随逗号的不同用法.
 ---
 
 ### > Backslashes at the end of string
