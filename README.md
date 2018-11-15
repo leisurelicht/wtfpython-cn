@@ -36,7 +36,7 @@ So, here we go...
         - [> The sticky output function/麻烦的输出](#-the-sticky-output-function麻烦的输出)
         - [> `is not ...` is not `is (not ...)`/`is not ...` 不是 `is (not ...)`](#-is-not--is-not-is-not-is-not--不是-is-not-)
         - [> The surprising comma/意外的逗号](#-the-surprising-comma意外的逗号)
-        - [> Backslashes at the end of string](#-backslashes-at-the-end-of-string)
+        - [> Backslashes at the end of string/字符串末尾的反斜杠](#-backslashes-at-the-end-of-string字符串末尾的反斜杠)
         - [> not knot!](#-not-knot)
         - [> Half triple-quoted strings](#-half-triple-quoted-strings)
         - [> Midnight time doesn't exist?](#-midnight-time-doesnt-exist)
@@ -649,7 +649,7 @@ SyntaxError: invalid syntax
 - **注意:** 尾随逗号的问题已经在Python 3.6中被[修复](https://bugs.python.org/issue9232)了. 而这篇[帖子](https://bugs.python.org/issue9232#msg248399)中则简要讨论了Python中尾随逗号的不同用法.
 ---
 
-### > Backslashes at the end of string
+### > Backslashes at the end of string/字符串末尾的反斜杠
 
 **Output:**
 ```
@@ -665,14 +665,14 @@ SyntaxError: invalid syntax
 SyntaxError: EOL while scanning string literal
 ```
 
-#### 💡 Explanation
+#### 💡 说明:
 
-- In a raw string literal, as indicated by the prefix `r`, the backslash doesn't have the special meaning.
+- 在以 `r` 开头的原始字符串中, 反斜杠并没有特殊含义.
   ```py
   >>> print(repr(r"wt\"f"))
   'wt\\"f'
   ```
-- What the interpreter actually does, though, is simply change the behavior of backslashes, so they pass themselves and the following character through. That's why backslashes don't work at the end of a raw string.
+- 解释器所做的只是简单的改变了反斜杠的行为, 因此会直接放行反斜杠及后一个的字符. 这就是反斜杠在原始字符串末尾不起作用的原因.
 
 ---
 
