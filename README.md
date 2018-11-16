@@ -38,7 +38,7 @@ So, here we go...
         - [> The surprising comma/意外的逗号](#-the-surprising-comma意外的逗号)
         - [> Backslashes at the end of string/字符串末尾的反斜杠](#-backslashes-at-the-end-of-string字符串末尾的反斜杠)
         - [> not knot!/别纠结!](#-not-knot别纠结)
-        - [> Half triple-quoted strings](#-half-triple-quoted-strings)
+        - [> Half triple-quoted strings/三个引号](#-half-triple-quoted-strings三个引号)
         - [> Midnight time doesn't exist?](#-midnight-time-doesnt-exist)
         - [> What's wrong with booleans?](#-whats-wrong-with-booleans)
         - [> Class attributes and instance attributes](#-class-attributes-and-instance-attributes)
@@ -703,7 +703,7 @@ SyntaxError: invalid syntax
 
 ---
 
-### > Half triple-quoted strings
+### > Half triple-quoted strings/三个引号
 
 **Output:**
 ```py
@@ -711,20 +711,20 @@ SyntaxError: invalid syntax
 wtfpython
 >>> print("wtfpython""")
 wtfpython
->>> # The following statements raise `SyntaxError`
+>>> # 下面的语句会抛出 `SyntaxError` 异常
 >>> # print('''wtfpython')
 >>> # print("""wtfpython")
 ```
 
-#### 💡 Explanation:
-+ Python supports implicit [string literal concatenation](https://docs.python.org/2/reference/lexical_analysis.html#string-literal-concatenation), Example,
+#### 💡 说明:
++ Python 提供隐式的[字符串链接](https://docs.python.org/2/reference/lexical_analysis.html#string-literal-concatenation), 例如,
   ```
   >>> print("wtf" "python")
   wtfpython
   >>> print("wtf" "") # or "wtf"""
   wtf
   ```
-+ `'''` and `"""` are also string delimiters in Python which causes a SyntaxError because the Python interpreter was expecting a terminating triple quote as delimiter while scanning the currently encountered triple quoted string literal.
++ `'''` 和 `"""` 在 Python中也是字符串定界符, Python 解释器在先遇到三个引号的的时候会尝试再寻找三个终止引号作为定界符, 如果不存在则会导致 `SyntaxError` 异常.
 
 ---
 
