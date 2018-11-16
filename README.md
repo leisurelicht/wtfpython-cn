@@ -39,7 +39,7 @@ So, here we go...
         - [> Backslashes at the end of string/字符串末尾的反斜杠](#-backslashes-at-the-end-of-string字符串末尾的反斜杠)
         - [> not knot!/别纠结!](#-not-knot别纠结)
         - [> Half triple-quoted strings/三个引号](#-half-triple-quoted-strings三个引号)
-        - [> Midnight time doesn't exist?](#-midnight-time-doesnt-exist)
+        - [> Midnight time doesn't exist?/不存在的午夜?](#-midnight-time-doesnt-exist不存在的午夜)
         - [> What's wrong with booleans?](#-whats-wrong-with-booleans)
         - [> Class attributes and instance attributes](#-class-attributes-and-instance-attributes)
         - [> yielding None](#-yielding-none)
@@ -728,7 +728,7 @@ wtfpython
 
 ---
 
-### > Midnight time doesn't exist?
+### > Midnight time doesn't exist?/不存在的午夜?
 
 ```py
 from datetime import datetime
@@ -750,11 +750,12 @@ if noon_time:
 ```sh
 ('Time at noon is', datetime.time(12, 0))
 ```
-The midnight time is not printed.
 
-#### 💡 Explanation:
+midnight_time 并没有被输出.
 
-Before Python 3.5, the boolean value for `datetime.time` object was considered to be `False` if it represented midnight in UTC. It is error-prone when using the `if obj:` syntax to check if the `obj` is null or some equivalent of "empty."
+#### 💡 说明:
+
+在Python 3.5之前, 如果 `datetime.time` 对象存储的UTC的午夜时间(译: 就是 `00:00`), 那么它的布尔值会被认为是 `False`. 当使用 `if obj:` 语句来检查 `obj` 是否为 `null` 或者某些“空”值的时候, 很容易出错.
 
 ---
 
