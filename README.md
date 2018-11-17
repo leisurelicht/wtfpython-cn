@@ -41,7 +41,7 @@ So, here we go...
         - [> Half triple-quoted strings/三个引号](#-half-triple-quoted-strings三个引号)
         - [> Midnight time doesn't exist?/不存在的午夜?](#-midnight-time-doesnt-exist不存在的午夜)
         - [> What's wrong with booleans?/布尔你咋了?](#-whats-wrong-with-booleans布尔你咋了)
-        - [> Class attributes and instance attributes](#-class-attributes-and-instance-attributes)
+        - [> Class attributes and instance attributes/类属性和实例属性](#-class-attributes-and-instance-attributes类属性和实例属性)
         - [> yielding None](#-yielding-none)
         - [> Mutating the immutable!](#-mutating-the-immutable)
         - [> The disappearing variable from outer scope](#-the-disappearing-variable-from-outer-scope)
@@ -827,7 +827,7 @@ another_dict[1.0] = "Python"
 
 ---
 
-### > Class attributes and instance attributes
+### > Class attributes and instance attributes/类属性和实例属性
 
 1\.
 ```py
@@ -890,10 +890,10 @@ True
 True
 ```
 
-#### 💡 Explanation:
+#### 💡 说明:
 
-* Class variables and variables in class instances are internally handled as dictionaries of a class object. If a variable name is not found in the dictionary of the current class, the parent classes are searched for it.
-* The `+=` operator modifies the mutable object in-place without creating a new object. So changing the attribute of one instance affects the other instances and the class attribute as well.
+* 类变量和实例变量在内部是通过类对象的字典来处理(译: 就是 `__dict__` 属性). 如果在当前类的字典中找不到的话就去它的父类中寻找.
+* `+=` 运算符会在原地修改可变对象, 而不是创建新对象. 因此, 修改一个实例的属性会影响其他实例和类属性.
 
 ---
 
