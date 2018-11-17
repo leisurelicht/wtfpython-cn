@@ -43,7 +43,7 @@ So, here we go...
         - [> What's wrong with booleans?/布尔你咋了?](#-whats-wrong-with-booleans布尔你咋了)
         - [> Class attributes and instance attributes/类属性和实例属性](#-class-attributes-and-instance-attributes类属性和实例属性)
         - [> yielding None/生成 None](#-yielding-none生成-none)
-        - [> Mutating the immutable!](#-mutating-the-immutable)
+        - [> Mutating the immutable!/强人所难](#-mutating-the-immutable强人所难)
         - [> The disappearing variable from outer scope](#-the-disappearing-variable-from-outer-scope)
         - [> When True is actually False](#-when-true-is-actually-false)
         - [> From filled to None in one instruction...](#-from-filled-to-none-in-one-instruction)
@@ -926,7 +926,7 @@ def some_func(val):
 
 ---
 
-### > Mutating the immutable!
+### > Mutating the immutable!/强人所难
 
 ```py
 some_tuple = ("A", "tuple", "with", "values")
@@ -937,7 +937,7 @@ another_tuple = ([1, 2], [3, 4], [5, 6])
 ```py
 >>> some_tuple[2] = "change this"
 TypeError: 'tuple' object does not support item assignment
->>> another_tuple[2].append(1000) #This throws no error
+>>> another_tuple[2].append(1000) # 这里不出现错误
 >>> another_tuple
 ([1, 2], [3, 4], [5, 6, 1000])
 >>> another_tuple[2] += [99, 999]
@@ -946,16 +946,18 @@ TypeError: 'tuple' object does not support item assignment
 ([1, 2], [3, 4], [5, 6, 1000, 99, 999])
 ```
 
-But I thought tuples were immutable...
+我还以为元组是不可变的呢...
 
-#### 💡 Explanation:
+#### 💡 说明:
 
-* Quoting from https://docs.python.org/2/reference/datamodel.html
+* 引用 https://docs.python.org/2/reference/datamodel.html
 
-    > Immutable sequences
-        An object of an immutable sequence type cannot change once it is created. (If the object contains references to other objects, these other objects may be mutable and may be modified; however, the collection of objects directly referenced by an immutable object cannot change.)
+    > 不可变序列
+        不可变序列的对象一旦创建就不能再改变. (如果对象包含对其他对象的引用，则这些其他对象可能是可变的并且可能会被修改; 但是，由不可变对象直接引用的对象集合不能更改.)
 
-* `+=` operator changes the list in-place. The item assignment doesn't work, but when the exception occurs, the item has already been changed in place.
+* `+=` 操作符在原地修改了列表. 元素赋值操作并不工作, 但是当异常抛出时, 元素已经在原地被修改了.
+
+(译: 对于不可变对象, 这里指tuple, `+=` 并不是原子操作, 而是 `extend` 和 `=` 两个动作, 这里 `=` 操作虽然会抛出异常, 但 `extend` 操作已经修改成功了. 详细解释可以看[这里](https://segmentfault.com/a/1190000010767068))
 
 ---
 
