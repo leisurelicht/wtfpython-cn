@@ -44,7 +44,7 @@ So, here we go...
         - [> Class attributes and instance attributes/类属性和实例属性](#-class-attributes-and-instance-attributes类属性和实例属性)
         - [> yielding None/生成 None](#-yielding-none生成-none)
         - [> Mutating the immutable!/强人所难](#-mutating-the-immutable强人所难)
-        - [> The disappearing variable from outer scope](#-the-disappearing-variable-from-outer-scope)
+        - [> The disappearing variable from outer scope/消失的外部变量](#-the-disappearing-variable-from-outer-scope消失的外部变量)
         - [> When True is actually False](#-when-true-is-actually-false)
         - [> From filled to None in one instruction...](#-from-filled-to-none-in-one-instruction)
         - [> Subclass relationships *](#-subclass-relationships-)
@@ -961,7 +961,7 @@ TypeError: 'tuple' object does not support item assignment
 
 ---
 
-### > The disappearing variable from outer scope
+### > The disappearing variable from outer scope/消失的外部变量
 
 ```py
 e = 7
@@ -983,18 +983,20 @@ except Exception as e:
 NameError: name 'e' is not defined
 ```
 
-#### 💡 Explanation:
+#### 💡 说明:
 
-* Source: https://docs.python.org/3/reference/compound_stmts.html#except
+* 出处: https://docs.python.org/3/reference/compound_stmts.html#except
 
-  When an exception has been assigned using `as` target, it is cleared at the end of the except clause. This is as if
+  当使用 `as` 为目标分配异常的时候, 将在except子句的末尾清除该异常.
+
+  这就好像
 
   ```py
   except E as N:
       foo
   ```
 
-  was translated into
+  会被翻译成
 
   ```py
   except E as N:
@@ -1004,9 +1006,9 @@ NameError: name 'e' is not defined
           del N
   ```
 
-  This means the exception must be assigned to a different name to be able to refer to it after the except clause. Exceptions are cleared because, with the traceback attached to them, they form a reference cycle with the stack frame, keeping all locals in that frame alive until the next garbage collection occurs.
+  这意味着异常必须在被赋值给其他变量才能在 `except` 子句之后引用它. 而异常之所以会被清除, 则是由于上面附加的回溯信息(trackback)会和栈帧(stack frame)形成循环引用, 使得该栈帧中的所有本地变量在下一次垃圾回收发生之前都处于活动状态.(译: 也就是说不会被回收)
 
-* The clauses are not scoped in Python. Everything in the example is present in the same scope, and the variable `e` got removed due to the execution of the `except` clause. The same is not the case with functions which have their separate inner-scopes. The example below illustrates this:
+* 子句在 Python 中并没有独立的作用域. 示例中的所有内容都处于同一作用域内, 所以变量 `e` 会由于执行了 `except` 子句而被删除. 而对于有独立的内部作用域的函数来说情况就不一样了. 下面的例子说明了这一点:
 
      ```py
      def f(x):
@@ -1029,14 +1031,14 @@ NameError: name 'e' is not defined
      [5, 4, 3]
      ```
 
-* In Python 2.x the variable name `e` gets assigned to `Exception()` instance, so when you try to print, it prints nothing.
+* 在 Python 2.x 中, `Exception()` 实例被赋值给了变量 `e`, 所以当你尝试打印结果的时候, 它的输出为空.（译: 正常的Exception实例打印出来就是空）
 
     **Output (Python 2.x):**
     ```py
     >>> e
     Exception()
     >>> print e
-    # Nothing is printed!
+    # 没有打印任何内容!
     ```
 
 ---
