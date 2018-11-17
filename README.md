@@ -40,7 +40,7 @@ So, here we go...
         - [> not knot!/别纠结!](#-not-knot别纠结)
         - [> Half triple-quoted strings/三个引号](#-half-triple-quoted-strings三个引号)
         - [> Midnight time doesn't exist?/不存在的午夜?](#-midnight-time-doesnt-exist不存在的午夜)
-        - [> What's wrong with booleans?](#-whats-wrong-with-booleans)
+        - [> What's wrong with booleans?/布尔你咋了?](#-whats-wrong-with-booleans布尔你咋了)
         - [> Class attributes and instance attributes](#-class-attributes-and-instance-attributes)
         - [> yielding None](#-yielding-none)
         - [> Mutating the immutable!](#-mutating-the-immutable)
@@ -759,12 +759,11 @@ midnight_time 并没有被输出.
 
 ---
 
-### > What's wrong with booleans?
+### > What's wrong with booleans?/布尔你咋了?
 
 1\.
 ```py
-# A simple example to count the number of boolean and
-# integers in an iterable of mixed data types.
+# 一个简单的例子, 统计下面可迭代对象中的布尔型值的个数和整型值的个数
 mixed_list = [False, 1.0, "some_string", 3, True, [], False]
 integers_found_so_far = 0
 booleans_found_so_far = 0
@@ -808,9 +807,9 @@ another_dict[1.0] = "Python"
 ''
 ```
 
-#### 💡 Explanation:
+#### 💡 说明:
 
-* Booleans are a subclass of `int`
+* 布尔值是 `int` 的子类
   ```py
   >>> isinstance(True, int)
   True
@@ -818,13 +817,13 @@ another_dict[1.0] = "Python"
   True
   ```
 
-* The integer value of `True` is `1` and that of `False` is `0`.
+* 所以 `True` 的整数值是 `1`, 而 `False` 的整数值是 `0`.
   ```py
   >>> True == 1 == 1.0 and False == 0 == 0.0
   True
   ```
 
-* See this StackOverflow [answer](https://stackoverflow.com/a/8169049/4354153) for the rationale behind it.
+* 关于其背后的原理, 请看这个 StackOverflow 的[回答](https://stackoverflow.com/a/8169049/4354153).
 
 ---
 
