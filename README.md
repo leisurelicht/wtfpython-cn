@@ -42,7 +42,7 @@ So, here we go...
         - [> Midnight time doesn't exist?/不存在的午夜?](#-midnight-time-doesnt-exist不存在的午夜)
         - [> What's wrong with booleans?/布尔你咋了?](#-whats-wrong-with-booleans布尔你咋了)
         - [> Class attributes and instance attributes/类属性和实例属性](#-class-attributes-and-instance-attributes类属性和实例属性)
-        - [> yielding None](#-yielding-none)
+        - [> yielding None/生成 None](#-yielding-none生成-none)
         - [> Mutating the immutable!](#-mutating-the-immutable)
         - [> The disappearing variable from outer scope](#-the-disappearing-variable-from-outer-scope)
         - [> When True is actually False](#-when-true-is-actually-false)
@@ -897,7 +897,7 @@ True
 
 ---
 
-### > yielding None
+### > yielding None/生成 None
 
 ```py
 some_iterable = ('a', 'b')
@@ -920,9 +920,9 @@ def some_func(val):
 ['a', 'something', 'b', 'something']
 ```
 
-#### 💡 Explanation:
-- Source and explanation can be found here: https://stackoverflow.com/questions/32139885/yield-in-list-comprehensions-and-generator-expressions
-- Related bug report: http://bugs.python.org/issue10544
+#### 💡 说明:
+- 来源和解释可以在这里找到: https://stackoverflow.com/questions/32139885/yield-in-list-comprehensions-and-generator-expressions
+- 相关错误报告: http://bugs.python.org/issue10544
 
 ---
 
