@@ -48,7 +48,7 @@ So, here we go...
         - [> When True is actually False/真亦假](#-when-true-is-actually-false真亦假)
         - [> From filled to None in one instruction.../从有到无...](#-from-filled-to-none-in-one-instruction从有到无)
         - [> Subclass relationships/子类关系 *](#-subclass-relationships子类关系-)
-        - [> The mysterious key type conversion *](#-the-mysterious-key-type-conversion-)
+        - [> The mysterious key type conversion/神秘的键型转换 *](#-the-mysterious-key-type-conversion神秘的键型转换-)
         - [> Let's see if you can guess this?](#-lets-see-if-you-can-guess-this)
     - [Section: Appearances are deceptive!](#section-appearances-are-deceptive)
         - [> Skipping lines?](#-skipping-lines)
@@ -1115,7 +1115,7 @@ False
 
 ---
 
-### > The mysterious key type conversion *
+### > The mysterious key type conversion/神秘的键型转换 *
 
 ```py
 class SomeClass(str):
@@ -1130,18 +1130,18 @@ some_dict = {'s':42}
 str
 >>> s = SomeClass('s')
 >>> some_dict[s] = 40
->>> some_dict # expected: Two different keys-value pairs
+>>> some_dict # 预期: 两个不同的键值对
 {'s': 40}
 >>> type(list(some_dict.keys())[0])
 str
 ```
 
-#### 💡 Explanation:
+#### 💡 说明:
 
-* Both the object `s` and the string `"s"` hash to the same value because `SomeClass` inherits the `__hash__` method of `str` class.
-* `SomeClass("s") == "s"` evaluates to `True` because `SomeClass` also inherits `__eq__` method from `str` class.
-* Since both the objects hash to the same value and are equal, they are represented by the same key in the dictionary.
-* For the desired behavior, we can redefine the `__eq__` method in `SomeClass`
+* 由于 `SomeClass` 会从 `str` 自动继承 `__hash__` 方法, 所以 `s` 对象和 `"s"` 字符串的哈希值是相同的.
+* 而 `SomeClass("s") == "s"` 为 `True` 是因为 `SomeClass` 也继承了 `str` 类 `__eq__` 方法.
+* 由于两者的哈希值相同且相等, 所以它们在字典中表示相同的键.
+* 如果想要实现期望的功能, 我们可以重定义 `SomeClass` 的 `__eq__` 方法.
   ```py
   class SomeClass(str):
     def __eq__(self, other):
@@ -1151,8 +1151,8 @@ str
             and super().__eq__(other)
         )
 
-    # When we define a custom __eq__, Python stops automatically inheriting the
-    # __hash__ method, so we need to define it as well
+    # 当我们自定义 __eq__ 方法时, Python 不会再自动继承 __hash__ 方法
+    # 所以我们也需要定义它
     __hash__ = str.__hash__
 
   some_dict = {'s':42}
