@@ -47,7 +47,7 @@ So, here we go...
         - [> The disappearing variable from outer scope/消失的外部变量](#-the-disappearing-variable-from-outer-scope消失的外部变量)
         - [> When True is actually False/真亦假](#-when-true-is-actually-false真亦假)
         - [> From filled to None in one instruction.../从有到无...](#-from-filled-to-none-in-one-instruction从有到无)
-        - [> Subclass relationships *](#-subclass-relationships-)
+        - [> Subclass relationships/子类关系 *](#-subclass-relationships子类关系-)
         - [> The mysterious key type conversion *](#-the-mysterious-key-type-conversion-)
         - [> Let's see if you can guess this?](#-lets-see-if-you-can-guess-this)
     - [Section: Appearances are deceptive!](#section-appearances-are-deceptive)
@@ -1091,7 +1091,7 @@ None
 
 ---
 
-### > Subclass relationships *
+### > Subclass relationships/子类关系 *
 
 **Output:**
 ```py
@@ -1104,14 +1104,14 @@ True
 False
 ```
 
-The Subclass relationships were expected to be transitive, right? (i.e., if `A` is a subclass of `B`, and `B` is a subclass of `C`, the `A` _should_ a subclass of `C`)
+子类关系应该是可传递的, 对吧? (即, 如果 `A` 是 `B` 的子类, `B` 是 `C` 的子类, 那么 `A` _应该_ 是 `C` 的子类.)
 
-#### 💡 Explanation:
+#### 💡 说明:
 
-* Subclass relationships are not necessarily transitive in Python. Anyone is allowed to define their own, arbitrary `__subclasscheck__` in a metaclass.
-* When `issubclass(cls, Hashable)` is called, it simply looks for non-Falsey "`__hash__`" method in `cls` or anything it inherits from.
-* Since `object` is hashable, but `list` is non-hashable, it breaks the transitivity relation.
-* More detailed explanation can be found [here](https://www.naftaliharris.com/blog/python-subclass-intransitivity/).
+* Python 中的子类关系并不必须是传递的. 任何人都可以在元类中随意定义 `__subclasscheck__`.
+* 当 `issubclass(cls, Hashable)` 被调用时, 它只是在 `cls` 中寻找 "`__hash__`" 方法或继承自"`__hash__`"的方法.
+* 由于 `object` is 可散列的(hashable), 但是 `list` 是不可散列的, 所以它打破了这种传递关系.
+* 在[这里](https://www.naftaliharris.com/blog/python-subclass-intransitivity/)可以找到更详细的解释.
 
 ---
 
