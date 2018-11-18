@@ -45,7 +45,7 @@ So, here we go...
         - [> yielding None/生成 None](#-yielding-none生成-none)
         - [> Mutating the immutable!/强人所难](#-mutating-the-immutable强人所难)
         - [> The disappearing variable from outer scope/消失的外部变量](#-the-disappearing-variable-from-outer-scope消失的外部变量)
-        - [> When True is actually False](#-when-true-is-actually-false)
+        - [> When True is actually False/真亦假](#-when-true-is-actually-false真亦假)
         - [> From filled to None in one instruction...](#-from-filled-to-none-in-one-instruction)
         - [> Subclass relationships *](#-subclass-relationships-)
         - [> The mysterious key type conversion *](#-the-mysterious-key-type-conversion-)
@@ -1043,7 +1043,7 @@ NameError: name 'e' is not defined
 
 ---
 
-### > When True is actually False
+### > When True is actually False/真亦假
 
 ```py
 True = False
@@ -1056,10 +1056,10 @@ if True == False:
 I've lost faith in truth!
 ```
 
-#### 💡 Explanation:
+#### 💡 说明:
 
-- Initially, Python used to have no `bool` type (people used 0 for false and non-zero value like 1 for true). Then they added `True`, `False`, and a `bool` type, but, for backward compatibility, they couldn't make `True` and `False` constants- they just were built-in variables.
-- Python 3 was backward-incompatible, so it was now finally possible to fix that, and so this example won't work with Python 3.x!
+- 最初, Python 并没有 `bool` 型 (人们用0表示假值, 用非零值比如1作为真值). 后来他们添加了 `True`, `False`, 和 `bool` 型, 但是, 为了向后兼容, 他们没法把 `True` 和 `False` 设置为常量, 只是设置成了内置变量.
+- Python 3 由于不再需要向后兼容, 终于可以修复这个问题了, 所以这个例子无法在 Python 3.x 中执行!
 
 ---
 
