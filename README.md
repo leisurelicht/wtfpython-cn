@@ -49,7 +49,7 @@ So, here we go...
         - [> From filled to None in one instruction.../从有到无...](#-from-filled-to-none-in-one-instruction从有到无)
         - [> Subclass relationships/子类关系 *](#-subclass-relationships子类关系-)
         - [> The mysterious key type conversion/神秘的键型转换 *](#-the-mysterious-key-type-conversion神秘的键型转换-)
-        - [> Let's see if you can guess this?](#-lets-see-if-you-can-guess-this)
+        - [> Let's see if you can guess this?/看看你能否猜到这一点?](#-lets-see-if-you-can-guess-this看看你能否猜到这一点)
     - [Section: Appearances are deceptive!](#section-appearances-are-deceptive)
         - [> Skipping lines?](#-skipping-lines)
         - [> Teleportation *](#-teleportation-)
@@ -1171,7 +1171,7 @@ str
 
 ---
 
-### > Let's see if you can guess this?
+### > Let's see if you can guess this?/看看你能否猜到这一点?
 
 ```py
 a, b = a[b] = {}, 5
@@ -1183,24 +1183,24 @@ a, b = a[b] = {}, 5
 {5: ({...}, 5)}
 ```
 
-#### 💡 Explanation:
+#### 💡 说明:
 
-* According to [Python language reference](https://docs.python.org/2/reference/simple_stmts.html#assignment-statements), assignment statements have the form
+* 根据 [Python 语言参考](https://docs.python.org/2/reference/simple_stmts.html#assignment-statements), 赋值语句的形式如下
   ```
   (target_list "=")+ (expression_list | yield_expression)
   ```
-  and
-  > An assignment statement evaluates the expression list (remember that this can be a single expression or a comma-separated list, the latter yielding a tuple) and assigns the single resulting object to each of the target lists, from left to right.
 
-* The `+` in `(target_list "=")+` means there can be **one or more** target lists. In this case, target lists are `a, b` and `a[b]` (note the expression list is exactly one, which in our case is `{}, 5`).
+  > 赋值语句计算表达式列表(expression list)(牢记 这可以是单个表达式或以逗号分隔的列表, 后者返回元组)并将单个结果对象从左到右分配给目标列表中的每一项.
 
-* After the expression list is evaluated, it's value is unpacked to the target lists from **left to right**. So, in our case, first the `{}, 5` tuple is unpacked to `a, b` and we now have `a = {}` and `b = 5`.
+*  `(target_list "=")+` 中的 `+` 意味着可以有**一个或多个**目标列表. 在这个例子中, 目标列表是 `a, b` 和 `a[b]` (注意表达式列表只能有一个, 在我们的例子中是 `{}, 5`).
 
-* `a` is now assigned to `{}` which is a mutable object.
+* 表达式列表计算结束后, 将其值自动解包后**从左到右**分配给目标列表(target list). 因此, 在我们的例子中, 首先将 `{}, 5` 元组并赋值给 `a, b`, 然后我们就可以得到 `a = {}` 且 `b = 5`.
 
-* The second target list is `a[b]` (you may expect this to throw an error because both `a` and `b` have not been defined in the statements before. But remember, we just assigned `a` to `{}` and `b` to `5`).
+* `a` 被赋值的 `{}` 是可变对象.
 
-* Now, we are setting the key `5` in the dictionary to the tuple `({}, 5)` creating a circular reference (the `{...}` in the output refers to the same object that `a` is already referencing). Another simpler example of circular reference could be
+* 第二个目标列表是 `a[b]` (你可能觉得这里会报错, 因为在之前的语句中 `a` 和 `b` 都还没有被定义. 但是别忘了, 我们刚刚将 `a` 赋值 `{}` 且将 `b` 赋值为 `5`).
+
+* 现在, 我们将通过将字典中键 `5` 的值设置为元组 `({}, 5)` 来创建循环引用 (输出中的 `{...}` 指与 `a` 引用了相同的对象). 下面是一个更简单的循环引用的例子
   ```py
   >>> some_list = some_list[0] = [0]
   >>> some_list
@@ -1212,14 +1212,14 @@ a, b = a[b] = {}, 5
   >>> some_list[0][0][0][0][0][0] == some_list
   True
   ```
-  Similar is the case in our example (`a[b][0]` is the same object as `a`)
+  我们的例子就是这种情况 (`a[b][0]` 与 `a` 是相同的对象)
 
-* So to sum it up, you can break the example down to
+* 总结一下, 你也可以把例子拆成
   ```py
   a, b = {}, 5
   a[b] = a, b
   ```
-  And the circular reference can be justified by the fact that `a[b][0]` is the same object as `a`
+  并且可以通过 `a[b][0]` 与 `a` 是相同的对象来证明是循环引用
   ```py
   >>> a[b][0] is a
   True
