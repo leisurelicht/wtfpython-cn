@@ -46,7 +46,7 @@ So, here we go...
         - [> Mutating the immutable!/强人所难](#-mutating-the-immutable强人所难)
         - [> The disappearing variable from outer scope/消失的外部变量](#-the-disappearing-variable-from-outer-scope消失的外部变量)
         - [> When True is actually False/真亦假](#-when-true-is-actually-false真亦假)
-        - [> From filled to None in one instruction...](#-from-filled-to-none-in-one-instruction)
+        - [> From filled to None in one instruction.../从有到无...](#-from-filled-to-none-in-one-instruction从有到无)
         - [> Subclass relationships *](#-subclass-relationships-)
         - [> The mysterious key type conversion *](#-the-mysterious-key-type-conversion-)
         - [> Let's see if you can guess this?](#-lets-see-if-you-can-guess-this)
@@ -1063,7 +1063,7 @@ I've lost faith in truth!
 
 ---
 
-### > From filled to None in one instruction...
+### > From filled to None in one instruction.../从有到无...
 
 ```py
 some_list = [1, 2, 3]
@@ -1085,9 +1085,9 @@ None
 None
 ```
 
-#### 💡 Explanation
+#### 💡 说明:
 
-Most methods that modify the items of sequence/mapping objects like `list.append`, `dict.update`, `list.sort`, etc. modify the objects in-place and return `None`. The rationale behind this is to improve performance by avoiding making a copy of the object if the operation can be done in-place (Referred from [here](http://docs.python.org/2/faq/design.html#why-doesn-t-list-sort-return-the-sorted-list))
+大多数修改序列/映射对象的方法, 比如 `list.append`, `dict.update`, `list.sort` 等等. 都是原地修改对象并返回 `None`. 这样做的理由是, 如果操作可以原地完成, 就可以避免创建对象的副本来提高性能. (参考[这里](http://docs.python.org/2/faq/design.html#why-doesn-t-list-sort-return-the-sorted-list))
 
 ---
 
