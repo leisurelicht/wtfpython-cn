@@ -51,7 +51,7 @@ So, here we go...
         - [> The mysterious key type conversion/神秘的键型转换 *](#-the-mysterious-key-type-conversion神秘的键型转换-)
         - [> Let's see if you can guess this?/看看你能否猜到这一点?](#-lets-see-if-you-can-guess-this看看你能否猜到这一点)
     - [Section: Appearances are deceptive!](#section-appearances-are-deceptive)
-        - [> Skipping lines?](#-skipping-lines)
+        - [> Skipping lines?/跳过一行?](#-skipping-lines跳过一行)
         - [> Teleportation *](#-teleportation-)
         - [> Well, something is fishy...](#-well-something-is-fishy)
     - [Section: Watch out for the landmines!](#section-watch-out-for-the-landmines)
@@ -1231,7 +1231,7 @@ a, b = a[b] = {}, 5
 
 ## Section: Appearances are deceptive!
 
-### > Skipping lines?
+### > Skipping lines?/跳过一行?
 
 **Output:**
 ```py
@@ -1241,29 +1241,29 @@ a, b = a[b] = {}, 5
 11
 ```
 
-Wut?
+什么鬼?
 
-**Note:** The easiest way to reproduce this is to simply copy the statements from the above snippet and paste them into your file/shell.
+**注意:** 如果你想要重现的话最简单的方法是直接复制上面的代码片段到你的文件或命令行里.
 
-#### 💡 Explanation
+#### 💡 说明:
 
-Some non-Western characters look identical to letters in the English alphabet but are considered distinct by the interpreter.
+一些非西方字符虽然看起来和英语字母相同, 但会被解释器识别为不同的字母.
 
 ```py
->>> ord('е') # cyrillic 'e' (Ye)
+>>> ord('е') # 西里尔语的 'e' (Ye)
 1077
->>> ord('e') # latin 'e', as used in English and typed using standard keyboard
+>>> ord('e') # 拉丁语的 'e', 用于英文并使用标准键盘输入
 101
 >>> 'е' == 'e'
 False
 
->>> value = 42 # latin e
->>> valuе = 23 # cyrillic 'e', Python 2.x interpreter would raise a `SyntaxError` here
+>>> value = 42 # 拉丁语 e
+>>> valuе = 23 # 西里尔语 'e', Python 2.x 的解释器在这会抛出 `SyntaxError` 异常
 >>> value
 42
 ```
 
-The built-in `ord()` function returns a character's Unicode [code point](https://en.wikipedia.org/wiki/Code_point), and different code positions of Cyrillic 'e' and Latin 'e' justify the behavior of the above example.
+内置的 `ord()` 函数可以返回一个字符的 Unicode [代码点](https://en.wikipedia.org/wiki/Code_point), 这里西里尔语 'e' 和拉丁语 'e' 的代码点不同证实了上述例子.
 
 ---
 
