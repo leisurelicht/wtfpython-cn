@@ -52,7 +52,7 @@ So, here we go...
         - [> Let's see if you can guess this?/看看你能否猜到这一点?](#-lets-see-if-you-can-guess-this看看你能否猜到这一点)
     - [Section: Appearances are deceptive!](#section-appearances-are-deceptive)
         - [> Skipping lines?/跳过一行?](#-skipping-lines跳过一行)
-        - [> Teleportation *](#-teleportation-)
+        - [> Teleportation/空间移动 *](#-teleportation空间移动-)
         - [> Well, something is fishy...](#-well-something-is-fishy)
     - [Section: Watch out for the landmines!](#section-watch-out-for-the-landmines)
         - [> Modifying a dictionary while iterating over it](#-modifying-a-dictionary-while-iterating-over-it)
@@ -1267,17 +1267,17 @@ False
 
 ---
 
-### > Teleportation *
+### > Teleportation/空间移动 *
 
 ```py
 import numpy as np
 
 def energy_send(x):
-    # Initializing a numpy array
+    # 初始化一个 numpy 数组
     np.array([float(x)])
 
 def energy_receive():
-    # Return an empty numpy array
+    # 返回一个空的 numpy 数组
     return np.empty((), dtype=np.float).tolist()
 ```
 
@@ -1288,12 +1288,12 @@ def energy_receive():
 123.456
 ```
 
-Where's the Nobel Prize?
+谁来给我发个诺贝尔奖?
 
-#### 💡 Explanation:
+#### 💡 说明:
 
-* Notice that the numpy array created in the `energy_send` function is not returned, so that memory space is free to reallocate.
-* `numpy.empty()` returns the next free memory slot without reinitializing it. This memory spot just happens to be the same one that was just freed (usually, but not always).
+* 注意在 `energy_send` 函数中创建的 numpy 数组并没有返回, 因此内存空间被释放并可以被重新分配.
+* `numpy.empty()` 直接返回下一段空闲内存，而不重新初始化. 而这个内存点恰好就是刚刚释放的那个(通常情况下, 并不绝对).
 
 ---
 
