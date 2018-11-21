@@ -53,7 +53,7 @@ So, here we go...
     - [Section: Appearances are deceptive!](#section-appearances-are-deceptive)
         - [> Skipping lines?/跳过一行?](#-skipping-lines跳过一行)
         - [> Teleportation/空间移动 *](#-teleportation空间移动-)
-        - [> Well, something is fishy...](#-well-something-is-fishy)
+        - [> Well, something is fishy.../嗯, 有些可疑...](#-well-something-is-fishy嗯有些可疑)
     - [Section: Watch out for the landmines!](#section-watch-out-for-the-landmines)
         - [> Modifying a dictionary while iterating over it](#-modifying-a-dictionary-while-iterating-over-it)
         - [> Stubborn `del` operator *](#-stubborn-del-operator-)
@@ -1297,12 +1297,12 @@ def energy_receive():
 
 ---
 
-### > Well, something is fishy...
+### > Well, something is fishy.../嗯，有些可疑...
 
 ```py
 def square(x):
     """
-    A simple function to calculate the square of a number by addition.
+    一个通过加法计算平方的简单函数.
     """
     sum_so_far = 0
     for counter in range(x):
@@ -1317,17 +1317,17 @@ def square(x):
 10
 ```
 
-Shouldn't that be 100?
+难道不应该是100吗?
 
-**Note:** If you're not able to reproduce this, try running the file [mixed_tabs_and_spaces.py](/mixed_tabs_and_spaces.py) via the shell.
+**注意:** 如果你无法重现, 可以尝试运行这个文件[mixed_tabs_and_spaces.py](/mixed_tabs_and_spaces.py).
 
-#### 💡 Explanation
+#### 💡 说明:
 
-* **Don't mix tabs and spaces!** The character just preceding return is a "tab",  and the code is indented by multiple of "4 spaces" elsewhere in the example.
-* This is how Python handles tabs:
-  > First, tabs are replaced (from left to right) by one to eight spaces such that the total number of characters up to and including the replacement is a multiple of eight <...>
-* So the "tab" at the last line of `square` function is replaced with eight spaces, and it gets into the loop.
-* Python 3 is kind enough to throw an error for such cases automatically.
+* **不要混用制表符(tab)和空格(space)!** 在上面的例子中, return 的前面是"1个制表符", 而其他部分的代码前面是 "4个空格".
+* Python是这么处理制表符的:
+  > 首先, 制表符会从左到右依次被替换成8个空格, 直到被替换后的字符总数是八的倍数 <...>
+* 因此, `square` 函数最后一行的制表符会被替换成8个空格, 导致return语句进入循环语句里面.
+* Python 3 很友好, 在这种情况下会自动抛出错误.
 
     **Output (Python 3.x):**
     ```py
