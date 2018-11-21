@@ -55,7 +55,7 @@ So, here we go...
         - [> Teleportation/空间移动 *](#-teleportation空间移动-)
         - [> Well, something is fishy.../嗯, 有些可疑...](#-well-something-is-fishy嗯有些可疑)
     - [Section: Watch out for the landmines!](#section-watch-out-for-the-landmines)
-        - [> Modifying a dictionary while iterating over it](#-modifying-a-dictionary-while-iterating-over-it)
+        - [> Modifying a dictionary while iterating over it/迭代字典时的修改](#-modifying-a-dictionary-while-iterating-over-it迭代字典时的修改)
         - [> Stubborn `del` operator *](#-stubborn-del-operator-)
         - [> Deleting a list item while iterating](#-deleting-a-list-item-while-iterating)
         - [> Loop variables leaking out!](#-loop-variables-leaking-out)
@@ -1341,7 +1341,7 @@ def square(x):
 ## Section: Watch out for the landmines!
 
 
-### > Modifying a dictionary while iterating over it
+### > Modifying a dictionary while iterating over it/迭代字典时的修改
 
 ```py
 x = {0: None}
@@ -1365,14 +1365,14 @@ for i in x:
 7
 ```
 
-Yes, it runs for exactly **eight** times and stops.
+是的, 它运行了**八次**然后才停下来.
 
-#### 💡 Explanation:
+#### 💡 说明:
 
-* Iteration over a dictionary that you edit at the same time is not supported.
-* It runs eight times because that's the point at which the dictionary resizes to hold more keys (we have eight deletion entries, so a resize is needed). This is actually an implementation detail.
-* How deleted keys are handled and when the resize occurs might be different for different Python implementations.
-* For more information, you may refer to this StackOverflow [thread](https://stackoverflow.com/questions/44763802/bug-in-python-dict) explaining a similar example in detail.
+* Python不支持对字典进行迭代的同时修改它.
+* 它之所以运行8次, 是因为字典会自动扩容以容纳更多键值(我们有8次删除记录, 因此需要扩容). 这实际上是一个实现细节. (译: 应该是因为字典的初始最小值是8, 扩容会导致散列表地址发生变化而中断循环.)
+* 在不同的Python实现中删除键的处理方式以及调整大小的时间可能会有所不同.(译: 就是说什么时候扩容在不同版本中可能是不同的, 在3.6及3.7的版本中到[5](https://github.com/python/cpython/blob/v3.6.1/Objects/dictobject.c#L103-L110)就会自动扩容了. 以后也有可能再次发生变化. 顺带一提,后面两次扩容会扩展为32和256. 8->32->256)
+* 更多的信息, 你可以参考这个StackOverflow的[回答](https://stackoverflow.com/questions/44763802/bug-in-python-dict), 它详细的解释一个类似的例子.
 
 ---
 
