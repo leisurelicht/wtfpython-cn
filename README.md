@@ -56,7 +56,7 @@ So, here we go...
         - [> Well, something is fishy.../嗯, 有些可疑...](#-well-something-is-fishy嗯有些可疑)
     - [Section: Watch out for the landmines!](#section-watch-out-for-the-landmines)
         - [> Modifying a dictionary while iterating over it/迭代字典时的修改](#-modifying-a-dictionary-while-iterating-over-it迭代字典时的修改)
-        - [> Stubborn `del` operator *](#-stubborn-del-operator-)
+        - [> Stubborn `del` operator/坚强的 `del` *](#-stubborn-del-operator坚强的-del-)
         - [> Deleting a list item while iterating](#-deleting-a-list-item-while-iterating)
         - [> Loop variables leaking out!](#-loop-variables-leaking-out)
         - [> Beware of default mutable arguments!](#-beware-of-default-mutable-arguments)
@@ -1376,7 +1376,7 @@ for i in x:
 
 ---
 
-### > Stubborn `del` operator *
+### > Stubborn `del` operator/坚强的 `del` *
 
 ```py
 class SomeClass:
@@ -1389,33 +1389,34 @@ class SomeClass:
 ```py
 >>> x = SomeClass()
 >>> y = x
->>> del x # this should print "Deleted!"
+>>> del x # 这里应该会输出 "Deleted!"
 >>> del y
 Deleted!
 ```
 
-Phew, deleted at last. You might have guessed what saved from `__del__` being called in our first attempt to delete `x`. Let's add more twist to the example.
+唷, 终于删除了. 你可能已经猜到了在我们第一次尝试删除 `x` 时是什么让 `__del__` 免于被调用的. 那让我们给这个例子增加点难度.
 
 2\.
 ```py
 >>> x = SomeClass()
 >>> y = x
 >>> del x
->>> y # check if y exists
+>>> y # 检查一下y是否存在
 <__main__.SomeClass instance at 0x7f98a1a67fc8>
->>> del y # Like previously, this should print "Deleted!"
->>> globals() # oh, it didn't. Let's check all our global variables and confirm
+>>> del y # 像之前一样, 这里应该会输出 "Deleted!"
+>>> globals() # 好吧, 并没有. 让我们看一下所有的全局变量
 Deleted!
 {'__builtins__': <module '__builtin__' (built-in)>, 'SomeClass': <class __main__.SomeClass at 0x7f98a1a5f668>, '__package__': None, '__name__': '__main__', '__doc__': None}
 ```
 
-Okay, now it's deleted :confused:
+好了，现在它被删除了 :confused:
 
-#### 💡 Explanation:
-+ `del x` doesn’t directly call `x.__del__()`.
-+ Whenever `del x` is encountered, Python decrements the reference count for `x` by one, and `x.__del__()` when x’s reference count reaches zero.
-+ In the second output snippet, `y.__del__()` was not called because the previous statement (`>>> y`) in the interactive interpreter created another reference to the same object, thus preventing the reference count to reach zero when `del y` was encountered.
-+ Calling `globals` caused the existing reference to be destroyed and hence we can see "Deleted!" being printed (finally!).
+#### 💡 说明:
++ `del x` 并不会立刻调用 `x.__del__()`.
++ 每当遇到 `del x`, Python 会将 `x` 的引用数减1, 当 `x` 的引用数减到0时就会调用 `x.__del__()`.
++ 在第二个例子中, `y.__del__()` 之所以未被调用, 是因为前一条语句 (`>>> y`) 对同一对象创建了另一个引用, 从而防止在执行 `del y` 后对象的引用数变为0.
++ 调用 `globals` 导致引用被销毁, 因此我们可以看到 "Deleted!" 终于被输出了.
++ (译: 这其实是 Python 交互解释器的特性, 它会自动让 `_` 保存上一个表达式输出的值, 详细可以看[这里](https://www.cnblogs.com/leisurelylicht/p/diao-pi-de-kong-zhi-tai.html).)
 
 ---
 
