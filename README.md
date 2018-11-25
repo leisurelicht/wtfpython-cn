@@ -58,7 +58,7 @@ So, here we go...
         - [> Modifying a dictionary while iterating over it/迭代字典时的修改](#-modifying-a-dictionary-while-iterating-over-it迭代字典时的修改)
         - [> Stubborn `del` operator/坚强的 `del` *](#-stubborn-del-operator坚强的-del-)
         - [> Deleting a list item while iterating/迭代列表时删除元素](#-deleting-a-list-item-while-iterating迭代列表时删除元素)
-        - [> Loop variables leaking out!](#-loop-variables-leaking-out)
+        - [> Loop variables leaking out!/循环变量泄漏!](#-loop-variables-leaking-out循环变量泄漏)
         - [> Beware of default mutable arguments!](#-beware-of-default-mutable-arguments)
         - [> Catching the Exceptions](#-catching-the-exceptions)
         - [> Same operands, different story!](#-same-operands-different-story)
@@ -1480,7 +1480,7 @@ for idx, item in enumerate(list_4):
 
 ---
 
-### > Loop variables leaking out!
+### > Loop variables leaking out!/循环变量泄漏!
 
 1\.
 ```py
@@ -1496,11 +1496,11 @@ print(x, ': x in global')
 6 : x in global
 ```
 
-But `x` was never defined outside the scope of for loop...
+但是 `x` 从未在循环外被定义...
 
 2\.
 ```py
-# This time let's initialize x first
+# 这次我们先初始化x
 x = -1
 for x in range(7):
     if x == 6:
@@ -1533,13 +1533,13 @@ print(x, ': x in global')
 1 : x in global
 ```
 
-#### 💡 Explanation:
+#### 💡 说明:
 
-- In Python, for-loops use the scope they exist in and leave their defined loop-variable behind. This also applies if we explicitly defined the for-loop variable in the global namespace before. In this case, it will rebind the existing variable.
+- 在 Python 中, for 循环使用所在作用域并在结束后保留定义的循环变量. 如果我们曾在全局命名空间中定义过循环变量. 在这种情况下, 它会重新绑定现有变量.
 
-- The differences in the output of Python 2.x and Python 3.x interpreters for list comprehension example can be explained by following change documented in [What’s New In Python 3.0](https://docs.python.org/3/whatsnew/3.0.html) documentation:
+- Python 2.x 和 Python 3.x 解释器在列表推导式示例中的输出差异, 在文档 [What’s New In Python 3.0](https://docs.python.org/3/whatsnew/3.0.html) 中可以找到相关的解释:
 
-    > "List comprehensions no longer support the syntactic form `[... for var in item1, item2, ...]`. Use `[... for var in (item1, item2, ...)]` instead. Also, note that list comprehensions have different semantics: they are closer to syntactic sugar for a generator expression inside a `list()` constructor, and in particular the loop control variables are no longer leaked into the surrounding scope."
+    > "列表推导不再支持句法形式 `[... for var in item1, item2, ...]`. 取而代之的是 `[... for var in (item1, item2, ...)]`. 另外, 注意列表推导具有不同的语义: 它们更接近于 `list()` 构造函数中生成器表达式的语法糖(译: 这一句我也不是很明白), 特别是循环控制变量不再泄漏到周围的作用域中."
 
 ---
 
