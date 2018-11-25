@@ -64,7 +64,7 @@ So, here we go...
         - [> Same operands, different story!/同人不同命!](#-same-operands-different-story同人不同命)
         - [> The out of scope variable/外部作用域变量](#-the-out-of-scope-variable外部作用域变量)
         - [> Be careful with chained operations/小心链式操作](#-be-careful-with-chained-operations小心链式操作)
-        - [> Name resolution ignoring class scope](#-name-resolution-ignoring-class-scope)
+        - [> Name resolution ignoring class scope/忽略类作用域的名称解析](#-name-resolution-ignoring-class-scope忽略类作用域的名称解析)
         - [> Needle in a Haystack](#-needle-in-a-haystack)
     - [Section: The Hidden treasures!](#section-the-hidden-treasures)
         - [> Okay Python, Can you make me fly? *](#-okay-python-can-you-make-me-fly-)
@@ -1801,7 +1801,7 @@ False
 
 ---
 
-### > Name resolution ignoring class scope
+### > Name resolution ignoring class scope/忽略类作用域的名称解析
 
 1\.
 ```py
@@ -1837,10 +1837,10 @@ class SomeClass:
 5
 ```
 
-#### 💡 Explanation
-- Scopes nested inside class definition ignore names bound at the class level.
-- A generator expression has its own scope.
-- Starting from Python 3.X, list comprehensions also have their own scope.
+#### 💡 说明:
+- 类定义中嵌套的作用域会忽略类内的名称绑定.
+- 生成器表达式有它自己的作用域.
+- 从 Python 3.X 开始, 列表推导式也有自己的作用域.
 
 ---
 
