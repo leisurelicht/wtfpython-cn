@@ -63,7 +63,7 @@ So, here we go...
         - [> Catching the Exceptions/捕获异常](#-catching-the-exceptions捕获异常)
         - [> Same operands, different story!/同人不同命!](#-same-operands-different-story同人不同命)
         - [> The out of scope variable/外部作用域变量](#-the-out-of-scope-variable外部作用域变量)
-        - [> Be careful with chained operations](#-be-careful-with-chained-operations)
+        - [> Be careful with chained operations/小心链式操作](#-be-careful-with-chained-operations小心链式操作)
         - [> Name resolution ignoring class scope](#-name-resolution-ignoring-class-scope)
         - [> Needle in a Haystack](#-needle-in-a-haystack)
     - [Section: The Hidden treasures!](#section-the-hidden-treasures)
@@ -1756,14 +1756,14 @@ UnboundLocalError: local variable 'a' referenced before assignment
 
 ---
 
-### > Be careful with chained operations
+### > Be careful with chained operations/小心链式操作
 
 ```py
->>> (False == False) in [False] # makes sense
+>>> (False == False) in [False] # 可以理解
 False
->>> False == (False in [False]) # makes sense
+>>> False == (False in [False]) # 可以理解
 False
->>> False == False in [False] # now what?
+>>> False == False in [False] # 为毛?
 True
 
 >>> True is False == False
@@ -1779,25 +1779,25 @@ False
 False
 ```
 
-#### 💡 Explanation:
+#### 💡 说明:
 
-As per https://docs.python.org/2/reference/expressions.html#not-in
+根据 https://docs.python.org/2/reference/expressions.html#not-in
 
-> Formally, if a, b, c, ..., y, z are expressions and op1, op2, ..., opN are comparison operators, then a op1 b op2 c ... y opN z is equivalent to a op1 b and b op2 c and ... y opN z, except that each expression is evaluated at most once.
+> 形式上, 如果 a, b, c, ..., y, z 是表达式, 而 op1, op2, ..., opN 是比较运算符, 那么除了每个表达式最多只出现一次以外 a op1 b op2 c ... y opN z 就等于 a op1 b and b op2 c and ... y opN z.
 
-While such behavior might seem silly to you in the above examples, it's fantastic with stuff like `a == b == c` and `0 <= x <= 100`.
+虽然上面的例子似乎很愚蠢, 但是像 `a == b == c` 或 `0 <= x <= 100` 就很棒了.
 
-* `False is False is False` is equivalent to `(False is False) and (False is False)`
-* `True is False == False` is equivalent to `True is False and False == False` and since the first part of the statement (`True is False`) evaluates to `False`, the overall expression evaluates to `False`.
-* `1 > 0 < 1` is equivalent to `1 > 0 and 0 < 1` which evaluates to `True`.
-* The expression `(1 > 0) < 1` is equivalent to `True < 1` and
+* `False is False is False` 相当于 `(False is False) and (False is False)`
+* `True is False == False` 相当于 `True is False and False == False`, 由于语句的第一部分 (`True is False`) 等于 `False`, 因此整个表达式的结果为 `False`.
+* `1 > 0 < 1` 相当于 `1 > 0 and 0 < 1`, 所以最终结果为 `True`.
+* 表达式 `(1 > 0) < 1` 相当于 `True < 1` 且
   ```py
   >>> int(True)
   1
-  >>> True + 1 #not relevant for this example, but just for fun
+  >>> True + 1 # 与这个例子无关，只是好玩
   2
   ```
-  So, `1 < 1` evaluates to `False`
+  所以, `1 < 1` 等于 `False`
 
 ---
 
