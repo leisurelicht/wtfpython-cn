@@ -59,7 +59,7 @@ So, here we go...
         - [> Stubborn `del` operator/坚强的 `del` *](#-stubborn-del-operator坚强的-del-)
         - [> Deleting a list item while iterating/迭代列表时删除元素](#-deleting-a-list-item-while-iterating迭代列表时删除元素)
         - [> Loop variables leaking out!/循环变量泄漏!](#-loop-variables-leaking-out循环变量泄漏)
-        - [> Beware of default mutable arguments!](#-beware-of-default-mutable-arguments)
+        - [> Beware of default mutable arguments!/当心默认的可变参数!](#-beware-of-default-mutable-arguments当心默认的可变参数)
         - [> Catching the Exceptions](#-catching-the-exceptions)
         - [> Same operands, different story!](#-same-operands-different-story)
         - [> The out of scope variable](#-the-out-of-scope-variable)
@@ -1543,7 +1543,7 @@ print(x, ': x in global')
 
 ---
 
-### > Beware of default mutable arguments!
+### > Beware of default mutable arguments!/当心默认的可变参数!
 
 ```py
 def some_func(default_arg=[]):
@@ -1563,9 +1563,9 @@ def some_func(default_arg=[]):
 ['some_string', 'some_string', 'some_string']
 ```
 
-#### 💡 Explanation:
+#### 💡 说明:
 
-- The default mutable arguments of functions in Python aren't really initialized every time you call the function. Instead, the recently assigned value to them is used as the default value. When we explicitly passed `[]` to `some_func` as the argument, the default value of the `default_arg` variable was not used, so the function returned as expected.
+- Python中函数的默认可变参数并不是每次调用该函数时都会被初始化. 相反, 它们会使用最近分配的值作为默认值. 当我们明确的将 `[]` 作为参数传递给 `some_func` 的时候, 就不会使用 `default_arg` 的默认值, 所以函数会返回我们所期望的结果.
 
     ```py
     def some_func(default_arg=[]):
@@ -1575,7 +1575,7 @@ def some_func(default_arg=[]):
 
     **Output:**
     ```py
-    >>> some_func.__defaults__ #This will show the default argument values for the function
+    >>> some_func.__defaults__ # 这里会显示函数的默认参数的值
     ([],)
     >>> some_func()
     >>> some_func.__defaults__
@@ -1588,7 +1588,7 @@ def some_func(default_arg=[]):
     (['some_string', 'some_string'],)
     ```
 
-- A common practice to avoid bugs due to mutable arguments is to assign `None` as the default value and later check if any value is passed to the function corresponding to that argument. Example:
+- 避免可变参数导致的错误的常见做法是将 `None` 指定为参数的默认值, 然后检查是否有值传给对应的参数. 例:
 
     ```py
     def some_func(default_arg=None):
