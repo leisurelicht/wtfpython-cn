@@ -61,7 +61,7 @@ So, here we go...
         - [> Loop variables leaking out!/循环变量泄漏!](#-loop-variables-leaking-out循环变量泄漏)
         - [> Beware of default mutable arguments!/当心默认的可变参数!](#-beware-of-default-mutable-arguments当心默认的可变参数)
         - [> Catching the Exceptions/捕获异常](#-catching-the-exceptions捕获异常)
-        - [> Same operands, different story!](#-same-operands-different-story)
+        - [> Same operands, different story!/同人不同命!](#-same-operands-different-story同人不同命)
         - [> The out of scope variable](#-the-out-of-scope-variable)
         - [> Be careful with chained operations](#-be-careful-with-chained-operations)
         - [> Name resolution ignoring class scope](#-name-resolution-ignoring-class-scope)
@@ -1675,7 +1675,7 @@ SyntaxError: invalid syntax
 
 ---
 
-### > Same operands, different story!
+### > Same operands, different story!/同人不同命!
 
 1\.
 ```py
@@ -1707,13 +1707,13 @@ a += [5, 6, 7, 8]
 [1, 2, 3, 4, 5, 6, 7, 8]
 ```
 
-#### 💡 Explanation:
+#### 💡 说明:
 
-*  `a += b` doesn't always behave the same way as `a = a + b`.  Classes *may* implement the *`op=`* operators differently, and lists do this.
+*  `a += b` 并不总是与 `a = a + b` 表现相同. 类实现 *`op=`* 运算符的方式 *也许* 是不同的, 列表就是这样做的.
 
-* The expression `a = a + [5,6,7,8]` generates a new list and sets `a`'s reference to that new list, leaving `b` unchanged.
+* 表达式 `a = a + [5,6,7,8]` 会生成一个新列表, 并让 `a` 引用这个新列表, 同时保持 `b` 不变.
 
-* The expression `a += [5,6,7,8]` is actually mapped to an "extend" function that operates on the list such that `a` and `b` still point to the same list that has been modified in-place.
+* 表达式 `a += [5,6,7,8]` 实际上是使用的是 "extend" 函数, 所以 `a` 和 `b` 仍然指向已被修改的同一列表.
 
 ---
 
