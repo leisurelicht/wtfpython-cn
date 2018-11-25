@@ -62,7 +62,7 @@ So, here we go...
         - [> Beware of default mutable arguments!/当心默认的可变参数!](#-beware-of-default-mutable-arguments当心默认的可变参数)
         - [> Catching the Exceptions/捕获异常](#-catching-the-exceptions捕获异常)
         - [> Same operands, different story!/同人不同命!](#-same-operands-different-story同人不同命)
-        - [> The out of scope variable](#-the-out-of-scope-variable)
+        - [> The out of scope variable/外部作用域变量](#-the-out-of-scope-variable外部作用域变量)
         - [> Be careful with chained operations](#-be-careful-with-chained-operations)
         - [> Name resolution ignoring class scope](#-name-resolution-ignoring-class-scope)
         - [> Needle in a Haystack](#-needle-in-a-haystack)
@@ -1717,7 +1717,7 @@ a += [5, 6, 7, 8]
 
 ---
 
-### > The out of scope variable
+### > The out of scope variable/外部作用域变量
 
 ```py
 a = 1
@@ -1737,10 +1737,10 @@ def another_func():
 UnboundLocalError: local variable 'a' referenced before assignment
 ```
 
-#### 💡 Explanation:
-* When you make an assignment to a variable in scope, it becomes local to that scope. So `a` becomes local to the scope of `another_func`,  but it has not been initialized previously in the same scope which throws an error.
-* Read [this](http://sebastianraschka.com/Articles/2014_python_scope_and_namespaces.html) short but an awesome guide to learn more about how namespaces and scope resolution works in Python.
-* To modify the outer scope variable `a` in `another_func`, use `global` keyword.
+#### 💡 说明:
+* 当你在作用域中对变量进行赋值时, 变量会变成该作用域内的局部变量. 因此 `a` 会变成 `another_func` 函数作用域中的局部变量, 但它在函数作用域中并没有被初始化, 所以会引发错误.
+* 可以阅读[这个](http://sebastianraschka.com/Articles/2014_python_scope_and_namespaces.html)简短却很棒的指南, 了解更多关于 Python 中命名空间和作用域的工作原理.
+* 想要在 `another_func` 中修改外部作用域变量 `a` 的话, 可以使用 `global` 关键字.
   ```py
   def another_func()
       global a
