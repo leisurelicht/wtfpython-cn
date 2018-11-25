@@ -65,7 +65,7 @@ So, here we go...
         - [> The out of scope variable/外部作用域变量](#-the-out-of-scope-variable外部作用域变量)
         - [> Be careful with chained operations/小心链式操作](#-be-careful-with-chained-operations小心链式操作)
         - [> Name resolution ignoring class scope/忽略类作用域的名称解析](#-name-resolution-ignoring-class-scope忽略类作用域的名称解析)
-        - [> Needle in a Haystack](#-needle-in-a-haystack)
+        - [> Needle in a Haystack/大海捞针](#-needle-in-a-haystack大海捞针)
     - [Section: The Hidden treasures!](#section-the-hidden-treasures)
         - [> Okay Python, Can you make me fly? *](#-okay-python-can-you-make-me-fly-)
         - [> `goto`, but why? *](#-goto-but-why-)
@@ -1844,7 +1844,7 @@ class SomeClass:
 
 ---
 
-### > Needle in a Haystack
+### > Needle in a Haystack/大海捞针
 
 1\.
 ```py
@@ -1853,11 +1853,11 @@ x, y = (0, 1) if True else None, None
 
 **Output:**
 ```
->>> x, y  # expected (0, 1)
+>>> x, y  # 期望的结果是 (0, 1)
 ((0, 1), None)
 ```
 
-Almost every Python programmer has faced a similar situation.
+几乎每个 Python 程序员都遇到过类似的情况.
 
 2\.
 ```py
@@ -1883,10 +1883,10 @@ e
 tuple()
 ```
 
-#### 💡 Explanation:
-* For 1, the correct statement for expected behavior is `x, y = (0, 1) if True else (None, None)`.
-* For 2, the correct statement for expected behavior is `t = ('one',)` or `t = 'one',` (missing comma) otherwise the interpreter considers `t` to be a `str` and iterates over it character by character.
-* `()` is a special token and denotes empty `tuple`.
+#### 💡 说明:
+* 对于 1, 正确的语句是 `x, y = (0, 1) if True else (None, None)`.
+* 对于 2, 正确的语句是 `t = ('one',)` 或者 `t = 'one',` (缺少逗号) 否则解释器会认为 `t` 是一个字符串, 并逐个字符对其进行迭代.
+* `()` 是一个特殊的标记，表示空元组.
 
 ---
 
