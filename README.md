@@ -60,7 +60,7 @@ So, here we go...
         - [> Deleting a list item while iterating/迭代列表时删除元素](#-deleting-a-list-item-while-iterating迭代列表时删除元素)
         - [> Loop variables leaking out!/循环变量泄漏!](#-loop-variables-leaking-out循环变量泄漏)
         - [> Beware of default mutable arguments!/当心默认的可变参数!](#-beware-of-default-mutable-arguments当心默认的可变参数)
-        - [> Catching the Exceptions](#-catching-the-exceptions)
+        - [> Catching the Exceptions/捕获异常](#-catching-the-exceptions捕获异常)
         - [> Same operands, different story!](#-same-operands-different-story)
         - [> The out of scope variable](#-the-out-of-scope-variable)
         - [> Be careful with chained operations](#-be-careful-with-chained-operations)
@@ -1600,18 +1600,18 @@ def some_func(default_arg=[]):
 
 ---
 
-### > Catching the Exceptions
+### > Catching the Exceptions/捕获异常
 
 ```py
 some_list = [1, 2, 3]
 try:
-    # This should raise an ``IndexError``
+    # 这里会抛出异常 ``IndexError``
     print(some_list[4])
 except IndexError, ValueError:
     print("Caught!")
 
 try:
-    # This should raise a ``ValueError``
+    # 这里会抛出异常 ``ValueError``
     some_list.remove(4)
 except IndexError, ValueError:
     print("Caught again!")
@@ -1632,13 +1632,13 @@ ValueError: list.remove(x): x not in list
 SyntaxError: invalid syntax
 ```
 
-#### 💡 Explanation
+#### 💡 说明:
 
-* To add multiple Exceptions to the except clause, you need to pass them as parenthesized tuple as the first argument. The second argument is an optional name, which when supplied will bind the Exception instance that has been raised. Example,
+* 如果你想要同时捕获多个不同类型的异常时, 你需要将它们用括号包成一个元组作为第一个参数传递. 第二个参数是可选名称, 如果你提供, 它将与被捕获的异常实例绑定. 例,
   ```py
   some_list = [1, 2, 3]
   try:
-     # This should raise a ``ValueError``
+     # 这里会抛出异常 ``ValueError``
      some_list.remove(4)
   except (IndexError, ValueError), e:
      print("Caught again!")
@@ -1657,7 +1657,7 @@ SyntaxError: invalid syntax
   IndentationError: unindent does not match any outer indentation level
   ```
 
-* Separating the exception from the variable with a comma is deprecated and does not work in Python 3; the correct way is to use `as`. Example,
+* 在 Python 3 中, 用逗号区分异常与可选名称是无效的; 正确的做法是使用 `as` 关键字. 例,
   ```py
   some_list = [1, 2, 3]
   try:
