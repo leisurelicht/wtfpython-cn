@@ -67,7 +67,7 @@ So, here we go...
         - [> Name resolution ignoring class scope/忽略类作用域的名称解析](#-name-resolution-ignoring-class-scope忽略类作用域的名称解析)
         - [> Needle in a Haystack/大海捞针](#-needle-in-a-haystack大海捞针)
     - [Section: The Hidden treasures!](#section-the-hidden-treasures)
-        - [> Okay Python, Can you make me fly? *](#-okay-python-can-you-make-me-fly-)
+        - [> Okay Python, Can you make me fly?/Python, 可否带我飞? *](#-okay-python-can-you-make-me-flypython-可否带我飞-)
         - [> `goto`, but why? *](#-goto-but-why-)
         - [> Brace yourself! *](#-brace-yourself-)
         - [> Let's meet Friendly Language Uncle For Life *](#-lets-meet-friendly-language-uncle-for-life-)
@@ -1897,21 +1897,21 @@ tuple()
 
 This section contains few of the lesser-known interesting things about Python that most beginners like me are unaware of (well, not anymore).
 
-### > Okay Python, Can you make me fly? *
+### > Okay Python, Can you make me fly?/Python, 可否带我飞? *
 
-Well, here you go
+好, 去吧.
 
 ```py
 import antigravity
 ```
 
 **Output:**
-Sshh.. It's a super secret.
+嘘.. 这是个超级秘密.
 
-#### 💡 Explanation:
-+ `antigravity` module is one of the few easter eggs released by Python developers.
-+ `import antigravity` opens up a web browser pointing to the [classic XKCD comic](http://xkcd.com/353/) about Python.
-+ Well, there's more to it. There's **another easter egg inside the easter egg**. If you look at the [code](https://github.com/python/cpython/blob/master/Lib/antigravity.py#L7-L17), there's a function defined that purports to implement the [XKCD's geohashing algorithm](https://xkcd.com/426/).
+#### 💡 说明:
++ `antigravity` 模块是 Python 开发人员发布的少数复活节彩蛋之一.
++ `import antigravity` 会打开一个 Python 的[经典 XKCD 漫画](http://xkcd.com/353/)页面.
++ 不止如此. 这个**复活节彩蛋里还有一个复活节彩蛋**. 如果你看一下[代码](https://github.com/python/cpython/blob/master/Lib/antigravity.py#L7-L17), 就会发现还有一个函数实现了 [XKCD's geohashing 算法](https://xkcd.com/426/).
 
 ---
 
