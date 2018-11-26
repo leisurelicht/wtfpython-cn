@@ -69,7 +69,7 @@ So, here we go...
     - [Section: The Hidden treasures!](#section-the-hidden-treasures)
         - [> Okay Python, Can you make me fly?/Python, 可否带我飞? *](#-okay-python-can-you-make-me-flypython-可否带我飞-)
         - [> `goto`, but why?/`goto`, 但为什么? *](#-goto-but-whygoto-但为什么-)
-        - [> Brace yourself! *](#-brace-yourself-)
+        - [> Brace yourself!/做好思想准备 *](#-brace-yourself做好思想准备-)
         - [> Let's meet Friendly Language Uncle For Life *](#-lets-meet-friendly-language-uncle-for-life-)
         - [> Even Python understands that love is complicated *](#-even-python-understands-that-love-is-complicated-)
         - [> Yes, it exists!](#-yes-it-exists)
@@ -1943,9 +1943,9 @@ Freedom!
 
 ---
 
-### > Brace yourself! *
+### > Brace yourself!/做好思想准备 *
 
-If you are one of the people who doesn't like using whitespace in Python to denote scopes, you can use the C-style {} by importing,
+如果你不喜欢在Python中使用空格来表示作用域, 你可以导入 C 风格的 {},
 
 ```py
 from __future__ import braces
@@ -1958,11 +1958,11 @@ from __future__ import braces
 SyntaxError: not a chance
 ```
 
-Braces? No way! If you think that's disappointing, use Java.
+想用大括号? 没门! 觉得不爽, 请去用java.
 
-#### 💡 Explanation:
-+ The `__future__` module is normally used to provide features from future versions of Python. The "future" here is however ironic.
-+ This is an easter egg concerned with the community's feelings on this issue.
+#### 💡 说明:
++ 通常 `__future__` 会提供 Python 未来版本的功能. 然而，这里的 “未来” 是一个讽刺.
++ 这是一个表达社区对此类问题态度的复活节彩蛋.
 
 ---
 
