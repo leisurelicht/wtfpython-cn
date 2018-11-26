@@ -68,7 +68,7 @@ So, here we go...
         - [> Needle in a Haystack/大海捞针](#-needle-in-a-haystack大海捞针)
     - [Section: The Hidden treasures!](#section-the-hidden-treasures)
         - [> Okay Python, Can you make me fly?/Python, 可否带我飞? *](#-okay-python-can-you-make-me-flypython-可否带我飞-)
-        - [> `goto`, but why? *](#-goto-but-why-)
+        - [> `goto`, but why?/`goto`, 但为什么? *](#-goto-but-whygoto-但为什么-)
         - [> Brace yourself! *](#-brace-yourself-)
         - [> Let's meet Friendly Language Uncle For Life *](#-lets-meet-friendly-language-uncle-for-life-)
         - [> Even Python understands that love is complicated *](#-even-python-understands-that-love-is-complicated-)
@@ -1915,7 +1915,7 @@ import antigravity
 
 ---
 
-### > `goto`, but why? *
+### > `goto`, but why?/`goto`, 但为什么? *
 
 ```py
 from goto import goto, label
@@ -1924,7 +1924,7 @@ for i in range(9):
         for k in range(9):
             print("I'm trapped, please rescue!")
             if k == 2:
-                goto .breakout # breaking out from a deeply nested loop
+                goto .breakout # 从多重循环中跳出
 label .breakout
 print("Freedom!")
 ```
@@ -1936,10 +1936,10 @@ I'm trapped, please rescue!
 Freedom!
 ```
 
-#### 💡 Explanation:
-- A working version of `goto` in Python was [announced](https://mail.python.org/pipermail/python-announce-list/2004-April/002982.html) as an April Fool's joke on 1st April 2004.
-- Current versions of Python do not have this module.
-- Although it works, but please don't use it. Here's the [reason](https://docs.python.org/3/faq/design.html#why-is-there-no-goto) to why `goto` is not present in Python.
+#### 💡 说明:
+- 2004年4月1日, Python [宣布](https://mail.python.org/pipermail/python-announce-list/2004-April/002982.html) 加入一个可用的 `goto` 作为愚人节礼物.
+- 当前版本的 Python 并没有这个模块.
+- 就算可以用, 也请不要使用它. 这里是为什么Python中没有 `goto` 的[原因](https://docs.python.org/3/faq/design.html#why-is-there-no-goto).
 
 ---
 
