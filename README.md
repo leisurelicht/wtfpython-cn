@@ -78,7 +78,7 @@ So, here we go...
     - [Section: Miscellaneous](#section-miscellaneous)
         - [> `+=` is faster/更快的 `+=` ](#--is-faster更快的-)
         - [> Let's make a giant string!/来做个巨大的字符串吧!](#-lets-make-a-giant-string来做个巨大的字符串吧)
-        - [> Explicit typecast of strings](#-explicit-typecast-of-strings)
+        - [> Explicit typecast of strings/字符串的显式类型转换](#-explicit-typecast-of-strings字符串的显式类型转换)
         - [> Minor Ones](#-minor-ones)
 - [Contributing](#contributing)
 - [Acknowledgements](#acknowledgements)
@@ -2267,12 +2267,12 @@ def convert_list_to_string(l, iters):
 
 ---
 
-### > Explicit typecast of strings
+### > Explicit typecast of strings/字符串的显式类型转换
 
 ```py
 a = float('inf')
 b = float('nan')
-c = float('-iNf')  #These strings are case-insensitive
+c = float('-iNf')  # 这些字符串不区分大小写
 d = float('nan')
 ```
 
@@ -2290,7 +2290,7 @@ ValueError: could not convert string to float: some_other_string
 True
 >>> None == None # None==None
 True
->>> b == d #but nan!=nan
+>>> b == d #但是 nan!=nan
 False
 >>> 50/a
 0.0
@@ -2300,9 +2300,9 @@ nan
 nan
 ```
 
-#### 💡 Explanation:
+#### 💡 说明:
 
-`'inf'` and `'nan'` are special strings (case-insensitive), which when explicitly typecasted to `float` type, are used to represent mathematical "infinity" and "not a number" respectively.
+`'inf'` 和 `'nan'` 是特殊的字符串(不区分大小写), 当显示转换成 `float` 型时, 它们分别用于表示数学意义上的 "无穷大" 和 "非数字".
 
 ---
 
