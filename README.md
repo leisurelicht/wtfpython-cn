@@ -70,7 +70,7 @@ So, here we go...
         - [> Okay Python, Can you make me fly?/Python, 可否带我飞? *](#-okay-python-can-you-make-me-flypython-可否带我飞-)
         - [> `goto`, but why?/`goto`, 但为什么? *](#-goto-but-whygoto-但为什么-)
         - [> Brace yourself!/做好思想准备 *](#-brace-yourself做好思想准备-)
-        - [> Let's meet Friendly Language Uncle For Life *](#-lets-meet-friendly-language-uncle-for-life-)
+        - [> Let's meet Friendly Language Uncle For Life/让生活更友好 *](#-lets-meet-friendly-language-uncle-for-life让生活更友好-)
         - [> Even Python understands that love is complicated *](#-even-python-understands-that-love-is-complicated-)
         - [> Yes, it exists!](#-yes-it-exists)
         - [> Inpinity *](#-inpinity-)
@@ -1966,12 +1966,12 @@ SyntaxError: not a chance
 
 ---
 
-### > Let's meet Friendly Language Uncle For Life *
+### > Let's meet Friendly Language Uncle For Life/让生活更友好 *
 
 **Output (Python 3.x)**
 ```py
 >>> from __future__ import barry_as_FLUFL
->>> "Ruby" != "Python" # there's no doubt about it
+>>> "Ruby" != "Python" # 这里没什么疑问
   File "some_file.py", line 1
     "Ruby" != "Python"
               ^
@@ -1981,14 +1981,14 @@ SyntaxError: invalid syntax
 True
 ```
 
-There we go.
+这就对了.
 
-#### 💡 Explanation:
-- This is relevant to [PEP-401](https://www.python.org/dev/peps/pep-0401/) released on April 1, 2009 (now you know, what it means).
-- Quoting from the PEP-401
-  > Recognized that the != inequality operator in Python 3.0 was a horrible, finger pain inducing mistake, the FLUFL reinstates the <> diamond operator as the sole spelling.
-- There were more things that Uncle Barry had to share in the PEP; you can read them [here](https://www.python.org/dev/peps/pep-0401/).
-
+#### 💡 说明:
+- 相关的 [PEP-401](https://www.python.org/dev/peps/pep-0401/) 发布于 2009年4月1日 (所以你现在知道这意味着什么了吧).
+- 引用 PEP-401
+  > 意识到 Python 3.0 里的 != 运算符是一个会引起手指疼痛的恐怖错误, FLUFL 将 <> 运算符恢复为唯一写法.
+- Uncle Barry 在 PEP 中还分享了其他东西; 你可以在[这里](https://www.python.org/dev/peps/pep-0401/)获得他们.
+- (译: 虽然文档中没写，但应该是只能在交互解释器中使用.)
 ---
 
 ### > Even Python understands that love is complicated *
