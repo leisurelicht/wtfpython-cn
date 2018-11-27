@@ -79,7 +79,7 @@ So, here we go...
         - [> `+=` is faster/更快的 `+=` ](#--is-faster更快的-)
         - [> Let's make a giant string!/来做个巨大的字符串吧!](#-lets-make-a-giant-string来做个巨大的字符串吧)
         - [> Explicit typecast of strings/字符串的显式类型转换](#-explicit-typecast-of-strings字符串的显式类型转换)
-        - [> Minor Ones](#-minor-ones)
+        - [> Minor Ones/小知识点](#-minor-ones小知识点)
 - [Contributing](#contributing)
 - [Acknowledgements](#acknowledgements)
 - [🎓 License](#🎓-license)
@@ -2306,19 +2306,19 @@ nan
 
 ---
 
-### > Minor Ones
+### > Minor Ones/小知识点
 
-* `join()` is a string operation instead of list operation. (sort of counter-intuitive at first usage)
+* `join()` 是一个字符串操作而不是列表操作. (第一次接触会觉得有点违反直觉)
 
-  **💡 Explanation:**
-  If `join()` is a method on a string then it can operate on any iterable (list, tuple, iterators). If it were a method on a list, it'd have to be implemented separately by every type. Also, it doesn't make much sense to put a string-specific method on a generic `list` object API.
+  **💡 说明:**
+  如果 `join()` 是字符串方法 那么它就可以处理任何可迭代的对象(列表，元组，迭代器). 如果它是列表方法, 则必须在每种类型中单独实现. 另外, 在 `list` 对象的通用API中实现一个专用于字符串的方法没有太大的意义.
 
-* Few weird looking but semantically correct statements:
-  + `[] = ()` is a semantically correct statement (unpacking an empty `tuple` into an empty `list`)
-  + `'a'[0][0][0][0][0]` is also a semantically correct statement as strings are [sequences](https://docs.python.org/3/glossary.html#term-sequence)(iterables supporting element access using integer indices) in Python.
-  + `3 --0-- 5 == 8` and `--5 == 5` are both semantically correct statements and evaluate to `True`.
+* 看着奇怪但能正确运行的语句:
+  + `[] = ()` 语句在语义上是正确的 (解包一个空的 `tuple` 并赋值给 `list`)
+  + `'a'[0][0][0][0][0]` 在语义上也是正确的, 因为在 Python 中字符串同时也是[序列](https://docs.python.org/3/glossary.html#term-sequence)(可迭代对象支持使用整数索引访问元素).
+  + `3 --0-- 5 == 8` 和 `--5 == 5` 在语义上都是正确的, 且结果等于 `True`.(译: 3减负0等于3，再减负5相当于加5等于8；负的负5等于5.)
 
-* Given that `a` is a number, `++a` and `--a` are both valid Python statements but don't behave the same way as compared with similar statements in languages like C, C++ or Java.
+* 鉴于 `a` 是一个数组, `++a` 和 `--a` 都是有效的 Python 语句, 但其效果与 C, C++ 或 Java 等不一样.
   ```py
   >>> a = 5
   >>> a
@@ -2329,12 +2329,12 @@ nan
   5
   ```
 
-  **💡 Explanation:**
-  + There is no `++` operator in Python grammar. It is actually two `+` operators.
-  + `++a` parses as `+(+a)` which translates to `a`. Similarly, the output of the statement `--a` can be justified.
-  + This StackOverflow [thread](https://stackoverflow.com/questions/3654830/why-are-there-no-and-operators-in-python) discusses the rationale behind the absence of increment and decrement operators in Python.
+  **💡 说明:**
+  + python 里没有 `++` 操作符. 这其实是两个 `+` 操作符.
+  + `++a` 被解析为 `+(+a)` 最后等于 `a`. `--a` 同理.
+  + 这个 StackOverflow [回答](https://stackoverflow.com/questions/3654830/why-are-there-no-and-operators-in-python) 讨论了为什么 Python 中缺少增量和减量运算符.
 
-* Python uses 2 bytes for local variable storage in functions. In theory, this means that only 65536 variables can be defined in a function. However, python has a handy solution built in that can be used to store more than 2^16 variable names. The following code demonstrates what happens in the stack when more than 65536 local variables are defined (Warning: This code prints around 2^18 lines of text, so be prepared!):
+* Python 使用 2个字节存储函数中的本地变量. 理论上, 这意味着函数中只能定义65536个变量. 但是，Python 内置了一个方便的解决方案，可用于存储超过2^16个变量名. 下面的代码演示了当定义了超过65536个局部变量时堆栈中发生的情况 (警告: 这段代码会打印大约2^18行文本, 请做好准备!):
      ```py
      import dis
      exec("""
@@ -2347,18 +2347,18 @@ nan
      print(dis.dis(f))
      ```
 
-* Multiple Python threads won't run your *Python code* concurrently (yes you heard it right!). It may seem intuitive to spawn several threads and let them execute your Python code concurrently, but, because of the [Global Interpreter Lock](https://wiki.python.org/moin/GlobalInterpreterLock) in Python, all you're doing is making your threads execute on the same core turn by turn. Python threads are good for IO-bound tasks, but to achieve actual parallelization in Python for CPU-bound tasks, you might want to use the Python [multiprocessing](https://docs.python.org/2/library/multiprocessing.html) module.
+* 你的 *Python 代码* 并不会多线程同时运行 (是的, 你没听错!). 虽然你觉得会产生多个线程并让它们同时执行你的代码, 但是, 由于 [全局解释锁](https://wiki.python.org/moin/GlobalInterpreterLock)的存在, 你所做的只是让你的线程依次在同一个核心上执行. Python 多线程适用于IO密集型的任务, 但如果想要并行处理CPU密集型的任务, 你应该会想使用 [multiprocessing](https://docs.python.org/2/library/multiprocessing.html) 模块.
 
-* List slicing with out of the bounds indices throws no errors
+* 列表切片超出索引边界而不引发任何错误
   ```py
   >>> some_list = [1, 2, 3, 4, 5]
   >>> some_list[111:]
   []
   ```
 
-* `int('١٢٣٤٥٦٧٨٩')` returns `123456789` in Python 3. In Python, Decimal characters include digit characters, and all characters that can be used to form decimal-radix numbers, e.g. U+0660, ARABIC-INDIC DIGIT ZERO. Here's an [interesting story](http://chris.improbable.org/2014/8/25/adventures-in-unicode-digits/) related to this behavior of Python.
+* `int('١٢٣٤٥٦٧٨٩')` 在 Python 3 中会返回 `123456789`. 在 Python 中, 十进制字符包括数字字符, 以及可用于形成十进制数字的所有字符, 例如: U+0660, ARABIC-INDIC DIGIT ZERO. 这有一个关于此的 [有趣故事](http://chris.improbable.org/2014/8/25/adventures-in-unicode-digits/).
 
-* `'abc'.count('') == 4`. Here's an approximate implementation of `count` method, which would make the things more clear
+* `'abc'.count('') == 4`. 这有一个 `count` 方法的相近实现, 能更好的说明问题
   ```py
   def count(s, sub):
       result = 0
@@ -2366,7 +2366,7 @@ nan
           result += (s[i:i + len(sub)] == sub)
       return result
   ```
-  The behavior is due to the matching of empty substring(`''`) with slices of length 0 in the original string.
+  这个行为是由于空子串(`''`)与原始字符串中长度为0的切片相匹配导致的.
 
 ---
 
