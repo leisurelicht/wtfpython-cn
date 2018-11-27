@@ -73,7 +73,7 @@ So, here we go...
         - [> Let's meet Friendly Language Uncle For Life/让生活更友好 *](#-lets-meet-friendly-language-uncle-for-life让生活更友好-)
         - [> Even Python understands that love is complicated/连Python也知道爱是难言的 *](#-even-python-understands-that-love-is-complicated连Python也知道爱是难言的-)
         - [> Yes, it exists!/是的, 它存在!](#-yes-it-exists是的-它存在)
-        - [> Inpinity *](#-inpinity-)
+        - [> Inpinity/无限 *](#-inpinity无限-)
         - [> Mangling time! *](#-mangling-time-)
     - [Section: Miscellaneous](#section-miscellaneous)
         - [> `+=` is faster](#--is-faster)
@@ -2063,7 +2063,7 @@ True
 
 * `this` 模块是关于 Python 之禅的复活节彩蛋 ([PEP 20](https://www.python.org/dev/peps/pep-0020)).
 * 如果你认为这已经够有趣的了, 可以看看 [this.py](https://hg.python.org/cpython/file/c3896275c0f6/Lib/this.py) 的实现. 有趣的是, Python 之禅的实现代码违反了他自己 (这可能是唯一会发生这种情况的地方).
-* 
+*
 至于 `love is not True or False; love is love`, 意外却又不言而喻.
 
 ---
@@ -2113,9 +2113,10 @@ Try block executed successfully...
 
 ---
 
-### > Inpinity *
+### > Inpinity/无限 *
 
-The spelling is intended. Please, don't submit a patch for this.
+英文拼写是有意的, 请不要为此提交补丁.
+(译: 这里是为了突出 Python 中无限的定义与[Pi](https://en.wikipedia.org/wiki/Pi)有关, 所以将两个单词拼接了.)
 
 **Output (Python 3.x):**
 ```py
@@ -2126,9 +2127,9 @@ The spelling is intended. Please, don't submit a patch for this.
 -314159
 ```
 
-#### 💡 Explanation:
-- Hash of infinity is 10⁵ x π.
-- Interestingly, the hash of `float('-inf')` is "-10⁵ x π" in Python 3, whereas "-10⁵ x e" in Python 2.
+#### 💡 说明:
+- infinity 的哈希值是 10⁵ x π.
+- 有意思的是, `float('-inf')` 的哈希值在 Python 3 中是 "-10⁵ x π"  , 而在 Python 2 中是 "-10⁵ x e".
 
 ---
 
