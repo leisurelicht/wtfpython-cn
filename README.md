@@ -77,7 +77,7 @@ So, here we go...
         - [> Mangling time!修饰时间! *](#-mangling-time修饰时间-)
     - [Section: Miscellaneous](#section-miscellaneous)
         - [> `+=` is faster/更快的 `+=` ](#--is-faster更快的-)
-        - [> Let's make a giant string!](#-lets-make-a-giant-string)
+        - [> Let's make a giant string!/来做个巨大的字符串吧!](#-lets-make-a-giant-string来做个巨大的字符串吧)
         - [> Explicit typecast of strings](#-explicit-typecast-of-strings)
         - [> Minor Ones](#-minor-ones)
 - [Contributing](#contributing)
@@ -2183,7 +2183,7 @@ True
 
 ---
 
-### > Let's make a giant string!
+### > Let's make a giant string!/来做个巨大的字符串吧！
 
 ```py
 def add_string_with_plus(iters):
@@ -2230,28 +2230,28 @@ def convert_list_to_string(l, iters):
 10000 loops, best of 3: 80 µs per loop
 ```
 
-Let's increase the number of iterations by a factor of 10.
+让我们将迭代次数增加10倍.
 
 ```py
->>> timeit(add_string_with_plus(100000)) # Linear increase in execution time
+>>> timeit(add_string_with_plus(100000)) # 执行时间线性增加
 100 loops, best of 3: 9.75 ms per loop
->>> timeit(add_bytes_with_plus(100000)) # Quadratic increase
+>>> timeit(add_bytes_with_plus(100000)) # 二次增加
 1000 loops, best of 3: 974 ms per loop
->>> timeit(add_string_with_format(100000)) # Linear increase
+>>> timeit(add_string_with_format(100000)) # 线性增加
 100 loops, best of 3: 5.25 ms per loop
->>> timeit(add_string_with_join(100000)) # Linear increase
+>>> timeit(add_string_with_join(100000)) # 线性增加
 100 loops, best of 3: 9.85 ms per loop
 >>> l = ["xyz"]*100000
->>> timeit(convert_list_to_string(l, 100000)) # Linear increase
+>>> timeit(convert_list_to_string(l, 100000)) # 线性增加
 1000 loops, best of 3: 723 µs per loop
 ```
 
-#### 💡 Explanation
-- You can read more about [timeit](https://docs.python.org/3/library/timeit.html) from here. It is generally used to measure the execution time of snippets.
-- Don't use `+` for generating long strings — In Python, `str` is immutable, so the left and right strings have to be copied into the new string for every pair of concatenations. If you concatenate four strings of length 10, you'll be copying (10+10) + ((10+10)+10) + (((10+10)+10)+10) = 90 characters instead of just 40 characters. Things get quadratically worse as the number and size of the string increases (justified with the execution times of `add_bytes_with_plus` function)
-- Therefore, it's advised to use `.format.` or `%` syntax (however, they are slightly slower than `+` for short strings).
-- Or better, if already you've contents available in the form of an iterable object, then use `''.join(iterable_object)` which is much faster.
-- `add_string_with_plus` didn't show a quadratic increase in execution time unlike `add_bytes_with_plus` because of the `+=` optimizations discussed in the previous example. Had the statement been `s = s + "x" + "y" + "z"` instead of `s += "xyz"`, the increase would have been quadratic.
+#### 💡 说明:
+- 你可以在这获得更多 [timeit](https://docs.python.org/3/library/timeit.html) 的相关信息. 它通常用于衡量代码片段的执行时间.
+- 不要用 `+` 去生成过长的字符串, 在 Python 中, `str` 是不可变得, 所以在每次连接中你都要把左右两个字符串复制到新的字符串中. 如果你连接四个长度为10的字符串, 你需要拷贝 (10+10) + ((10+10)+10) + (((10+10)+10)+10) = 90 个字符而不是 40 个字符. 随着字符串的数量和大小的增加, 情况会变得越发的糟糕 (就像`add_bytes_with_plus` 函数的执行时间一样)
+- 因此, 更建议使用 `.format.` 或 `%` 语法 (但是, 对于短字符串, 它们比 `+` 稍慢一点).
+- 又或者, 如果你所需的内容已经以可迭代对象的形式提供了, 使用 `''.join(可迭代对象)` 要快多了.
+- `add_string_with_plus` 的执行时间没有像 `add_bytes_with_plus` 一样出现二次增加是因为解释器会如同上一个列子所讨论的一样优化 `+=`. 用 `s = s + "x" + "y" + "z"` 替代 `s += "xyz"` 的话, 执行时间就会二次增加了.
   ```py
   def add_string_with_plus(iters):
       s = ""
@@ -2261,7 +2261,7 @@ Let's increase the number of iterations by a factor of 10.
 
   >>> timeit(add_string_with_plus(10000))
   100 loops, best of 3: 9.87 ms per loop
-  >>> timeit(add_string_with_plus(100000)) # Quadratic increase in execution time
+  >>> timeit(add_string_with_plus(100000)) # 执行时间二次增加
   1 loops, best of 3: 1.09 s per loop
   ```
 
