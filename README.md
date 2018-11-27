@@ -74,7 +74,7 @@ So, here we go...
         - [> Even Python understands that love is complicated/连Python也知道爱是难言的 *](#-even-python-understands-that-love-is-complicated连Python也知道爱是难言的-)
         - [> Yes, it exists!/是的, 它存在!](#-yes-it-exists是的-它存在)
         - [> Inpinity/无限 *](#-inpinity无限-)
-        - [> Mangling time! *](#-mangling-time-)
+        - [> Mangling time!修饰时间! *](#-mangling-time修饰时间-)
     - [Section: Miscellaneous](#section-miscellaneous)
         - [> `+=` is faster](#--is-faster)
         - [> Let's make a giant string!](#-lets-make-a-giant-string)
@@ -2133,7 +2133,7 @@ Try block executed successfully...
 
 ---
 
-### > Mangling time! *
+### > Mangling time!/修饰时间! *
 
 ```py
 class Yo(object):
@@ -2152,13 +2152,13 @@ AttributeError: 'Yo' object has no attribute '__honey'
 True
 ```
 
-Why did `Yo()._Yo__honey` work? Only Indian readers would understand.
+为什么 `Yo()._Yo__honey` 能运行? 只有印度人理解.(译: 这个梗可能是指印度音乐人[Yo Yo Honey Singh](https://en.wikipedia.org/wiki/Yo_Yo_Honey_Singh))
 
-#### 💡 Explanation:
+#### 💡 说明:
 
-* [Name Mangling](https://en.wikipedia.org/wiki/Name_mangling) is used to avoid naming collisions between different namespaces.
-* In Python, the interpreter modifies (mangles) the class member names starting with `__` (double underscore) and not ending with more than one trailing underscore by adding `_NameOfTheClass` in front.
-* So, to access `__honey` attribute, we are required to append `_Yo` to the front which would prevent conflicts with the same name attribute defined in any other class.
+* [名字修饰](https://en.wikipedia.org/wiki/Name_mangling) 用于避免不同命名空间之间名称冲突.
+* 在 Python 中, 解释器会通过给类中以 `__` (双下划线)开头且结尾最多只有一个下划线的类成员名称加上`_NameOfTheClass` 来修饰(mangles)名称.
+* 所以, 要访问 `__honey` 对象,我们需要加上 `_Yo` 以防止与其他类中定义的相同名称的属性发生冲突.
 
 ---
 
