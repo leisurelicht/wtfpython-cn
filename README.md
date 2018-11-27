@@ -71,7 +71,7 @@ So, here we go...
         - [> `goto`, but why?/`goto`, 但为什么? *](#-goto-but-whygoto-但为什么-)
         - [> Brace yourself!/做好思想准备 *](#-brace-yourself做好思想准备-)
         - [> Let's meet Friendly Language Uncle For Life/让生活更友好 *](#-lets-meet-friendly-language-uncle-for-life让生活更友好-)
-        - [> Even Python understands that love is complicated *](#-even-python-understands-that-love-is-complicated-)
+        - [> Even Python understands that love is complicated/连Python也知道爱是难言的 *](#-even-python-understands-that-love-is-complicated连Python也知道爱是难言的-)
         - [> Yes, it exists!](#-yes-it-exists)
         - [> Inpinity *](#-inpinity-)
         - [> Mangling time! *](#-mangling-time-)
@@ -1991,40 +1991,59 @@ True
 - (译: 虽然文档中没写，但应该是只能在交互解释器中使用.)
 ---
 
-### > Even Python understands that love is complicated *
+### > Even Python understands that love is complicated/连Python也知道爱是难言的 *
 
 ```py
 import this
 ```
 
-Wait, what's **this**? `this` is love :heart:
+等等, **this** 是什么? `this` 是爱 :heart:
 
 **Output:**
 ```
 The Zen of Python, by Tim Peters
 
 Beautiful is better than ugly.
+优美胜于丑陋（Python 以编写优美的代码为目标）
 Explicit is better than implicit.
+明了胜于晦涩（优美的代码应当是明了的，命名规范，风格相似）
 Simple is better than complex.
+简洁胜于复杂（优美的代码应当是简洁的，不要有复杂的内部实现）
 Complex is better than complicated.
+复杂胜于凌乱（如果复杂不可避免，那代码间也不能有难懂的关系，要保持接口简洁）
 Flat is better than nested.
+扁平胜于嵌套（优美的代码应当是扁平的，不能有太多的嵌套）
 Sparse is better than dense.
+间隔胜于紧凑（优美的代码有适当的间隔，不要奢望一行代码解决问题）
 Readability counts.
+可读性很重要（优美的代码一定是可读的）
 Special cases aren't special enough to break the rules.
+没有特例特殊到需要违背这些规则（这些规则至高无上）
 Although practicality beats purity.
+尽管我们更倾向于实用性
 Errors should never pass silently.
+不要安静的包容所有错误
 Unless explicitly silenced.
+除非你确定需要这样做（精准地捕获异常，不写 except:pass 风格的代码）
 In the face of ambiguity, refuse the temptation to guess.
+拒绝诱惑你去猜测的暧昧事物
 There should be one-- and preferably only one --obvious way to do it.
+而是尽量找一种，最好是唯一一种明显的解决方案（如果不确定，就用穷举法）
 Although that way may not be obvious at first unless you're Dutch.
+虽然这并不容易，因为你不是 Python 之父（这里的 Dutch 是指 Guido ）
 Now is better than never.
+现在行动好过永远不行动
 Although never is often better than *right* now.
+尽管不行动要好过鲁莽行动
 If the implementation is hard to explain, it's a bad idea.
+如果你无法向人描述你的方案，那肯定不是一个好方案；
 If the implementation is easy to explain, it may be a good idea.
+如果你能轻松向人描述你的方案，那也许会是一个好方案（方案测评标准）
 Namespaces are one honking great idea -- let's do more of those!
+命名空间是一种绝妙的理念，我们应当多加利用（倡导与号召）
 ```
 
-It's the Zen of Python!
+这是 Python 之禅!
 
 ```py
 >>> love = this
@@ -2036,15 +2055,16 @@ False
 False
 >>> love is not True or False
 True
->>> love is not True or False; love is love  # Love is complicated
+>>> love is not True or False; love is love  # 爱是难言的
 True
 ```
 
-#### 💡 Explanation:
+#### 💡 说明:
 
-* `this` module in Python is an easter egg for The Zen Of Python ([PEP 20](https://www.python.org/dev/peps/pep-0020)).
-* And if you think that's already interesting enough, check out the implementation of [this.py](https://hg.python.org/cpython/file/c3896275c0f6/Lib/this.py). Interestingly, the code for the Zen violates itself (and that's probably the only place where this happens).
-* Regarding the statement `love is not True or False; love is love`, ironic but it's self-explanatory.
+* `this` 模块是关于 Python 之禅的复活节彩蛋 ([PEP 20](https://www.python.org/dev/peps/pep-0020)).
+* 如果你认为这已经够有趣的了, 可以看看 [this.py](https://hg.python.org/cpython/file/c3896275c0f6/Lib/this.py) 的实现. 有趣的是, Python 之禅的实现代码违反了他自己 (这可能是唯一会发生这种情况的地方).
+* 
+至于 `love is not True or False; love is love`, 意外却又不言而喻.
 
 ---
 
