@@ -72,7 +72,7 @@ So, here we go...
         - [> Brace yourself!/做好思想准备 *](#-brace-yourself做好思想准备-)
         - [> Let's meet Friendly Language Uncle For Life/让生活更友好 *](#-lets-meet-friendly-language-uncle-for-life让生活更友好-)
         - [> Even Python understands that love is complicated/连Python也知道爱是难言的 *](#-even-python-understands-that-love-is-complicated连Python也知道爱是难言的-)
-        - [> Yes, it exists!](#-yes-it-exists)
+        - [> Yes, it exists!/是的, 它存在!](#-yes-it-exists是的-它存在)
         - [> Inpinity *](#-inpinity-)
         - [> Mangling time! *](#-mangling-time-)
     - [Section: Miscellaneous](#section-miscellaneous)
@@ -2068,9 +2068,9 @@ True
 
 ---
 
-### > Yes, it exists!
+### > Yes, it exists!/是的, 它存在!
 
-**The `else` clause for loops.** One typical example might be:
+**循环的 `else`.** 一个典型的例子:
 
 ```py
   def does_exists_num(l, to_find):
@@ -2091,7 +2091,7 @@ Exists!
 Does not exist
 ```
 
-**The `else` clause in exception handling.** An example,
+**异常的 `else` .** 例,
 
 ```py
 try:
@@ -2107,9 +2107,9 @@ else:
 Try block executed successfully...
 ```
 
-#### 💡 Explanation:
-- The `else` clause after a loop is executed only when there's no explicit `break` after all the iterations.
-- `else` clause after try block is also called "completion clause" as reaching the `else` clause in a `try` statement means that the try block actually completed successfully.
+#### 💡 说明:
+- 循环后的 `else` 子句只会在循环没有触发 `break` 语句, 正常结束的情况下才会执行.
+- try 之后的 `else` 子句也被称为 "完成子句", 因为在 `try` 语句中到达 `else` 子句意味着try块实际上已成功完成.
 
 ---
 
