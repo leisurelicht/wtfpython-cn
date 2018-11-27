@@ -76,7 +76,7 @@ So, here we go...
         - [> Inpinity/无限 *](#-inpinity无限-)
         - [> Mangling time!修饰时间! *](#-mangling-time修饰时间-)
     - [Section: Miscellaneous](#section-miscellaneous)
-        - [> `+=` is faster](#--is-faster)
+        - [> `+=` is faster/更快的 `+=` ](#--is-faster更快的-)
         - [> Let's make a giant string!](#-lets-make-a-giant-string)
         - [> Explicit typecast of strings](#-explicit-typecast-of-strings)
         - [> Minor Ones](#-minor-ones)
@@ -2167,19 +2167,19 @@ True
 ## Section: Miscellaneous
 
 
-### > `+=` is faster
+### > `+=` is faster/更快的 `+=` 
 
 ```py
-# using "+", three strings:
+# 用 "+" 连接三个字符串:
 >>> timeit.timeit("s1 = s1 + s2 + s3", setup="s1 = ' ' * 100000; s2 = ' ' * 100000; s3 = ' ' * 100000", number=100)
 0.25748300552368164
-# using "+=", three strings:
+# 用 "+=" 连接三个字符串:
 >>> timeit.timeit("s1 += s2 + s3", setup="s1 = ' ' * 100000; s2 = ' ' * 100000; s3 = ' ' * 100000", number=100)
 0.012188911437988281
 ```
 
-#### 💡 Explanation:
-+ `+=` is faster than `+` for concatenating more than two strings because the first string (example, `s1` for `s1 += s2 + s3`) is not destroyed while calculating the complete string.
+#### 💡 说明:
++ 连接两个以上的字符串时 `+=` 比 `+` 更快, 因为在计算过程中第一个字符串 (例如, `s1 += s2 + s3` 中的 `s1`) 不会被销毁.(译: 就是 `+=` 执行的是追加操作，少了一个销毁新建的动作.)
 
 ---
 
