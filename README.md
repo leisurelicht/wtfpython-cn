@@ -1,30 +1,35 @@
 <p align="center"><img src="/images/logo.png" alt=""></p>
 <h1 align="center">What the f*ck Python! 🐍</h1>
-<p align="center">An interesting collection of surprising snippets and lesser-known Python features.</p>
+<p align="center">一些有趣且鲜为人知的 Python 特性.</p>
+
+<p align="center">
+<a href="https://github.com/satwikkansal/wtfpython">English</a>
+| <a href="#">中文</a>
+</p>
 
 [![WTFPL 2.0][license-image]][license-url] [![Commit id][commit-image]][commit-url]
 
 
-Python, being a beautifully designed high-level and interpreter-based programming language, provides us with many features for the programmer's comfort. But sometimes, the outcomes of a Python snippet may not seem obvious to a regular user at first sight.
+Python, 是一个设计优美的解释型高级语言, 它提供了很多能让程序员感到舒适的功能特性. 但有的时候, Python 的一些输出结果对于初学者来说似乎并不是那么一目了然.
 
-Here is a fun project to collect such tricky & counter-intuitive examples and lesser-known features in Python, attempting to discuss what exactly is happening under the hood!
+这个有趣的项目意在收集 Python 中那些难以理解和反人类直觉的例子以及鲜为人知的功能特性, 并尝试讨论这些现象背后真正的原理!
 
-While some of the examples you see below may not be WTFs in the truest sense, but they'll reveal some of the interesting parts of Python that you might be unaware of. I find it a nice way to learn the internals of a programming language, and I think you'll find them interesting as well!
+虽然下面的有些例子并不一定会让你觉得 WTFs, 但它们依然有可能会告诉你一些你所不知道的 Python 有趣特性.  我觉得这是一种学习编程语言内部原理的好办法, 而且我相信你也会从中获得乐趣!
 
-If you're an experienced Python programmer, you can take it as a challenge to get most of them right in first attempt. You may be already familiar with some of these examples, and I might be able to revive sweet old memories of yours being bitten by these gotchas :sweat_smile:
+如果您是一位经验比较丰富的 Python 程序员, 你可以尝试挑战看是否能一次就找到例子的正确答案. 你可能对其中的一些例子已经比较熟悉了, 那这也许能唤起你当年踩这些坑时的甜蜜回忆 :sweat_smile:
 
-PS: If you're a returning reader, you can learn about the new modifications [here](https://github.com/satwikkansal/wtfpython/releases/).
+PS: 如果你不是第一次读了, 你可以在[这里](https://github.com/satwikkansal/wtfpython/releases/)获取变动内容.
 
-So, here we go...
+那么, 让我们开始吧...
 
-# Table of Contents
+# Table of Contents/目录
 <!-- TOC -->
 
-- [Table of Contents](#table-of-contents)
-- [Structure of the Examples](#structure-of-the-examples)
-- [Usage](#usage)
-- [👀 Examples](#👀-examples)
-    - [Section: Strain your brain!](#section-strain-your-brain)
+- [Table of Contents/目录](#table-of-contents目录)
+- [Structure of the Examples/示例结构](#structure-of-the-examples示例结构)
+- [Usage/用法](#usage用法)
+- [👀 Examples/示例](#-examples示例)
+    - [Section: Strain your brain!/大脑运动!](#section-strain-your-brain大脑运动)
         - [> Strings can be tricky sometimes/微妙的字符串 *](#-strings-can-be-tricky-sometimes微妙的字符串-)
         - [> Time for some hash brownies!/是时候来点蛋糕了!](#-time-for-some-hash-brownies是时候来点蛋糕了)
         - [> Return return everywhere!/到处返回！](#-return-return-everywhere到处返回)
@@ -50,11 +55,11 @@ So, here we go...
         - [> Subclass relationships/子类关系 *](#-subclass-relationships子类关系-)
         - [> The mysterious key type conversion/神秘的键型转换 *](#-the-mysterious-key-type-conversion神秘的键型转换-)
         - [> Let's see if you can guess this?/看看你能否猜到这一点?](#-lets-see-if-you-can-guess-this看看你能否猜到这一点)
-    - [Section: Appearances are deceptive!](#section-appearances-are-deceptive)
+    - [Section: Appearances are deceptive!/外表是靠不住的!](#section-appearances-are-deceptive外表是靠不住的)
         - [> Skipping lines?/跳过一行?](#-skipping-lines跳过一行)
         - [> Teleportation/空间移动 *](#-teleportation空间移动-)
         - [> Well, something is fishy.../嗯, 有些可疑...](#-well-something-is-fishy嗯有些可疑)
-    - [Section: Watch out for the landmines!](#section-watch-out-for-the-landmines)
+    - [Section: Watch out for the landmines!/小心地雷!](#section-watch-out-for-the-landmines小心地雷)
         - [> Modifying a dictionary while iterating over it/迭代字典时的修改](#-modifying-a-dictionary-while-iterating-over-it迭代字典时的修改)
         - [> Stubborn `del` operator/坚强的 `del` *](#-stubborn-del-operator坚强的-del-)
         - [> Deleting a list item while iterating/迭代列表时删除元素](#-deleting-a-list-item-while-iterating迭代列表时删除元素)
@@ -66,7 +71,7 @@ So, here we go...
         - [> Be careful with chained operations/小心链式操作](#-be-careful-with-chained-operations小心链式操作)
         - [> Name resolution ignoring class scope/忽略类作用域的名称解析](#-name-resolution-ignoring-class-scope忽略类作用域的名称解析)
         - [> Needle in a Haystack/大海捞针](#-needle-in-a-haystack大海捞针)
-    - [Section: The Hidden treasures!](#section-the-hidden-treasures)
+    - [Section: The Hidden treasures!/隐藏的宝藏!](#section-the-hidden-treasures隐藏的宝藏)
         - [> Okay Python, Can you make me fly?/Python, 可否带我飞? *](#-okay-python-can-you-make-me-flypython-可否带我飞-)
         - [> `goto`, but why?/`goto`, 但为什么? *](#-goto-but-whygoto-但为什么-)
         - [> Brace yourself!/做好思想准备 *](#-brace-yourself做好思想准备-)
@@ -75,85 +80,85 @@ So, here we go...
         - [> Yes, it exists!/是的, 它存在!](#-yes-it-exists是的-它存在)
         - [> Inpinity/无限 *](#-inpinity无限-)
         - [> Mangling time!修饰时间! *](#-mangling-time修饰时间-)
-    - [Section: Miscellaneous](#section-miscellaneous)
+    - [Section: Miscellaneous/杂项](#section-miscellaneous杂项)
         - [> `+=` is faster/更快的 `+=` ](#--is-faster更快的-)
         - [> Let's make a giant string!/来做个巨大的字符串吧!](#-lets-make-a-giant-string来做个巨大的字符串吧)
         - [> Explicit typecast of strings/字符串的显式类型转换](#-explicit-typecast-of-strings字符串的显式类型转换)
         - [> Minor Ones/小知识点](#-minor-ones小知识点)
-- [Contributing](#contributing)
-- [Acknowledgements](#acknowledgements)
-- [🎓 License](#🎓-license)
-    - [Help](#help)
-    - [Want to surprise your geeky pythonist friends?](#want-to-surprise-your-geeky-pythonist-friends)
-    - [Need a pdf version?](#need-a-pdf-version)
-    - [Follow Commit](#follow-commit)
+- [Contributing/贡献](#contributing贡献)
+- [Acknowledgements/致谢](#acknowledgements致谢)
+- [🎓 License/许可](#-license许可)
+    - [Help/帮助](#help帮助)
+    - [Surprise your geeky pythonist friends?/想给你的极客朋友一个惊喜?](#surprise-your-geeky-pythonist-friends想给你的极客朋友一个惊喜)
+    - [Need a pdf version?/需要来一份pdf版的?](#need-a-pdf-version需要来一份pdf版的)
+    - [Follow Commit/追踪Commit](#follow-commit追踪Commit)
 
 <!-- /TOC -->
 
-# Structure of the Examples
+# Structure of the Examples/示例结构
 
-All the examples are structured like below:
+所有示例的结构都如下所示:
 
-> ### > Some fancy Title *
-> The asterisk at the end of the title indicates the example was not present in the first release and has been recently added.
+> ### > 一个精选的标题 *
+> 标题末尾的星号表示该示例在第一版中不存在，是最近添加的.
 >
 > ```py
-> # Setting up the code.
-> # Preparation for the magic...
+> # 准备代码.
+> # 释放魔法...
 > ```
 >
 > **Output (Python version):**
 > ```py
-> >>> triggering_statement
-> Probably unexpected output
+> >>> 触发语句
+> 出乎意料的输出结果
 > ```
-> (Optional): One line describing the unexpected output.
+> (可选): 对意外输出结果的简短描述.
 >
 >
-> #### 💡 Explanation:
+> #### 💡 说明:
 >
-> * Brief explanation of what's happening and why is it happening.
+> * 简要说明发生了什么以及为什么会发生.
 >   ```py
->   Setting up examples for clarification (if necessary)
+>   如有必要, 举例说明
 >   ```
 >   **Output:**
 >   ```py
->   >>> trigger # some example that makes it easy to unveil the magic
->   # some justified output
+>   >>> 触发语句 # 一些让魔法变得容易理解的例子
+>   # 一些正常的输入
 >   ```
 
-**Note:** All the examples are tested on Python 3.5.2 interactive interpreter, and they should work for all the Python versions unless explicitly specified in the description.
+**注意:** 所有的示例都在 Python 3.5.2 版本的交互解释器上测试过, 如果不特别说明应该适用于所有 Python 版本.
 
-# Usage
+# Usage/用法
 
-A nice way to get the most out of these examples, in my opinion, will be just to read the examples chronologically, and for every example:
-- Carefully read the initial code for setting up the example. If you're an experienced Python programmer, most of the times you will successfully anticipate what's going to happen next.
-- Read the output snippets and,
-  + Check if the outputs are the same as you'd expect.
-  + Make sure if you know the exact reason behind the output being the way it is.
-    - If no, take a deep breath, and read the explanation (and if you still don't understand, shout out! and create an issue [here](https://github.com/satwikkansal/wtfPython)).
-    - If yes, give a gentle pat on your back, and you may skip to the next example.
+我个人建议, 最好依次阅读下面的示例, 并对每个示例:
+- 仔细阅读设置例子最开始的代码.  如果您是一位经验丰富的 Python 程序员, 那么大多数时候您都能成功预期到后面的结果.
+- 阅读输出结果,
+  + 确认结果是否如你所料.
+  + 确认你是否知道这背后的原理.
+    - 如果不知道, 深呼吸然后阅读说明 (如果你还是看不明白, 别沉默! 可以在[这](https://github.com/satwikkansal/wtfPython)提个 issue).
+    - 如果知道, 给自己点奖励, 然后去看下一个例子.
 
-PS: You can also read WTFpython at the command line. There's a pypi package and an npm package (supports colored formatting) for the same.
+PS: 你也可以在命令行阅读 WTFpython. 我们有 pypi 包 和 npm 包(支持代码高亮).(译: 这两个都是英文版的)
 
-To install the npm package [`wtfpython`](https://www.npmjs.com/package/wtfpython)
+安装 npm 包 [`wtfpython`](https://www.npmjs.com/package/wtfpython)
 ```sh
 $ npm install -g wtfpython
 ```
 
-Alternatively, to install the pypi package [`wtfpython`](https://pypi.python.org/pypi/wtfpython)
+或者, 安装 pypi 包 [`wtfpython`](https://pypi.python.org/pypi/wtfpython)
 ```sh
 $ pip install wtfpython -U
 ```
 
-Now, just run `wtfpython` at the command line which will open this collection in your selected `$PAGER`.
+现在, 在命令行中运行 `wtfpython`, 你就可以开始浏览了.
 
 ---
 
-# 👀 Examples
+# 👀 Examples/示例
 
 
-## Section: Strain your brain!
+## Section: Strain your brain!/大脑运动!
 
 ### > Strings can be tricky sometimes/微妙的字符串 *
 
@@ -1229,7 +1234,7 @@ a, b = a[b] = {}, 5
 
 ---
 
-## Section: Appearances are deceptive!
+## Section: Appearances are deceptive!/外表是靠不住的!
 
 ### > Skipping lines?/跳过一行?
 
@@ -1338,7 +1343,7 @@ def square(x):
 
 ---
 
-## Section: Watch out for the landmines!
+## Section: Watch out for the landmines!/小心地雷!
 
 
 ### > Modifying a dictionary while iterating over it/迭代字典时的修改
@@ -1893,7 +1898,7 @@ tuple()
 ---
 
 
-## Section: The Hidden treasures!
+## Section: The Hidden treasures!/隐藏的宝藏!
 
 This section contains few of the lesser-known interesting things about Python that most beginners like me are unaware of (well, not anymore).
 
@@ -2164,10 +2169,10 @@ True
 
 ---
 
-## Section: Miscellaneous
+## Section: Miscellaneous/杂项
 
 
-### > `+=` is faster/更快的 `+=` 
+### > `+=` is faster/更快的 `+=`
 
 ```py
 # 用 "+" 连接三个字符串:
@@ -2370,17 +2375,17 @@ nan
 
 ---
 
-# Contributing
+# Contributing/贡献
 
-All patches are Welcome! Please see [CONTRIBUTING.md](/CONTRIBUTING.md) for further details.
+欢迎各种补丁! 详情请看[CONTRIBUTING.md](https://github.com/satwikkansal/wtfpython/blob/master/CONTRIBUTING.md).(译: 这是给原库提贡献的要求模版)
 
-For discussions, you can either create a new [issue](https://github.com/satwikkansal/wtfpython/issues/new) or ping on the Gitter [channel](https://gitter.im/wtfpython/Lobby)
+你可以通过新建 [issue](https://github.com/satwikkansal/wtfpython/issues/new) 或者在上 [Gitter](https://gitter.im/wtfpython/Lobby) 与我们进行讨论.
 
-# Acknowledgements
+# Acknowledgements/致谢
 
-The idea and design for this collection were initially inspired by Denys Dovhan's awesome project [wtfjs](https://github.com/denysdovhan/wtfjs). The overwhelming support by the community gave it the shape it is in right now.
+这个系列最初的想法和设计灵感来自于 Denys Dovhan 的项目 [wtfjs](https://github.com/denysdovhan/wtfjs). 社区的强大支持让它成长为现在的模样.
 
-#### Some nice Links!
+#### Some nice Links!/一些不错的资源
 * https://www.youtube.com/watch?v=sH4XF6pKKmk
 * https://www.reddit.com/r/Python/comments/3cu6ej/what_are_some_wtf_things_about_python
 * https://sopython.com/wiki/Common_Gotchas_In_Python
@@ -2389,7 +2394,7 @@ The idea and design for this collection were initially inspired by Denys Dovhan'
 * https://www.python.org/doc/humor/
 * https://www.codementor.io/satwikkansal/python-practices-for-efficient-code-performance-memory-and-usability-aze6oiq65
 
-# 🎓 License
+# 🎓 License/许可
 
 [![CC 4.0][license-image]][license-url]
 
@@ -2398,22 +2403,24 @@ The idea and design for this collection were initially inspired by Denys Dovhan'
 [license-url]: http://www.wtfpl.net
 [license-image]: https://img.shields.io/badge/License-WTFPL%202.0-lightgrey.svg?style=flat-square
 
-## Help
+## Help/帮助
 
-If you have any wtfs, ideas or suggestions, please share.
+如果您有任何想法或建议，欢迎分享.
 
-## Surprise your geeky pythonist friends?
+## Surprise your geeky pythonist friends?/想给你的极客朋友一个惊喜?
 
-You can use these quick links to recommend wtfpython to your friends,
+您可以使用这些快链向 Twitter 和 Linkedin 上的朋友推荐 wtfpython,
 
 [Twitter](https://twitter.com/intent/tweet?url=https://github.com/satwikkansal/wtfpython&hastags=python,wtfpython)
  | [Linkedin](https://www.linkedin.com/shareArticle?url=https://github.com/satwikkansal&title=What%20the%20f*ck%20Python!&summary=An%20interesting%20collection%20of%20subtle%20and%20tricky%20Python%20snippets.)
 
-## Need a pdf version?
+## Need a pdf version?/需要来一份pdf版的?
 
-I've received a few requests for the pdf version of wtfpython. You can add your details [here](https://satwikkansal.xyz/wtfpython-pdf/) to get the pdf as soon as it is finished.
+我收到一些想要pdf版本的需求. 你可以快速在[这](https://satwikkansal.xyz/wtfpython-pdf/)获得.
 
-## Follow Commit
+## Follow Commit/追踪Commit
+
+这是中文版 fork 时所处的原库 Commit, 当原库更新时我会跟随更新.
 
 [![Commit id][commit-image]][commit-url]
 
