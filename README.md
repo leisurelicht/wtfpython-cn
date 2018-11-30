@@ -2381,6 +2381,8 @@ nan
 
 你可以通过新建 [issue](https://github.com/satwikkansal/wtfpython/issues/new) 或者在上 [Gitter](https://gitter.im/wtfpython/Lobby) 与我们进行讨论.
 
+(译: 如果你想对这个翻译项目提供帮助, 请看[这里](https://github.com/leisurelicht/wtfpython-cn/blob/master/CONTRIBUTING.md))
+
 # Acknowledgements/致谢
 
 这个系列最初的想法和设计灵感来自于 Denys Dovhan 的项目 [wtfjs](https://github.com/denysdovhan/wtfjs). 社区的强大支持让它成长为现在的模样.
