@@ -199,7 +199,7 @@ False
 很好理解, 对吧?
 
 #### 💡 说明:
-- 这些行为是由于 Cpython 在编译优化时, 某些情况下会尝试使用已经存在的不可变对象而不是每次都创建一个新对象. (这种行为被称作字符串的驻留[string interning])
+- 这些行为是由于 <strong style="color:#d00;">Cpython 在编译优化</strong>时, 某些情况下会尝试使用已经存在的不可变对象而不是每次都创建一个新对象. (这种行为被称作<strong style="color:#d00;">字符串的驻留</strong>[string interning])
 - 发生驻留之后, 许多变量可能指向内存中的相同字符串对象. (从而节省内存)
 - 在上面的代码中, 字符串是隐式驻留的. 何时发生隐式驻留则取决于具体的实现. 这里有一些方法可以用来猜测字符串是否会被驻留:
   - 所有长度为 0 和长度为 1 的字符串都被驻留.
@@ -208,8 +208,8 @@ False
 
     <img src="/images/string-intern/string_intern.png" alt="">
 
-- 当在同一行将 `a` 和 `b` 的值设置为 `"wtf!"` 的时候, Python 解释器会创建一个新对象, 然后同时引用第二个变量. 如果你在不同的行上进行赋值操作, 它就不会“知道”已经有一个 `wtf！` 对象 (因为 `"wtf!"` 不是按照上面提到的方式被隐式驻留的). 它是一种编译器优化, 特别适用于交互式环境.
-- 常量折叠(constant folding) 是 Python 中的一种 [窥孔优化(peephole optimization)](https://en.wikipedia.org/wiki/Peephole_optimization) 技术. 这意味着在编译时表达式 `'a'*20` 会被替换为 `'aaaaaaaaaaaaaaaaaaaa'` 以减少运行时的时钟周期. 只有长度小于 20 的字符串才会发生常量折叠. (为啥? 想象一下由于表达式 `'a'*10**10` 而生成的 `.pyc` 文件的大小). 相关的源码实现在[这里](https://github.com/python/cpython/blob/3.6/Python/peephole.c#L288).
+- 当在同一行将 `a` 和 `b` 的值设置为 `"wtf!"` 的时候, Python 解释器会创建一个新对象, 然后同时引用第二个变量. 如果你在不同的行上进行赋值操作, 它就不会“知道”已经有一个 `wtf！` 对象 (因为 `"wtf!"` 不是按照上面提到的方式被隐式驻留的). 它是一种<strong style="color:#d00;">编译器优化</strong>, 特别适用于交互式环境.
+- <strong style="color:#d00;">常量折叠</strong>(constant folding) 是 Python 中的一种 [<strong style="color:#d00;">窥孔优化</strong>(peephole optimization)](https://en.wikipedia.org/wiki/Peephole_optimization) 技术. 这意味着在编译时表达式 `'a'*20` 会被替换为 `'aaaaaaaaaaaaaaaaaaaa'` 以减少运行时的时钟周期. 只有<strong style="color:#d00;">长度小于 20 </strong>的字符串才会发生常量折叠. (为啥? 想象一下由于表达式 `'a'*10**10` 而生成的 `.pyc` 文件的大小). 相关的源码实现在[这里](https://github.com/python/cpython/blob/3.6/Python/peephole.c#L288).
 
 
 ---
@@ -239,7 +239,7 @@ some_dict[5] = "Python"
 
 #### 💡 说明:
 
-* Python 字典通过检查键值是否相等和比较哈希值来确定两个键是否相同.
+* Python 字典通过<strong style="color:#d00;">检查键值是否相等和比较哈希值来确定两个键是否相同</strong>.
 * 具有相同值的不可变对象在Python中始终具有相同的哈希值.
   ```py
   >>> 5 == 5.0
@@ -247,7 +247,7 @@ some_dict[5] = "Python"
   >>> hash(5) == hash(5.0)
   True
   ```
-  **注意:** 具有不同值的对象也可能具有相同的哈希值（哈希冲突）.
+  **注意:** 具有不同值的对象也可能具有相同的哈希值（<strong style="color:#d00;">哈希冲突</strong>）.
 * 当执行 `some_dict[5] = "Python"` 语句时, 因为Python将 `5` 和 `5.0` 识别为 `some_dict` 的同一个键, 所以已有值 "JavaScript" 就被 "Python" 覆盖了.
 * 这个 StackOverflow的 [回答](https://stackoverflow.com/a/32211042/4354153) 漂亮的解释了这背后的基本原理.
 
@@ -272,7 +272,7 @@ def some_func():
 #### 💡 说明:
 
 - 当在 "try...finally" 语句的 `try` 中执行 `return`, `break` 或 `continue` 后, `finally` 子句依然会执行.
-- 函数的返回值由最后执行的 `return` 语句决定. 由于 `finally` 子句一定会执行, 所以 `finally` 子句中的 `return` 将始终是最后执行的语句.
+- <strong style="color:#d00;">函数的返回值由最后执行的 `return` 语句决定</strong>. 由于 `finally` 子句一定会执行, 所以 `finally` 子句中的 `return` 将始终是最后执行的语句.
 
 ---
 
@@ -298,8 +298,8 @@ True
 #### 💡 说明:
 
 * 当调用 `id` 函数时, Python 创建了一个 `WTF` 类的对象并传给 `id` 函数. 然后 `id` 函数获取其id值 (也就是内存地址), 然后丢弃该对象. 该对象就被销毁了.
-* 当我们连续两次进行这个操作时, Python会将相同的内存地址分配给第二个对象. 因为 (在CPython中) `id` 函数使用对象的内存地址作为对象的id值, 所以两个对象的id值是相同的.
-* 综上, 对象的id值仅仅在对象的生命周期内唯一. 在对象被销毁之后, 或被创建之前, 其他对象可以具有相同的id值.
+* 当我们连续两次进行这个操作时, <strong style="color:#d00;">Python会将相同的内存地址分配给第二个对象</strong>. 因为 (在CPython中) `id` 函数使用对象的内存地址作为对象的id值, 所以两个对象的id值是相同的.
+* 综上, <strong style="color:#d00;">对象的id值仅仅在对象的生命周期内唯一</strong>. 在对象被销毁之后, 或被创建之前, 其他对象可以具有相同的id值.
 * 那为什么 `is` 操作的结果为 `False` 呢? 让我们看看这段代码.
   ```py
   class WTF(object):
@@ -347,7 +347,7 @@ for i, some_dict[i] in enumerate(some_string):
   ```
   for_stmt: 'for' exprlist 'in' testlist ':' suite ['else' ':' suite]
   ```
-  其中 `exprlist` 指分配目标. 这意味着对可迭代对象中的**每一项都会执行**类似 `{exprlist} = {next_value}` 的操作.
+  其中 `exprlist` 指分配目标. 这意味着对可迭代对象中的<strong style="color:#d00;">**每一项都会执行**类</strong>似 `{exprlist} = {next_value}` 的操作.
 
   一个有趣的例子说明了这一点:
   ```py
@@ -418,9 +418,9 @@ array_2[:] = [1,2,3,4,5]
 
 #### 💡 说明
 
-- 在[生成器](https://wiki.python.org/moin/Generators)表达式中, `in` 子句在声明时执行, 而条件子句则是在运行时执行.
+- 在[生成器](https://wiki.python.org/moin/Generators)表达式中,<strong style="color:#d00;"> `in` 子句在声明时执行, 而条件子句则是在运行时执行</strong>.
 - 所以在运行前, `array` 已经被重新赋值为 `[2, 8, 22]`, 因此对于之前的 `1`, `8` 和 `15`, 只有 `count(8)` 的结果是大于 `0` 的, 所以生成器只会生成 `8`.
-- 第二部分中 `g1` 和 `g2` 的输出差异则是由于变量 `array_1` 和 `array_2` 被重新赋值的方式导致的.
+- 第二部分中 `g1` 和 `g2` 的输出差异则是由于变量 `array_1` 和 `array_2` 被<strong style="color:#d00;">重新赋值</strong>的方式导致的.
 - 在第一种情况下, `array_1` 被绑定到新对象 `[1,2,3,4,5]`, 因为 `in` 子句是在声明时被执行的， 所以它仍然引用旧对象 `[1,2,3,4]`(并没有被销毁).
 - 在第二种情况下, 对 `array_2` 的切片赋值将相同的旧对象 `[1,2,3,4]` 原地更新为 `[1,2,3,4,5]`. 因此 `g2` 和 `array_2` 仍然引用同一个对象(这个对象现在已经更新为 `[1,2,3,4,5]`).
 
@@ -450,9 +450,9 @@ True
 
 **`is` 和 `==` 的区别**
 
-* `is` 运算符检查两个运算对象是否引用自同一对象 (即, 它检查两个预算对象是否相同).
+* `is` 运算符检查两个运算对象是否引用自同一对象 (即, 它检查两个预算<strong style="color:#909;"> (运算) </strong>对象是否相同).
 * `==` 运算符比较两个运算对象的值是否相等.
-* 因此 `is` 代表引用相同, `==` 代表值相等. 下面的例子可以很好的说明这点,
+* 因此<strong style="color:#d00;"> `is` 代表引用相同, `==` 代表值相等</strong>. 下面的例子可以很好的说明这点,
   ```py
   >>> [] == []
   True
@@ -462,10 +462,10 @@ True
 
 **`256` 是一个已经存在的对象, 而 `257` 不是**
 
-当你启动Python 的时候, `-5` 到 `256` 的数值就已经被分配好了. 这些数字因为经常使用所以适合被提前准备好.
+当你启动Python 的时候, <strong style="color:#d00;"> `-5` 到 `256` 的数值就已经被分配好了</strong>. 这些数字因为经常使用所以适合被提前准备好.
 
 引用自 https://docs.python.org/3/c-api/long.html
-> 当前的实现为-5到256之间的所有整数保留一个整数对象数组, 当你创建了一个该范围内的整数时, 你只需要返回现有对象的引用. 所以改变1的值是有可能的. 我怀疑这种行为在Python中是未定义行为. :-)
+> <strong style="color:#d00;">当前的实现为-5到256之间的所有整数保留一个整数对象数组</strong>, 当你创建了一个该范围内的整数时, 你只需要返回现有对象的引用. 所以改变1的值是有可能的. 我怀疑这种行为在Python中是未定义行为. :-)
 
 ```py
 >>> id(256)
@@ -488,7 +488,7 @@ True
 
 这里解释器并没有智能到能在执行 `y = 257` 时意识到我们已经创建了一个整数 `257`, 所以它在内存中又新建了另一个对象.
 
-**当 `a` 和 `b` 在同一行中使用相同的值初始化时，会指向同一个对象.**
+<strong style="color:#d00;">**当 `a` 和 `b` 在同一行中使用相同的值初始化时，会指向同一个对象.**</strong>
 
 ```py
 >>> a, b = 257, 257
@@ -505,7 +505,7 @@ True
 ```
 
 * 当 a 和 b 在同一行中被设置为 `257` 时, Python 解释器会创建一个新对象, 然后同时引用第二个变量. 如果你在不同的行上进行, 它就不会 "知道" 已经存在一个 `257` 对象了.
-* 这是一种特别为交互式环境做的编译器优化. 当你在实时解释器中输入两行的时候, 他们会单独编译, 因此也会单独进行优化. 如果你在 `.py` 文件中尝试这个例子, 则不会看到相同的行为, 因为文件是一次性编译的.
+* 这是一种<strong style="color:#d00;">特别为交互式环境做的编译器优化</strong>. 当你在实时解释器中输入两行的时候, 他们会单独编译, 因此也会单独进行优化. 如果你在 `.py` 文件中尝试这个例子, 则不会看到相同的行为, 因为<strong style="color:#d00;">文件是一次性编译的</strong>.
 
 ---
 
@@ -539,7 +539,7 @@ board = [row]*3
 
 ![image](/images/tic-tac-toe/after_row_initialized.png)
 
-而当通过对 `row` 做乘法来初始化 `board` 时, 内存中的情况则如下图所示 (每个元素 `board[0]`, `board[1]` 和 `board[2]` 都和 `row` 一样引用了同一列表.)
+而当通过对 `row` 做乘法来初始化 `board` 时, 内存中的情况则如下图所示 (每个元素 `board[0]`, `board[1]` 和 `board[2]` 都和 `row` 一样<strong style="color:#d00;">引用了同一列表.</strong>)
 
 ![image](/images/tic-tac-toe/after_board_initialized.png)
 
@@ -588,9 +588,9 @@ funcs_results = [func() for func in funcs]
 
 #### 💡 说明:
 
-- 当在循环内部定义一个函数时, 如果该函数在其主体中使用了循环变量, 则闭包函数将与循环变量绑定, 而不是它的值. 因此, 所有的函数都是使用最后分配给变量的值来进行计算的.
+- 当在循环内部定义一个函数时, 如果该函数在其主体中使用了循环变量, 则<strong style="color:#d00;">闭包函数将与循环变量绑定</strong>, 而不是它的值. 因此, 所有的函数都是使用最后分配给变量的值来进行计算的.
 
-- 可以通过将循环变量作为命名变量传递给函数来获得预期的结果. **为什么这样可行?** 因为这会在函数内再次定义一个局部变量.
+- 可以通过将循环变量作为命名变量传递给函数来获得预期的结果. **为什么这样可行?** 因为这会在函数内<strong style="color:#d00;">再次定义一个局部变量</strong>.
 
     ```py
     funcs = []
@@ -620,7 +620,7 @@ False
 
 #### 💡 说明:
 
-- `is not` 是个单独的二元运算符, 与分别使用 `is` 和 `not` 不同.
+- <strong style="color:#d00;">`is not` 是个单独的二元运算符</strong>, 与分别使用 `is` 和 `not` 不同.
 -  如果操作符两侧的变量指向同一个对象, 则 `is not` 的结果为 `False`, 否则结果为 `True`.
 
 ---
@@ -649,9 +649,9 @@ SyntaxError: invalid syntax
 
 #### 💡 说明:
 
-- 在Python函数的形式参数列表中, 尾随逗号并不一定是合法的.
+- 在Python函数的形式参数列表中, <strong style="color:#d00;">尾随逗号并不一定是合法的</strong>.
 - 在Python中, 参数列表部分用前置逗号定义, 部分用尾随逗号定义. 这种冲突导致逗号被夹在中间, 没有规则定义它.(译:这一句看得我也很懵逼,只能强翻了.详细解释看下面的讨论帖会一目了然.)
-- **注意:** 尾随逗号的问题已经在Python 3.6中被[修复](https://bugs.python.org/issue9232)了. 而这篇[帖子](https://bugs.python.org/issue9232#msg248399)中则简要讨论了Python中尾随逗号的不同用法.
+- **注意:** 尾随逗号的问题已经<strong style="color:#d00;">Python 3.6</strong>在中被[修复](https://bugs.python.org/issue9232)了. 而这篇[帖子](https://bugs.python.org/issue9232#msg248399)中则简要讨论了Python中尾随逗号的不同用法.
 ---
 
 ### > Backslashes at the end of string/字符串末尾的反斜杠
@@ -677,7 +677,15 @@ SyntaxError: EOL while scanning string literal
   >>> print(repr(r"wt\"f"))
   'wt\\"f'
   ```
+
 - 解释器所做的只是简单的改变了反斜杠的行为, 因此会直接放行反斜杠及后一个的字符. 这就是反斜杠在原始字符串末尾不起作用的原因.
+- <em style="color:#909;">Even in a raw literal, quotes can be escaped with a backslash, but the backslash remains in the result; for example, r"\ "" is a valid string literal consisting of two characters: a backslash and a double quote; r"\ " is not a valid string literal (even a raw string cannot end in an odd number of backslashes). Specifically, a raw literal cannot end in a single backslash (since the backslash would escape the following quote character). Note also that a single backslash followed by a newline is interpreted as those two characters as part of the literal, not as a line continuation</em>[参考官方文档](https://docs.python.org/3/reference/lexical_analysis.html#).
+- <em style="color:#909;">即使在原始文字中，引号也可以使用反斜杠进行转义，但反斜杠仍保留在结果中; 例如，r“\”“是一个有效的字符串文字，由两个字符组成：反斜杠和双引号; r”\“不是有效的字符串文字（即使原始字符串也不能以奇数个反斜杠结尾）。 具体来说，原始文字不能以单个反斜杠结尾（因为反斜杠会转义后面的引号字符）。另请注意，单个反斜杠后跟换行符被解释为文本中的两个字符，而不是行继续</em>。
+
+    ```py
+    >>> print(repr(r"wt\\n"))
+    'wt\\\\n'
+    ```
 
 ---
 
@@ -701,10 +709,10 @@ SyntaxError: invalid syntax
 
 #### 💡 说明:
 
-* 运算符的优先级会影响表达式的求值顺序, 而在 Python 中 `==` 运算符的优先级要高于 `not` 运算符.
+* <strong style="color:#d00;">运算符的优先级会影响表达式的求值顺序</strong>, 而在 Python 中 `==` 运算符的优先级要高于 `not` 运算符.
 * 所以 `not x == y` 相当于 `not (x == y)`, 同时等价于 `not (True == False)`, 最后的运算结果就是 `True`.
 * 之所以 `x == not y` 会抛一个 `SyntaxError` 异常, 是因为它会被认为等价于 `(x == not) y`, 而不是你一开始期望的 `x == (not y)`.
-* 解释器期望 `not` 标记是 `not in` 操作符的一部分 (因为 `==` 和 `not in` 操作符具有相同的优先级), 但是它在 `not` 标记后面找不到 `in` 标记, 所以会抛出 `SyntaxError` 异常.
+* <strong style="color:#d00;">解释器期望 `not` 标记是 `not in` 操作符的一部分</strong> (因为 `==` 和 `not in` 操作符具有相同的优先级), 但是它在 `not` 标记后面找不到 `in` 标记, 所以会抛出 `SyntaxError` 异常.
 
 ---
 
@@ -729,7 +737,7 @@ wtfpython
   >>> print("wtf" "") # or "wtf"""
   wtf
   ```
-+ `'''` 和 `"""` 在 Python中也是字符串定界符, Python 解释器在先遇到三个引号的的时候会尝试再寻找三个终止引号作为定界符, 如果不存在则会导致 `SyntaxError` 异常.
++ `'''` 和 `"""` 在 Python中也是<strong style="color:#d00;">字符串定界符</strong>, Python 解释器在先遇到三个引号的的时候会尝试再寻找三个终止引号作为定界符, 如果不存在则会导致 `SyntaxError` 异常.
 
 ---
 
@@ -760,7 +768,7 @@ midnight_time 并没有被输出.
 
 #### 💡 说明:
 
-在Python 3.5之前, 如果 `datetime.time` 对象存储的UTC的午夜时间(译: 就是 `00:00`), 那么它的布尔值会被认为是 `False`. 当使用 `if obj:` 语句来检查 `obj` 是否为 `null` 或者某些“空”值的时候, 很容易出错.
+<strong style="color:#d00;">在Python 3.5之前, 如果 `datetime.time` 对象存储的UTC的午夜时间(译: 就是 `00:00`), 那么它的布尔值会被认为是 `False`.</strong> 当使用 `if obj:` 语句来检查 `obj` 是否为 `null` 或者某些“空”值的时候, 很容易出错.
 
 ---
 
@@ -814,7 +822,7 @@ another_dict[1.0] = "Python"
 
 #### 💡 说明:
 
-* 布尔值是 `int` 的子类
+* <strong style="color:#d00;">布尔值是 `int` 的子类</strong>
   ```py
   >>> isinstance(True, int)
   True
@@ -895,10 +903,37 @@ True
 True
 ```
 
+<strong style="color:#909;">OutPut</strong>
+
+```py
+>>> class SomeClass:
+...     some_var = 15
+...     some_list = [5]
+...     another_list = [5]
+...     def __init__(self, x):
+...         self.some_var = x + 1  # 实例属性
+...         self.some_list = self.some_list + [x]  # 实例属性
+...         self.another_list += [x]  # 类属性
+...
+>>> ss = SomeClass(111)
+>>> ss.some_list
+[5, 111]
+>>> SomeClass.some_list
+[5]
+>>> ss.some_var
+112
+>>> SomeClass.some_var
+15
+>>> ss.another_list
+[5, 111]
+>>> SomeClass.another_list
+[5, 111]
+```
+
 #### 💡 说明:
 
 * 类变量和实例变量在内部是通过类对象的字典来处理(译: 就是 `__dict__` 属性). 如果在当前类的字典中找不到的话就去它的父类中寻找.
-* `+=` 运算符会在原地修改可变对象, 而不是创建新对象. 因此, 修改一个实例的属性会影响其他实例和类属性.
+* <strong style="color:#d00;">`+=` 运算符会在原地修改可变对象,</strong> 而不是创建新对象. 因此, 修改一个实例的属性会影响其他实例和类属性.
 
 ---
 
@@ -928,6 +963,8 @@ def some_func(val):
 #### 💡 说明:
 - 来源和解释可以在这里找到: https://stackoverflow.com/questions/32139885/yield-in-list-comprehensions-and-generator-expressions
 - 相关错误报告: http://bugs.python.org/issue10544
+- <em style="color:#909">这是CPython处理yieldcomprehensions和生成器表达式中的一个错误，在Python 3.8中修复，在Python 3.7中使用了弃用警告。请参阅Python错误报告和Python 3.7和Python 3.8 的新增条目</em>。
+- <em style="color:#909">yield表达式仅在定义生成器函数时使用，因此只能在函数定义的主体中使用</em>。
 
 ---
 
@@ -957,12 +994,12 @@ TypeError: 'tuple' object does not support item assignment
 
 * 引用 https://docs.python.org/2/reference/datamodel.html
 
-    > 不可变序列
-        不可变序列的对象一旦创建就不能再改变. (如果对象包含对其他对象的引用，则这些其他对象可能是可变的并且可能会被修改; 但是，由不可变对象直接引用的对象集合不能更改.)
+    > 不可变序列  
+        不可变序列的对象一旦创建就不能再改变. (如果对象包含对其他对象的引用，则<strong style="color:#d00;">这些其他对象可能是可变的并且可能会被修改</strong>; 但是，由不可变对象直接引用的对象集合不能更改.)
 
 * `+=` 操作符在原地修改了列表. 元素赋值操作并不工作, 但是当异常抛出时, 元素已经在原地被修改了.
 
-(译: 对于不可变对象, 这里指tuple, `+=` 并不是原子操作, 而是 `extend` 和 `=` 两个动作, 这里 `=` 操作虽然会抛出异常, 但 `extend` 操作已经修改成功了. 详细解释可以看[这里](https://segmentfault.com/a/1190000010767068))
+(译: 对于不可变对象, 这里指tuple, <strong style="color:#d00;">`+=` 并不是原子操作, 而是 `extend` 和 `=` 两个动作,</strong> 这里 `=` 操作虽然会抛出异常, 但 `extend` 操作已经修改成功了. 详细解释可以看[这里](https://segmentfault.com/a/1190000010767068))
 
 ---
 
@@ -992,7 +1029,7 @@ NameError: name 'e' is not defined
 
 * 出处: https://docs.python.org/3/reference/compound_stmts.html#except
 
-  当使用 `as` 为目标分配异常的时候, 将在except子句的末尾清除该异常.
+  <strong style="color:#d00;">当使用 `as` 为目标分配异常的时候, 将在except子句的末尾清除该异常.</strong>
 
   这就好像
 
@@ -1011,9 +1048,9 @@ NameError: name 'e' is not defined
           del N
   ```
 
-  这意味着异常必须在被赋值给其他变量才能在 `except` 子句之后引用它. 而异常之所以会被清除, 则是由于上面附加的回溯信息(trackback)会和栈帧(stack frame)形成循环引用, 使得该栈帧中的所有本地变量在下一次垃圾回收发生之前都处于活动状态.(译: 也就是说不会被回收)
+  这意味着异常必须在被赋值给其他变量才能在 `except` 子句之后引用它. 而异常之所以会被清除, 则是由于上面附加的回溯信息(trackback)会和栈帧(stack frame)形成<strong style="color:#d00;">循环引用</strong>, 使得该栈帧中的所有本地变量在下一次垃圾回收发生之前都处于活动状态.(译: 也就是说不会被回收)
 
-* 子句在 Python 中并没有独立的作用域. 示例中的所有内容都处于同一作用域内, 所以变量 `e` 会由于执行了 `except` 子句而被删除. 而对于有独立的内部作用域的函数来说情况就不一样了. 下面的例子说明了这一点:
+* <strong style="color:#d00;">子句在 Python 中并没有独立的作用域</strong>. 示例中的所有内容都处于同一作用域内, 所以变量 `e` 会由于执行了 `except` 子句而被删除. 而对于有独立的内部作用域的函数来说情况就不一样了. 下面的例子说明了这一点:
 
      ```py
      def f(x):
@@ -1063,8 +1100,8 @@ I've lost faith in truth!
 
 #### 💡 说明:
 
-- 最初, Python 并没有 `bool` 型 (人们用0表示假值, 用非零值比如1作为真值). 后来他们添加了 `True`, `False`, 和 `bool` 型, 但是, 为了向后兼容, 他们没法把 `True` 和 `False` 设置为常量, 只是设置成了内置变量.
-- Python 3 由于不再需要向后兼容, 终于可以修复这个问题了, 所以这个例子无法在 Python 3.x 中执行!
+- 最初, Python 并没有 `bool` 型 (人们用0表示假值, 用非零值比如1作为真值). 后来他们添加了 `True`, `False`, 和 `bool` 型, 但是, 为了向后兼容, 他们没法把 `True` 和 `False` 设置为常量, <strong style="color:#d00;">只是设置成了内置变量</strong>.
+- Python 3 由于不再需要向后兼容, 终于可以修复这个问题了, 所以这个例子<strong style="color:#d00;">无法在 Python 3.x 中执行</strong>!
 
 ---
 
@@ -1092,7 +1129,7 @@ None
 
 #### 💡 说明:
 
-大多数修改序列/映射对象的方法, 比如 `list.append`, `dict.update`, `list.sort` 等等. 都是原地修改对象并返回 `None`. 这样做的理由是, 如果操作可以原地完成, 就可以避免创建对象的副本来提高性能. (参考[这里](http://docs.python.org/2/faq/design.html#why-doesn-t-list-sort-return-the-sorted-list))
+大多数修改序列/映射对象的方法, 比如 `list.append`, `dict.update`, `list.sort` 等等. <strong style="color:#d00;">都是原地修改对象并返回 `None`</strong>. 这样做的理由是, 如果操作可以原地完成, 就可以避免创建对象的副本来提高性能. (参考[这里](http://docs.python.org/2/faq/design.html#why-doesn-t-list-sort-return-the-sorted-list))
 
 ---
 
@@ -1113,7 +1150,7 @@ False
 
 #### 💡 说明:
 
-* Python 中的子类关系并不必须是传递的. 任何人都可以在元类中随意定义 `__subclasscheck__`.
+* <strong style="color:#d00;">Python 中的子类关系并不必须是传递的. 任何人都可以在元类中随意定义 `__subclasscheck__`</strong>.
 * 当 `issubclass(cls, Hashable)` 被调用时, 它只是在 `cls` 中寻找 "`__hash__`" 方法或继承自"`__hash__`"的方法.
 * 由于 `object` is 可散列的(hashable), 但是 `list` 是不可散列的, 所以它打破了这种传递关系.
 * 在[这里](https://www.naftaliharris.com/blog/python-subclass-intransitivity/)可以找到更详细的解释.
@@ -1145,7 +1182,7 @@ str
 
 * 由于 `SomeClass` 会从 `str` 自动继承 `__hash__` 方法, 所以 `s` 对象和 `"s"` 字符串的哈希值是相同的.
 * 而 `SomeClass("s") == "s"` 为 `True` 是因为 `SomeClass` 也继承了 `str` 类 `__eq__` 方法.
-* 由于两者的哈希值相同且相等, 所以它们在字典中表示相同的键.
+* <strong style="color:#d00;">由于两者的哈希值相同且相等, 所以它们在字典中表示相同的键.</strong>
 * 如果想要实现期望的功能, 我们可以重定义 `SomeClass` 的 `__eq__` 方法.
   ```py
   class SomeClass(str):
@@ -1197,15 +1234,15 @@ a, b = a[b] = {}, 5
 
   > 赋值语句计算表达式列表(expression list)(牢记 这可以是单个表达式或以逗号分隔的列表, 后者返回元组)并将单个结果对象从左到右分配给目标列表中的每一项.
 
-*  `(target_list "=")+` 中的 `+` 意味着可以有**一个或多个**目标列表. 在这个例子中, 目标列表是 `a, b` 和 `a[b]` (注意表达式列表只能有一个, 在我们的例子中是 `{}, 5`).
+*  `(target_list "=")+` 中的 `+` 意味着<strong style="color:#d00;">可以有**一个或多个**目标列表</strong>. 在这个例子中, 目标列表是 `a, b` 和 `a[b]` (注意表达式列表只能有一个, 在我们的例子中是 `{}, 5`).
 
-* 表达式列表计算结束后, 将其值自动解包后**从左到右**分配给目标列表(target list). 因此, 在我们的例子中, 首先将 `{}, 5` 元组并赋值给 `a, b`, 然后我们就可以得到 `a = {}` 且 `b = 5`.
+* 表达式列表计算结束后, <strong style="color:#d00;">将其值自动解包后**从左到右**分配给目标列表(target list)</strong>. 因此, 在我们的例子中, 首先将 `{}, 5` 元组并赋值给 `a, b`, 然后我们就可以得到 `a = {}` 且 `b = 5`.
 
 * `a` 被赋值的 `{}` 是可变对象.
 
 * 第二个目标列表是 `a[b]` (你可能觉得这里会报错, 因为在之前的语句中 `a` 和 `b` 都还没有被定义. 但是别忘了, 我们刚刚将 `a` 赋值 `{}` 且将 `b` 赋值为 `5`).
 
-* 现在, 我们将通过将字典中键 `5` 的值设置为元组 `({}, 5)` 来创建循环引用 (输出中的 `{...}` 指与 `a` 引用了相同的对象). 下面是一个更简单的循环引用的例子
+* 现在, <strong style="color:#d00;">我们将通过将字典中键 `5` 的值设置为元组 `({}, 5)` 来创建循环引用</strong> (输出中的 `{...}` 指与 `a` 引用了相同的对象). 下面是一个更简单的循环引用的例子
   ```py
   >>> some_list = some_list[0] = [0]
   >>> some_list
