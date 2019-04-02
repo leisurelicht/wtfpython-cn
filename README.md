@@ -7,7 +7,7 @@
 | <a href="#">中文</a>
 </p>
 
-[![WTFPL 2.0][license-image]][license-url] [![Commit id][commit-image]][commit-url]
+[![WTFPL 2.0][license-image]][license-url] [![Commit id][commit-image]][commit-url] [![996.icu][996.icu-image]][996.icu-url]
 
 
 Python, 是一个设计优美的解释型高级语言, 它提供了很多能让程序员感到舒适的功能特性. 但有的时候, Python 的一些输出结果对于初学者来说似乎并不是那么一目了然.
@@ -92,6 +92,7 @@ PS: 如果你不是第一次读了, 你可以在[这里](https://github.com/satw
     - [Surprise your geeky pythonist friends?/想给你的极客朋友一个惊喜?](#surprise-your-geeky-pythonist-friends想给你的极客朋友一个惊喜)
     - [Need a pdf version?/需要来一份pdf版的?](#need-a-pdf-version需要来一份pdf版的)
     - [Follow Commit/追踪Commit](#follow-commit追踪Commit)
+    - [996.icu](#996icu)
 
 <!-- /TOC -->
 
@@ -2428,3 +2429,10 @@ nan
 
 [commit-url]: https://github.com/satwikkansal/wtfpython/commit/30e05a5973930c38cdb59f1c02b85b19b22ac531
 [commit-image]: https://img.shields.io/badge/Commit-30e05a-yellow.svg
+
+## 996.icu
+
+[![996.icu][996.icu-image]][996.icu-url]
+
+[996.icu-url]: https://996.icu
+[996.icu-image]: https://img.shields.io/badge/link-996.icu-red.svg
