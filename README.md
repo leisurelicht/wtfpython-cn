@@ -1411,9 +1411,9 @@ for i in x:
 
 #### 💡 说明:
 
-* Python不支持对字典进行迭代的同时修改它.
-* 它之所以运行8次, 是因为字典会自动扩容以容纳更多键值(我们有8次删除记录, 因此需要扩容). 这实际上是一个实现细节. (译: 应该是因为字典的初始最小值是8, 扩容会导致散列表地址发生变化而中断循环.)
-* 在不同的Python实现中删除键的处理方式以及调整大小的时间可能会有所不同.(译: 就是说什么时候扩容在不同版本中可能是不同的, 在3.6及3.7的版本中到[5](https://github.com/python/cpython/blob/v3.6.1/Objects/dictobject.c#L103-L110)就会自动扩容了. 以后也有可能再次发生变化. 顺带一提,后面两次扩容会扩展为32和256. 8->32->256)
+* <strong style="color:#d00;">Python不支持对字典进行迭代的同时修改它.</strong>
+* 它之所以运行8次, <strong style="color:#d00;">是因为字典会自动扩容以容纳更多键值</strong>(我们有8次删除记录, 因此需要扩容). 这实际上是一个实现细节. (译: 应该是因为字典的初始最小值是8, 扩容会导致散列表地址发生变化而中断循环.)
+* 在不同的Python实现中删除键的处理方式以及调整大小的时间可能会有所不同.(译: 就是说什么时候扩容在不同版本中可能是不同的, 在<strong style="color:#d00;">3.6及3.7的版本中</strong>到[5](https://github.com/python/cpython/blob/v3.6.1/Objects/dictobject.c#L103-L110)就会自动扩容了. 以后也有可能再次发生变化. 顺带一提,后面两次扩容会扩展为32和256. 8->32->256)
 * 更多的信息, 你可以参考这个StackOverflow的[回答](https://stackoverflow.com/questions/44763802/bug-in-python-dict), 它详细的解释一个类似的例子.
 
 ---
@@ -1455,10 +1455,10 @@ Deleted!
 
 #### 💡 说明:
 + `del x` 并不会立刻调用 `x.__del__()`.
-+ 每当遇到 `del x`, Python 会将 `x` 的引用数减1, 当 `x` 的引用数减到0时就会调用 `x.__del__()`.
++ 每当遇到 `del x`, Python 会将 `x` 的<strong style="color:#d00;">引用数减1</strong>, 当 `x` 的引用数减到0时就会调用 `x.__del__()`.
 + 在第二个例子中, `y.__del__()` 之所以未被调用, 是因为前一条语句 (`>>> y`) 对同一对象创建了另一个引用, 从而防止在执行 `del y` 后对象的引用数变为0.
 + 调用 `globals` 导致引用被销毁, 因此我们可以看到 "Deleted!" 终于被输出了.
-+ (译: 这其实是 Python 交互解释器的特性, 它会自动让 `_` 保存上一个表达式输出的值, 详细可以看[这里](https://www.cnblogs.com/leisurelylicht/p/diao-pi-de-kong-zhi-tai.html).)
++ (译: 这其实是 Python 交互解释器的特性, 它会<strong style="color:#d00;">自动让 `_` 保存上一个表达式输出的值</strong>, 详细可以看[这里](https://www.cnblogs.com/leisurelylicht/p/diao-pi-de-kong-zhi-tai.html).)
 
 ---
 
@@ -1499,7 +1499,7 @@ for idx, item in enumerate(list_4):
 
 #### 💡 说明:
 
-* 在迭代时修改对象是一个很愚蠢的主意. 正确的做法是迭代对象的副本, `list_3[:]` 就是这么做的.
+* <strong style="color:#d00;">在迭代时修改对象是一个很愚蠢的主意.</strong> 正确的做法是迭代对象的副本, `list_3[:]` 就是这么做的.
 
      ```py
      >>> some_list = [1, 2, 3, 4]
@@ -1510,12 +1510,12 @@ for idx, item in enumerate(list_4):
      ```
 
 **`del`, `remove` 和 `pop` 的不同:**
-* `del var_name` 只是从本地或全局命名空间中删除了 `var_name` (这就是为什么 `list_1` 没有受到影响).
+* `del var_name` <strong style="color:#d00;">只是从本地或全局命名空间中删除</strong>了 `var_name` (这就是为什么 `list_1` 没有受到影响).
 * `remove` 会删除第一个匹配到的指定值, 而不是特定的索引, 如果找不到值则抛出 `ValueError` 异常.
 * `pop` 则会删除指定索引处的元素并返回它, 如果指定了无效的索引则抛出 `IndexError` 异常.
 
 **为什么输出是 `[2, 4]`?**
-- 列表迭代是按索引进行的, 所以当我们从 `list_2` 或 `list_4` 中删除 `1` 时, 列表的内容就变成了 `[2, 3, 4]`. 剩余元素会依次位移, 也就是说, `2` 的索引会变为 0, `3` 会变为 1. 由于下一次迭代将获取索引为 1 的元素 (即 `3`), 因此 `2` 将被彻底的跳过. 类似的情况会交替发生在列表中的每个元素上.
+- 列表迭代是<strong style="color:#d00;">按索引进行</strong>的, 所以当我们从 `list_2` 或 `list_4` 中删除 `1` 时, 列表的内容就变成了 `[2, 3, 4]`. 剩余元素会依次位移, 也就是说, `2` 的索引会变为 0, `3` 会变为 1. 由于下一次迭代将获取索引为 1 的元素 (即 `3`), 因此 `2` 将被彻底的跳过. 类似的情况会交替发生在列表中的每个元素上.
 
 * 参考这个StackOverflow的[回答](https://stackoverflow.com/questions/45946228/what-happens-when-you-try-to-delete-a-list-element-while-iterating-over-it)来解释这个例子
 * 关于Python中字典的类似例子, 可以参考这个Stackoverflow的[回答](https://stackoverflow.com/questions/45877614/how-to-change-all-the-dictionary-keys-in-a-for-loop-with-d-items).
@@ -1577,11 +1577,11 @@ print(x, ': x in global')
 
 #### 💡 说明:
 
-- 在 Python 中, for 循环使用所在作用域并在结束后保留定义的循环变量. 如果我们曾在全局命名空间中定义过循环变量. 在这种情况下, 它会重新绑定现有变量.
+- 在 Python 中, <strong style="color:#d00;">for 循环使用所在作用域并在结束后保留定义的循环变量.</strong> 如果我们曾在全局命名空间中定义过循环变量. 在这种情况下, 它会重新绑定现有变量.
 
 - Python 2.x 和 Python 3.x 解释器在列表推导式示例中的输出差异, 在文档 [What’s New In Python 3.0](https://docs.python.org/3/whatsnew/3.0.html) 中可以找到相关的解释:
 
-    > "列表推导不再支持句法形式 `[... for var in item1, item2, ...]`. 取而代之的是 `[... for var in (item1, item2, ...)]`. 另外, 注意列表推导具有不同的语义: 它们更接近于 `list()` 构造函数中生成器表达式的语法糖(译: 这一句我也不是很明白), 特别是循环控制变量不再泄漏到周围的作用域中."
+    > "列表推导不再支持句法形式 `[... for var in item1, item2, ...]`. 取而代之的是 `[... for var in (item1, item2, ...)]`. 另外, 注意列表推导具有不同的语义: 它们更接近于 `list()` 构造函数中生成器表达式的语法糖(译: 这一句我也不是很明白), 特别是<strong style="color:#d00;">循环控制变量不再泄漏到周围的作用域中</strong>."
 
 ---
 
@@ -1607,7 +1607,7 @@ def some_func(default_arg=[]):
 
 #### 💡 说明:
 
-- Python中函数的默认可变参数并不是每次调用该函数时都会被初始化. 相反, 它们会使用最近分配的值作为默认值. 当我们明确的将 `[]` 作为参数传递给 `some_func` 的时候, 就不会使用 `default_arg` 的默认值, 所以函数会返回我们所期望的结果.
+- Python中<strong style="color:#d00;">函数的默认可变参数并不是每次调用该函数时都会被初始化</strong>. 相反, 它们会使用最近分配的值作为默认值. 当我们明确的将 `[]` 作为参数传递给 `some_func` 的时候, 就不会使用 `default_arg` 的默认值, 所以函数会返回我们所期望的结果.
 
     ```py
     def some_func(default_arg=[]):
@@ -1630,7 +1630,7 @@ def some_func(default_arg=[]):
     (['some_string', 'some_string'],)
     ```
 
-- 避免可变参数导致的错误的常见做法是将 `None` 指定为参数的默认值, 然后检查是否有值传给对应的参数. 例:
+- 避免可变参数导致的错误的<strong style="color:#d00;">常见做法是将 `None` 指定为参数的默认值,</strong> 然后检查是否有值传给对应的参数. 例:
 
     ```py
     def some_func(default_arg=None):
@@ -1676,7 +1676,7 @@ SyntaxError: invalid syntax
 
 #### 💡 说明:
 
-* 如果你想要同时捕获多个不同类型的异常时, 你需要将它们用括号包成一个元组作为第一个参数传递. 第二个参数是可选名称, 如果你提供, 它将与被捕获的异常实例绑定. 例,
+* 如果你想要同时捕获多个不同类型的异常时, 你<strong style="color:#d00;">需要将它们用括号包成一个元组作为第一个参数传递. 第二个参数是可选名称, 如果你提供, 它将与被捕获的异常实例绑定.</strong> 例,
   ```py
   some_list = [1, 2, 3]
   try:
@@ -1699,7 +1699,7 @@ SyntaxError: invalid syntax
   IndentationError: unindent does not match any outer indentation level
   ```
 
-* 在 Python 3 中, 用逗号区分异常与可选名称是无效的; 正确的做法是使用 `as` 关键字. 例,
+* <strong style="color:#d00;">在 Python 3 中, 用逗号区分异常与可选名称是无效的; 正确的做法是使用 `as` 关键字.</strong> 例,
   ```py
   some_list = [1, 2, 3]
   try:
@@ -1751,11 +1751,11 @@ a += [5, 6, 7, 8]
 
 #### 💡 说明:
 
-*  `a += b` 并不总是与 `a = a + b` 表现相同. 类实现 *`op=`* 运算符的方式 *也许* 是不同的, 列表就是这样做的.
+*  <strong style="color:#d00;">`a += b` 并不总是与 `a = a + b` 表现相同.</strong> 类实现 *`op=`* 运算符的方式 *也许* 是不同的, 列表就是这样做的.
 
 * 表达式 `a = a + [5,6,7,8]` 会生成一个新列表, 并让 `a` 引用这个新列表, 同时保持 `b` 不变.
 
-* 表达式 `a += [5,6,7,8]` 实际上是使用的是 "extend" 函数, 所以 `a` 和 `b` 仍然指向已被修改的同一列表.
+* 表达式 `a += [5,6,7,8]` <strong style="color:#d00;">实际上是使用的是 "extend" 函数</strong>, 所以 `a` 和 `b` 仍然指向已被修改的同一列表.
 
 ---
 
@@ -1780,7 +1780,7 @@ UnboundLocalError: local variable 'a' referenced before assignment
 ```
 
 #### 💡 说明:
-* 当你在作用域中对变量进行赋值时, 变量会变成该作用域内的局部变量. 因此 `a` 会变成 `another_func` 函数作用域中的局部变量, 但它在函数作用域中并没有被初始化, 所以会引发错误.
+* <strong style="color:#d00;">当你在作用域中对变量进行赋值时, 变量会变成该作用域内的局部变量</strong>. 因此 `a` 会变成 `another_func` 函数作用域中的局部变量, 但它在函数作用域中并没有被初始化, 所以会引发错误.
 * 可以阅读[这个](http://sebastianraschka.com/Articles/2014_python_scope_and_namespaces.html)简短却很棒的指南, 了解更多关于 Python 中命名空间和作用域的工作原理.
 * 想要在 `another_func` 中修改外部作用域变量 `a` 的话, 可以使用 `global` 关键字.
   ```py
@@ -1825,7 +1825,7 @@ False
 
 根据 https://docs.python.org/2/reference/expressions.html#not-in
 
-> 形式上, 如果 a, b, c, ..., y, z 是表达式, 而 op1, op2, ..., opN 是比较运算符, 那么除了每个表达式最多只出现一次以外 a op1 b op2 c ... y opN z 就等于 a op1 b and b op2 c and ... y opN z.
+> <strong style="color:#d00;">形式上, 如果 a, b, c, ..., y, z 是表达式, 而 op1, op2, ..., opN 是比较运算符, 那么除了每个表达式最多只出现一次以外 a op1 b op2 c ... y opN z 就等于 a op1 b and b op2 c and ... y opN z.</strong>
 
 虽然上面的例子似乎很愚蠢, 但是像 `a == b == c` 或 `0 <= x <= 100` 就很棒了.
 
@@ -1880,7 +1880,7 @@ class SomeClass:
 ```
 
 #### 💡 说明:
-- 类定义中嵌套的作用域会忽略类内的名称绑定.
+- <strong style="color:#d00;">类定义中嵌套的作用域会忽略类内的名称绑定.</strong>
 - 生成器表达式有它自己的作用域.
 - 从 Python 3.X 开始, 列表推导式也有自己的作用域.
 
@@ -1927,7 +1927,7 @@ tuple()
 
 #### 💡 说明:
 * 对于 1, 正确的语句是 `x, y = (0, 1) if True else (None, None)`.
-* 对于 2, 正确的语句是 `t = ('one',)` 或者 `t = 'one',` (缺少逗号) 否则解释器会认为 `t` 是一个字符串, 并逐个字符对其进行迭代.
+* 对于 2, 正确的语句是 `t = ('one',)` 或者 `t = 'one',` (<strong style="color:#d00;">缺少逗号</strong>) 否则解释器会认为 `t` 是一个字符串, 并逐个字符对其进行迭代.
 * `()` 是一个特殊的标记，表示空元组.
 
 ---
@@ -1951,7 +1951,7 @@ import antigravity
 嘘.. 这是个超级秘密.
 
 #### 💡 说明:
-+ `antigravity` 模块是 Python 开发人员发布的少数复活节彩蛋之一.
++ `antigravity` 模块是 Python 开发人员发布的少数<strong style="color:#d00;">复活节彩蛋之一</strong>.
 + `import antigravity` 会打开一个 Python 的[经典 XKCD 漫画](http://xkcd.com/353/)页面.
 + 不止如此. 这个**复活节彩蛋里还有一个复活节彩蛋**. 如果你看一下[代码](https://github.com/python/cpython/blob/master/Lib/antigravity.py#L7-L17), 就会发现还有一个函数实现了 [XKCD's geohashing 算法](https://xkcd.com/426/).
 
@@ -1979,9 +1979,9 @@ Freedom!
 ```
 
 #### 💡 说明:
-- 2004年4月1日, Python [宣布](https://mail.python.org/pipermail/python-announce-list/2004-April/002982.html) 加入一个可用的 `goto` 作为愚人节礼物.
+- 2004年4月1日, Python [宣布](https://mail.python.org/pipermail/python-announce-list/2004-April/002982.html) 加入一个可用的 `goto` 作为<strong style="color:#d00;">愚人节礼物</strong>.
 - 当前版本的 Python 并没有这个模块.
-- 就算可以用, 也请不要使用它. 这里是为什么Python中没有 `goto` 的[原因](https://docs.python.org/3/faq/design.html#why-is-there-no-goto).
+- 就算可以用, 也请不要使用它. 这里是为什么<strong style="color:#d00;">Python中没有</strong> `goto` 的[原因](https://docs.python.org/3/faq/design.html#why-is-there-no-goto).
 
 ---
 
@@ -2004,7 +2004,7 @@ SyntaxError: not a chance
 
 #### 💡 说明:
 + 通常 `__future__` 会提供 Python 未来版本的功能. 然而，这里的 “未来” 是一个讽刺.
-+ 这是一个表达社区对此类问题态度的复活节彩蛋.
++ 这是一个表达社区对此类问题态度的<strong style="color:#d00;">复活节彩蛋</strong>.
 
 ---
 
@@ -2028,7 +2028,7 @@ True
 #### 💡 说明:
 - 相关的 [PEP-401](https://www.python.org/dev/peps/pep-0401/) 发布于 2009年4月1日 (所以你现在知道这意味着什么了吧).
 - 引用 PEP-401
-  > 意识到 Python 3.0 里的 != 运算符是一个会引起手指疼痛的恐怖错误, FLUFL 将 <> 运算符恢复为唯一写法.
+  > 意识到 Python 3.0 里的 != 运算符是一个会引起手指疼痛的恐怖错误, <strong style="color:#d00;">FLUFL 将 <> 运算符恢复为唯一写法</strong>.
 - Uncle Barry 在 PEP 中还分享了其他东西; 你可以在[这里](https://www.python.org/dev/peps/pep-0401/)获得他们.
 - (译: 虽然文档中没写，但应该是只能在交互解释器中使用.)
 ---
@@ -2103,7 +2103,7 @@ True
 
 #### 💡 说明:
 
-* `this` 模块是关于 Python 之禅的复活节彩蛋 ([PEP 20](https://www.python.org/dev/peps/pep-0020)).
+* `this` 模块是关于 Python 之禅的<strong style="color:#d00;">复活节彩蛋</strong> ([PEP 20](https://www.python.org/dev/peps/pep-0020)).
 * 如果你认为这已经够有趣的了, 可以看看 [this.py](https://hg.python.org/cpython/file/c3896275c0f6/Lib/this.py) 的实现. 有趣的是, Python 之禅的实现代码违反了他自己 (这可能是唯一会发生这种情况的地方).
 *
 至于 `love is not True or False; love is love`, 意外却又不言而喻.
@@ -2150,8 +2150,8 @@ Try block executed successfully...
 ```
 
 #### 💡 说明:
-- 循环后的 `else` 子句只会在循环没有触发 `break` 语句, 正常结束的情况下才会执行.
-- try 之后的 `else` 子句也被称为 "完成子句", 因为在 `try` 语句中到达 `else` 子句意味着try块实际上已成功完成.
+- 循环后的 `else` 子句只会在循环没有触发 `break` 语句, <strong style="color:#d00;">正常结束的情况下才会执行</strong>.
+- try 之后的 `else` 子句也被称为 <strong style="color:#d00;">"完成子句"</strong>, 因为在 `try` 语句中到达 `else` 子句意味着try块实际上已成功完成.
 
 ---
 
@@ -2170,7 +2170,7 @@ Try block executed successfully...
 ```
 
 #### 💡 说明:
-- infinity 的哈希值是 10⁵ x π.
+- <strong style="color:#d00;">infinity 的哈希值是 10⁵ x π</strong>.
 - 有意思的是, `float('-inf')` 的哈希值在 Python 3 中是 "-10⁵ x π"  , 而在 Python 2 中是 "-10⁵ x e".
 
 ---
@@ -2198,7 +2198,7 @@ True
 
 #### 💡 说明:
 
-* [名字修饰](https://en.wikipedia.org/wiki/Name_mangling) 用于避免不同命名空间之间名称冲突.
+* [名字修饰](https://en.wikipedia.org/wiki/Name_mangling) <strong style="color:#d00;">用于避免不同命名空间之间名称冲突</strong>.
 * 在 Python 中, 解释器会通过给类中以 `__` (双下划线)开头且结尾最多只有一个下划线的类成员名称加上`_NameOfTheClass` 来修饰(mangles)名称.
 * 所以, 要访问 `__honey` 对象,我们需要加上 `_Yo` 以防止与其他类中定义的相同名称的属性发生冲突.
 
@@ -2221,7 +2221,7 @@ True
 ```
 
 #### 💡 说明:
-+ 连接两个以上的字符串时 `+=` 比 `+` 更快, 因为在计算过程中第一个字符串 (例如, `s1 += s2 + s3` 中的 `s1`) 不会被销毁.(译: 就是 `+=` 执行的是追加操作，少了一个销毁新建的动作.)
++ <strong style="color:#d00;">连接两个以上的字符串时 `+=` 比 `+` 更快</strong>, 因为在计算过程中第一个字符串 (例如, `s1 += s2 + s3` 中的 `s1`) 不会被销毁.(译: 就是 `+=` 执行的是追加操作，少了一个销毁新建的动作.)
 
 ---
 
@@ -2290,10 +2290,10 @@ def convert_list_to_string(l, iters):
 
 #### 💡 说明:
 - 你可以在这获得更多 [timeit](https://docs.python.org/3/library/timeit.html) 的相关信息. 它通常用于衡量代码片段的执行时间.
-- 不要用 `+` 去生成过长的字符串, 在 Python 中, `str` 是不可变得, 所以在每次连接中你都要把左右两个字符串复制到新的字符串中. 如果你连接四个长度为10的字符串, 你需要拷贝 (10+10) + ((10+10)+10) + (((10+10)+10)+10) = 90 个字符而不是 40 个字符. 随着字符串的数量和大小的增加, 情况会变得越发的糟糕 (就像`add_bytes_with_plus` 函数的执行时间一样)
-- 因此, 更建议使用 `.format.` 或 `%` 语法 (但是, 对于短字符串, 它们比 `+` 稍慢一点).
-- 又或者, 如果你所需的内容已经以可迭代对象的形式提供了, 使用 `''.join(可迭代对象)` 要快多了.
-- `add_string_with_plus` 的执行时间没有像 `add_bytes_with_plus` 一样出现二次增加是因为解释器会如同上一个列子所讨论的一样优化 `+=`. 用 `s = s + "x" + "y" + "z"` 替代 `s += "xyz"` 的话, 执行时间就会二次增加了.
+- <strong style="color:#d00;">不要用 `+` 去生成过长的字符串</strong>, 在 Python 中, `str` 是不可变得, 所以在每次连接中你都要把左右两个字符串复制到新的字符串中. 如果你连接四个长度为10的字符串, 你需要拷贝 (10+10) + ((10+10)+10) + (((10+10)+10)+10) = 90 个字符而不是 40 个字符. 随着字符串的数量和大小的增加, 情况会变得越发的糟糕 (就像`add_bytes_with_plus` 函数的执行时间一样)
+- 因此, <strong style="color:#d00;">更建议使用 `.format.` 或 `%` 语法</strong> (但是, 对于短字符串, 它们比 `+` 稍慢一点).
+- 又或者, 如果你所需的内容已经以可迭代对象的形式提供了, 使用 <strong style="color:#d00;">`''.join(可迭代对象)` 要快多了</strong>.
+- `add_string_with_plus` 的执行时间没有像 `add_bytes_with_plus` 一样出现二次增加是因为解释器会如同上一个列子<strong style="color:#909;">例子</strong>所讨论的一样优化 `+=`. 用 `s = s + "x" + "y" + "z"` 替代 `s += "xyz"` 的话, 执行时间就会二次增加了.
   ```py
   def add_string_with_plus(iters):
       s = ""
@@ -2344,23 +2344,23 @@ nan
 
 #### 💡 说明:
 
-`'inf'` 和 `'nan'` 是特殊的字符串(不区分大小写), 当显示转换成 `float` 型时, 它们分别用于表示数学意义上的 "无穷大" 和 "非数字".
+`'inf'` 和 `'nan'` 是特殊的字符串(不区分大小写), 当显示转换成 `float` 型时, 它们分别用于<strong style="color:#d00;">表示数学意义上的 "无穷大" 和 "非数字"</strong>.
 
 ---
 
 ### > Minor Ones/小知识点
 
-* `join()` 是一个字符串操作而不是列表操作. (第一次接触会觉得有点违反直觉)
+* <strong style="color:#d00;">`join()` 是一个字符串操作而不是列表操作.</strong> (第一次接触会觉得有点违反直觉)
 
   **💡 说明:**
   如果 `join()` 是字符串方法 那么它就可以处理任何可迭代的对象(列表，元组，迭代器). 如果它是列表方法, 则必须在每种类型中单独实现. 另外, 在 `list` 对象的通用API中实现一个专用于字符串的方法没有太大的意义.
 
 * 看着奇怪但能正确运行的语句:
   + `[] = ()` 语句在语义上是正确的 (解包一个空的 `tuple` 并赋值给 `list`)
-  + `'a'[0][0][0][0][0]` 在语义上也是正确的, 因为在 Python 中字符串同时也是[序列](https://docs.python.org/3/glossary.html#term-sequence)(可迭代对象支持使用整数索引访问元素).
+  + `'a'[0][0][0][0][0]` 在语义上也是正确的, 因为在 Python 中<strong style="color:#d00;">字符串同时也是</strong>[序列](https://docs.python.org/3/glossary.html#term-sequence)(可迭代对象支持使用整数索引访问元素).
   + `3 --0-- 5 == 8` 和 `--5 == 5` 在语义上都是正确的, 且结果等于 `True`.(译: 3减负0等于3，再减负5相当于加5等于8；负的负5等于5.)
 
-* 鉴于 `a` 是一个数组, `++a` 和 `--a` 都是有效的 Python 语句, 但其效果与 C, C++ 或 Java 等不一样.
+* 鉴于 `a` 是一个数组<strong style="color:#909;">数字</strong>, `++a` 和 `--a` 都是有效的 Python 语句, 但其效果与 C, C++ 或 Java 等不一样.
   ```py
   >>> a = 5
   >>> a
@@ -2372,11 +2372,11 @@ nan
   ```
 
   **💡 说明:**
-  + python 里没有 `++` 操作符. 这其实是两个 `+` 操作符.
+  + <strong style="color:#d00;">python 里没有 `++` 操作符. 这其实是两个 `+` 操作符</strong>.
   + `++a` 被解析为 `+(+a)` 最后等于 `a`. `--a` 同理.
   + 这个 StackOverflow [回答](https://stackoverflow.com/questions/3654830/why-are-there-no-and-operators-in-python) 讨论了为什么 Python 中缺少增量和减量运算符.
 
-* Python 使用 2个字节存储函数中的本地变量. 理论上, 这意味着函数中只能定义65536个变量. 但是，Python 内置了一个方便的解决方案，可用于存储超过2^16个变量名. 下面的代码演示了当定义了超过65536个局部变量时堆栈中发生的情况 (警告: 这段代码会打印大约2^18行文本, 请做好准备!):
+* <strong style="color:#d00;">Python 使用 2个字节存储函数中的本地变量</strong>. 理论上, 这意味着函数中只能定义65536个变量. 但是，Python 内置了一个方便的解决方案，<strong style="color:#d00;">可用于存储超过2^16个变量名</strong>. 下面的代码演示了当定义了超过65536个局部变量时堆栈中发生的情况 (警告: 这段代码会打印大约2^18行文本, 请做好准备!):
      ```py
      import dis
      exec("""
@@ -2389,9 +2389,9 @@ nan
      print(dis.dis(f))
      ```
 
-* 你的 *Python 代码* 并不会多线程同时运行 (是的, 你没听错!). 虽然你觉得会产生多个线程并让它们同时执行你的代码, 但是, 由于 [全局解释锁](https://wiki.python.org/moin/GlobalInterpreterLock)的存在, 你所做的只是让你的线程依次在同一个核心上执行. Python 多线程适用于IO密集型的任务, 但如果想要并行处理CPU密集型的任务, 你应该会想使用 [multiprocessing](https://docs.python.org/2/library/multiprocessing.html) 模块.
+* 你的 *Python 代码* <strong style="color:#d00;">并不会多线程同时运行</strong> (是的, 你没听错!). 虽然你觉得会产生多个线程并让它们同时执行你的代码, 但是, 由于 [全局解释锁](https://wiki.python.org/moin/GlobalInterpreterLock)的存在, 你所做的只是让你的线程依次在同一个核心上执行. <strong style="color:#d00;">Python 多线程适用于IO密集型的任务, 但如果想要并行处理CPU密集型的任务, 你应该会想使用 </strong>[multiprocessing](https://docs.python.org/2/library/multiprocessing.html) 模块.
 
-* 列表切片超出索引边界而不引发任何错误
+* <strong style="color:#d00;">列表切片超出索引边界而不引发任何错误</strong>
   ```py
   >>> some_list = [1, 2, 3, 4, 5]
   >>> some_list[111:]
@@ -2408,7 +2408,7 @@ nan
           result += (s[i:i + len(sub)] == sub)
       return result
   ```
-  这个行为是由于空子串(`''`)与原始字符串中长度为0的切片相匹配导致的.
+  这个行为是<strong style="color:#d00;">由于空子串(`''`)与原始字符串中长度为0的切片相匹配导致的</strong>.
 
 ---
 
