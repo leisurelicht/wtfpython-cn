@@ -2376,6 +2376,24 @@ nan
 
 ---
 
+---小数池
+>>> a=256
+>>> b=256
+>>> a is b
+True
+>>> a=257
+>>> b=257
+>>> a is b
+False
+>>> a=-5
+>>> b=-5
+>>> a is b
+True
+>>> a=-6
+>>> b=-6
+>>> a is b
+False
+小数整数池 的意思 系统已经为你准备好了 【-5，257）范围内 所有整数， 不需要直接创建 ，拿来直接用
 # Contributing/贡献
 
 欢迎各种补丁! 详情请看[CONTRIBUTING.md](https://github.com/satwikkansal/wtfpython/blob/master/CONTRIBUTING.md).(译: 这是给原库提贡献的要求模版)
