@@ -1,6 +1,6 @@
 <p align="center"><img src="/images/logo.png" alt=""></p>
-<h1 align="center">What the f*ck Python! 🐍</h1>
-<p align="center">一些有趣且鲜为人知的 Python 特性.</p>
+<h1 align="center">What the f*ck Python! 😱</h1>
+<p align="center">通过令人惊喜的代码片段来探索和理解 Python</p>
 
 <p align="center">
 <a href="https://github.com/satwikkansal/wtfpython">English</a>
@@ -9,14 +9,13 @@
 
 [![WTFPL 2.0][license-image]][license-url] [![Commit id][commit-image]][commit-url] [![996.icu][996.icu-image]][996.icu-url]
 
+Python, 是一个设计优美的解释型高级语言, 它提供了很多能让程序员感到舒适的功能特性. 但有的时候, 一些 Python 代码片段的输出结果并不是那么一目了然.
 
-Python, 是一个设计优美的解释型高级语言, 它提供了很多能让程序员感到舒适的功能特性. 但有的时候, Python 的一些输出结果对于初学者来说似乎并不是那么一目了然.
+这个有趣的项目意在收集 Python 中那些违反直觉的代码片段以及鲜为人知的功能特性, 并尝试讨论这些现象背后真正的原理.
 
-这个有趣的项目意在收集 Python 中那些难以理解和反人类直觉的例子以及鲜为人知的功能特性, 并尝试讨论这些现象背后真正的原理!
+虽然下面的有些例子并不一定会让你觉得 WTFs, 但它们会揭示一些你可能不知道的 Python 有趣特性. 我觉得这是一种学习编程语言内部原理的好办法, 而且我相信你也会从中获得乐趣!
 
-虽然下面的有些例子并不一定会让你觉得 WTFs, 但它们依然有可能会告诉你一些你所不知道的 Python 有趣特性.  我觉得这是一种学习编程语言内部原理的好办法, 而且我相信你也会从中获得乐趣!
-
-如果您是一位经验比较丰富的 Python 程序员, 你可以尝试挑战看是否能一次就找到例子的正确答案. 你可能对其中的一些例子已经比较熟悉了, 那这也许能唤起你当年踩这些坑时的甜蜜回忆 :sweat_smile:
+如果你是一位经验比较丰富的 Python 程序员, 你可以尝试挑战看是否能一次就找到例子的正确答案. 你可能对其中的一些例子已经比较熟悉了, 那这也许能唤起你当年踩这些坑时的甜蜜回忆 :sweat_smile:
 
 PS: 如果你不是第一次读了, 你可以在[这里](https://github.com/satwikkansal/wtfpython/releases/)获取变动内容.
 
