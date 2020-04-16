@@ -252,7 +252,7 @@ some_dict[5] = "Python"
   ```
   **注意:** 具有不同值的对象也可能具有相同的哈希值（哈希冲突）.
 * 当执行 `some_dict[5] = "Python"` 语句时, 因为Python将 `5` 和 `5.0` 识别为 `some_dict` 的同一个键, 所以已有值 "JavaScript" 就被 "Python" 覆盖了.
-* 这个 StackOverflow的 [回答](https://stackoverflow.com/a/32211042/4354153) 漂亮的解释了这背后的基本原理.
+* 这个 StackOverflow的 [回答](https://stackoverflow.com/a/32211042/4354153) 漂亮地解释了这背后的基本原理.
 
 ---
 
