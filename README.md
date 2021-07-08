@@ -182,11 +182,11 @@ True
 >>> a = "wtf!"
 >>> b = "wtf!"
 >>> a is b
-False
+False # 3.9版本返回结果为True
 
 >>> a, b = "wtf!", "wtf!"
 >>> a is b 
-True # 3.7 版本返回结果为 False.
+True # 3.7 版本返回结果为 False,而在3.9版本返回结果为True
 ```
 
 3\.
@@ -194,7 +194,7 @@ True # 3.7 版本返回结果为 False.
 >>> 'a' * 20 is 'aaaaaaaaaaaaaaaaaaaa'
 True
 >>> 'a' * 21 is 'aaaaaaaaaaaaaaaaaaaaa'
-False # 3.7 版本返回结果为 True
+False # 3.7 版本返回结果为 True, 3.9版本同样返回结果为True
 ```
 
 很好理解, 对吧?
@@ -213,7 +213,6 @@ False # 3.7 版本返回结果为 True
 - 常量折叠(constant folding) 是 Python 中的一种 [窥孔优化(peephole optimization)](https://en.wikipedia.org/wiki/Peephole_optimization) 技术. 这意味着在编译时表达式 `'a'*20` 会被替换为 `'aaaaaaaaaaaaaaaaaaaa'` 以减少运行时的时钟周期. 只有长度小于 20 的字符串才会发生常量折叠. (为啥? 想象一下由于表达式 `'a'*10**10` 而生成的 `.pyc` 文件的大小). 相关的源码实现在[这里](https://github.com/python/cpython/blob/3.6/Python/peephole.c#L288).
 - 如果你是使用 3.7 版本中运行上述示例代码, 会发现部分代码的运行结果与注释说明相同. 这是因为在 3.7 版本中, 常量折叠已经从窥孔优化器迁移至新的 AST 优化器, 后者可以以更高的一致性来执行优化. (由 Eugene Toder 和 INADA Naoki 在 [bpo-29469](https://bugs.python.org/issue29469) 和 [bpo-11549](https://bugs.python.org/issue11549) 中贡献.) 
 - (译: 但是在最新的 3.8 版本中, 结果又变回去了. 虽然 3.8 版本和 3.7 版本一样, 都是使用 AST 优化器. 目前不确定官方对 3.8 版本的 AST 做了什么调整.)
-
 
 ---
 
@@ -1336,6 +1335,7 @@ def square(x):
 
 * **不要混用制表符(tab)和空格(space)!** 在上面的例子中, return 的前面是"1个制表符", 而其他部分的代码前面是 "4个空格".
 * Python是这么处理制表符的:
+  
   > 首先, 制表符会从左到右依次被替换成8个空格, 直到被替换后的字符总数是八的倍数 <...>
 * 因此, `square` 函数最后一行的制表符会被替换成8个空格, 导致return语句进入循环语句里面.
 * Python 3 很友好, 在这种情况下会自动抛出错误.
@@ -1997,6 +1997,7 @@ True
 #### 💡 说明:
 - 相关的 [PEP-401](https://www.python.org/dev/peps/pep-0401/) 发布于 2009年4月1日 (所以你现在知道这意味着什么了吧).
 - 引用 PEP-401
+  
   > 意识到 Python 3.0 里的 != 运算符是一个会引起手指疼痛的恐怖错误, FLUFL 将 <> 运算符恢复为唯一写法.
 - Uncle Barry 在 PEP 中还分享了其他东西; 你可以在[这里](https://www.python.org/dev/peps/pep-0401/)获得他们.
 - (译: 虽然文档中没写，但应该是只能在交互解释器中使用.)
