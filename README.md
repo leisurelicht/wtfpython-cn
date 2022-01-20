@@ -35,6 +35,7 @@ PS: 如果你不是第一次读了, 你可以在[这里](https://github.com/satw
         - [> Time for some hash brownies!/是时候来点蛋糕了!](#-time-for-some-hash-brownies是时候来点蛋糕了)
         - [> Return return everywhere!/到处返回！](#-return-return-everywhere到处返回)
         - [> Deep down, we're all the same./本质上,我们都一样. *](#-deep-down-were-all-the-same本质上我们都一样-)
+        - [> Disorder within order/有序中潜藏着无序 *](#-disorder-within-order/有序中潜藏着无序-*)
         - [> For what?/为什么?](#-for-what为什么)
         - [> Evaluation time discrepancy/执行时机差异](#-evaluation-time-discrepancy执行时机差异)
         - [> `is` is not what it is!/出人意料的`is`!](#-is-is-not-what-it-is出人意料的is)
@@ -448,6 +449,108 @@ True
   True
   ```
   正如你所看到的, 对象销毁的顺序是造成所有不同之处的原因.
+
+
+---
+
+### > Disorder within order/有序中潜藏着无序 *
+<!-- Example ID: 91bff1f8-541d-455a-9de4-6cd8ff00ea66 --->
+
+```py
+from collections import OrderedDict
+
+dictionary = dict()
+dictionary[1] = 'a'; dictionary[2] = 'b';
+
+ordered_dict = OrderedDict()
+ordered_dict[1] = 'a'; ordered_dict[2] = 'b';
+
+another_ordered_dict = OrderedDict()
+another_ordered_dict[2] = 'b'; another_ordered_dict[1] = 'a';
+
+class DictWithHash(dict):
+    """
+    实现了 __hash__ 魔法方法的dict类
+    """
+    __hash__ = lambda self: 0
+
+class OrderedDictWithHash(OrderedDict):
+    """
+    实现了 __hash__ 魔法方法的OrderedDict类
+    """
+    __hash__ = lambda self: 0
+```
+
+**Output**
+```py
+>>> dictionary == ordered_dict # 如果 a == b
+True
+>>> dictionary == another_ordered_dict # 且 b == c
+True
+>>> ordered_dict == another_ordered_dict # 那么为什么 c == a 不成立??
+False
+
+# 众所周知，set数据结构储存不重复元素，
+# 让我们生成以上字典的 set 数据类型，看看会发生什么……
+
+>>> len({dictionary, ordered_dict, another_ordered_dict})
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: unhashable type: 'dict'
+
+# dict类没有实现 __hash__ ，出错可以理解，接下来使用我们派生的类。
+
+>>> dictionary = DictWithHash()
+>>> dictionary[1] = 'a'; dictionary[2] = 'b';
+>>> ordered_dict = OrderedDictWithHash()
+>>> ordered_dict[1] = 'a'; ordered_dict[2] = 'b';
+>>> another_ordered_dict = OrderedDictWithHash()
+>>> another_ordered_dict[2] = 'b'; another_ordered_dict[1] = 'a';
+>>> len({dictionary, ordered_dict, another_ordered_dict})
+1
+>>> len({ordered_dict, another_ordered_dict, dictionary}) # 交换顺序
+2
+```
+
+到底发生了什么?
+
+#### 💡 说明:
+
+- 等号的传递性没有在 `dictionary`, `ordered_dict` 和 `another_ordered_dict` 之间生效是 `OrderedDict` 类中 `__eq__` 方法的实现方式造成的。根据[文档](https://docs.python.org/3/library/collections.html#ordereddict-objects)以下部分:
+  
+    > 对于 `OrderedDict` 类之间，相等性的判定是位置敏感的，实现类似于 `list(od1.items())==list(od2.items())`。对于 `OrderedDict` 类与其他 `Mapping` 对象（例如`dict` 类），相等性的判定是非位置敏感的。
+- 这是为了任何使用常规 `dict` 类的地方能够直接使用 `OrderedDict` 对象代替。
+- 好啦，那为什么改变顺序会影响 `set` 对象生成的长度呢? 答案就是上面说的缺乏等号的传递性。因为 `set` 类是唯一元素的无序集合，元素插入的顺序不应该有影响。但在此例中，确有不同。让我们进一步深入。
+
+    ```py
+    >>> some_set = set()
+    >>> some_set.add(dictionary) # 涉及的变量是前序片段定义的 mapping 对象
+    >>> ordered_dict in some_set
+    True
+    >>> some_set.add(ordered_dict)
+    >>> len(some_set)
+    1
+    >>> another_ordered_dict in some_set
+    True
+    >>> some_set.add(another_ordered_dict)
+    >>> len(some_set)
+    1
+
+    >>> another_set = set()
+    >>> another_set.add(ordered_dict)
+    >>> another_ordered_dict in another_set
+    False
+    >>> another_set.add(another_ordered_dict)
+    >>> len(another_set)
+    2
+    >>> dictionary in another_set
+    True
+    >>> another_set.add(another_ordered_dict)
+    >>> len(another_set)
+    2
+    ```
+    因此，不一致性是由于 `another_ordered_dict in another_set` 结果为 `False`。 因为 `ordered_dict` 已经在 `another_set` 中，但如前所述， `ordered_dict == another_ordered_dict` 的结果为 `False`，会在后续再加入 `another_ordered_dict` 到 `another_set` 中。
+
 
 ---
 
