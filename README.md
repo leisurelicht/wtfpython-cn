@@ -50,6 +50,7 @@ PS: 如果你不是第一次读了, 你可以在[这里](https://github.com/satw
         - [> What's wrong with booleans?/布尔你咋了?](#-whats-wrong-with-booleans布尔你咋了)
         - [> Class attributes and instance attributes/类属性和实例属性](#-class-attributes-and-instance-attributes类属性和实例属性)
         - [> yielding None/生成 None](#-yielding-none生成-none)
+        - [> Yielding from... return!/生成器里的return *](#-Yielding-from-return/生成器里的return-)
         - [> Mutating the immutable!/强人所难](#-mutating-the-immutable强人所难)
         - [> The disappearing variable from outer scope/消失的外部变量](#-the-disappearing-variable-from-outer-scope消失的外部变量)
         - [> When True is actually False/真亦假](#-when-true-is-actually-false真亦假)
@@ -1162,6 +1163,73 @@ def some_func(val):
 - 来源和解释可以在这里找到: https://stackoverflow.com/questions/32139885/yield-in-list-comprehensions-and-generator-expressions
 - 相关错误报告: http://bugs.python.org/issue10544
 - 这个bug在3.7以后的版本中不被推荐使用, 并在3.8中被修复. 因此在3.8中尝试在推导式中使用 yield, 只会得到一个 SyntaxError. 详细内容可以看[3.7更新内容](https://docs.python.org/dev/whatsnew/3.7.html#deprecated-python-behavior), [3.8更新内容](https://docs.python.org/dev/whatsnew/3.8.html#changes-in-python-behavior).
+
+
+---
+
+### > Yielding from... return!/生成器里的return *
+<!-- Example ID: 5626d8ef-8802-49c2-adbc-7cda5c550816 --->
+1\.
+
+```py
+def some_func(x):
+    if x == 3:
+        return ["wtf"]
+    else:
+        yield from range(x)
+```
+
+**Output (> 3.3):**
+
+```py
+>>> list(some_func(3))
+[]
+```
+
+`"wtf"` 去哪儿了？是因为`yield from`的一些特殊效果吗？让我们验证一下
+
+2\.
+
+```py
+def some_func(x):
+    if x == 3:
+        return ["wtf"]
+    else:
+        for i in range(x):
+          yield i
+```
+
+**Output:**
+
+```py
+>>> list(some_func(3))
+[]
+```
+
+同样的结果，这里也不起作用。
+
+#### 💡 说明
+
++ 从 Python 3.3 开始，可以在生成器中使用带有值的 `return` 语句（参见 [PEP380](https://www.python.org/dev/peps/pep-0380/)）。 [官方文档](https://www.python.org/dev/peps/pep-0380/#enhancements-to-stopiteration) 描述，
+
+> "... 生成器中的 `return expr` 会导致在退出生成器时引发 `StopIteration(expr)`。"
+
++ 在 `some_func(3)` 例子中，`return` 语句在开始就引发了`StopIteration`。 `StopIteration` 异常会在`list(...)` 包装器和`for` 循环中自动捕获。 因此，以上两个片段都产生的是一个空列表。
+
++ 要从生成器 `some_func` 中获取 `["wtf"]`，我们需要捕获 `StopIteration` 异常，
+
+    ```py
+    try:
+        next(some_func(3))
+    except StopIteration as e:
+        some_string = e.value
+    ```
+
+    ```py
+    >>> some_string
+    ["wtf"]
+    ```
+
 
 ---
 
