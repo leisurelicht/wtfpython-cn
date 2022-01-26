@@ -56,6 +56,7 @@ PS: 如果你不是第一次读了, 你可以在[这里](https://github.com/satw
         - [> From filled to None in one instruction.../从有到无...](#-from-filled-to-none-in-one-instruction从有到无)
         - [> The chicken-egg problem/先有鸡还是先有蛋 *](#-the-chicken-egg-problem/先有鸡还是先有蛋-*)
         - [> Subclass relationships/子类关系 *](#-subclass-relationships子类关系-)
+        - [> Methods equality and identity/方法的相等性和唯一性 *](#-Methods-equality-and-identity/方法的相等性和唯一性-)
         - [> The mysterious key type conversion/神秘的键型转换 *](#-the-mysterious-key-type-conversion神秘的键型转换-)
         - [> Let's see if you can guess this?/看看你能否猜到这一点?](#-lets-see-if-you-can-guess-this看看你能否猜到这一点)
     - [Section: Appearances are deceptive!/外表是靠不住的!](#section-appearances-are-deceptive外表是靠不住的)
@@ -1400,6 +1401,105 @@ False
 * 当 `issubclass(cls, Hashable)` 被调用时, 它只是在 `cls` 中寻找 `__hash__` 方法或者从继承的父类中寻找 `__hash__` 方法.
 * 由于 `object` is 可散列的(hashable), 但是 `list` 是不可散列的, 所以它打破了这种传递关系.
 * 在[这里](https://www.naftaliharris.com/blog/python-subclass-intransitivity/)可以找到更详细的解释.
+
+---
+
+### > Methods equality and identity/方法的相等性和唯一性 *
+<!-- Example ID: 94802911-48fe-4242-defa-728ae893fa32 --->
+
+1.
+```py
+class SomeClass:
+    def method(self):
+        pass
+
+    @classmethod
+    def classm(cls):
+        pass
+
+    @staticmethod
+    def staticm():
+        pass
+```
+
+**Output:**
+```py
+>>> print(SomeClass.method is SomeClass.method)
+True
+>>> print(SomeClass.classm is SomeClass.classm)
+False
+>>> print(SomeClass.classm == SomeClass.classm)
+True
+>>> print(SomeClass.staticm is SomeClass.staticm)
+True
+```
+访问 `classm` 两次，我们得到一个相等的对象，但不是*同一个*？ 让我们看看 `SomeClass` 的实例会发生什么：
+
+2.
+```py
+o1 = SomeClass()
+o2 = SomeClass()
+```
+
+**Output:**
+```py
+>>> print(o1.method == o2.method)
+False
+>>> print(o1.method == o1.method)
+True
+>>> print(o1.method is o1.method)
+False
+>>> print(o1.classm is o1.classm)
+False
+>>> print(o1.classm == o1.classm == o2.classm == SomeClass.classm)
+True
+>>> print(o1.staticm is o1.staticm is o2.staticm is SomeClass.staticm)
+True
+```
+
+访问 ` classm` or `method` 两次, 为 `SomeClass` 的同一个实例创建了相等但是*不同*的对象。
+
+#### 💡 说明
+* 函数是[描述符](https://docs.python.org/3/howto/descriptor.html)。每当将函数作为属性访问时，就会调用描述符，创建一个方法对象，该对象将函数与拥有该属性的对象“绑定”。如果被调用，该方法调用函数，隐式传递绑定对象作为第一个参数（这就是我们如何将 self 作为第一个参数获取，尽管没有显式传递它）。
+
+```py
+>>> o1.method
+<bound method SomeClass.method of <__main__.SomeClass object at ...>>
+```
+
+* 多次访问该属性，每次都会创建一个方法对象！ 因此，`o1.method is o1.method` 永远不会是真的。但是，将函数作为类属性（而不是实例）访问并不会创建方法对象，所以 `SomeClass.method is SomeClass.method` 是真的。
+
+```py
+>>> SomeClass.method
+<function SomeClass.method at ...>
+```
+
+* `classmethod` 将函数转换为类方法。 类方法是描述符，当被访问时，它会创建一个绑定*类本身*的方法对象，而不是对象本身。
+
+```py
+>>> o1.classm
+<bound method SomeClass.classm of <class '__main__.SomeClass'>>
+```
+
+* 与函数不同，`classmethod` 在作为类属性访问时也会创建一个方法（在这种情况下，它们绑定类，而不是类的类型）。 所以 `SomeClass.classm is SomeClass.classm` 是假的。
+
+```py
+>>> SomeClass.classm
+<bound method SomeClass.classm of <class '__main__.SomeClass'>>
+```
+
+* 当两个函数相等并且绑定的对象相同时，方法对象比较相等。 所以`o1.method == o1.method` 为真，尽管它们在内存中是两个不同的对象。
+* `staticmethod` 将函数转换为“无操作”描述符，它按原样返回函数。没有方法对象被创建，所以 `is` 的比较运算为真。
+
+```py
+>>> o1.staticm
+<function SomeClass.staticm at ...>
+>>> SomeClass.staticm
+<function SomeClass.staticm at ...>
+```
+
+* 每次 Python 调用实例方法时都必须创建新的“方法”对象，并且每次都必须修改参数以插入 `self` 严重影响性能。CPython 3.7 [解决了这个问题](https://bugs.python.org/issue26110) 。通过引入新的操作码来处理调用方法而不创建临时方法对象。这仅在实际调用访问的函数时使用，因此这里的代码片段不受影响，仍然会生成方法:)
+
 
 ---
 
