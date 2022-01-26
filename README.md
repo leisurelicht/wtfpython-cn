@@ -54,6 +54,7 @@ PS: 如果你不是第一次读了, 你可以在[这里](https://github.com/satw
         - [> The disappearing variable from outer scope/消失的外部变量](#-the-disappearing-variable-from-outer-scope消失的外部变量)
         - [> When True is actually False/真亦假](#-when-true-is-actually-false真亦假)
         - [> From filled to None in one instruction.../从有到无...](#-from-filled-to-none-in-one-instruction从有到无)
+        - [> The chicken-egg problem/先有鸡还是先有蛋 *](#-the-chicken-egg-problem/先有鸡还是先有蛋-*)
         - [> Subclass relationships/子类关系 *](#-subclass-relationships子类关系-)
         - [> The mysterious key type conversion/神秘的键型转换 *](#-the-mysterious-key-type-conversion神秘的键型转换-)
         - [> Let's see if you can guess this?/看看你能否猜到这一点?](#-lets-see-if-you-can-guess-this看看你能否猜到这一点)
@@ -1324,6 +1325,57 @@ None
 #### 💡 说明:
 
 大多数修改序列/映射对象的方法, 比如 `list.append`, `dict.update`, `list.sort` 等等. 都是原地修改对象并返回 `None`. 这样做的理由是, 如果操作可以原地完成, 就可以避免创建对象的副本来提高性能. (参考[这里](http://docs.python.org/2/faq/design.html#why-doesn-t-list-sort-return-the-sorted-list))
+
+---
+
+### > The chicken-egg problem/先有鸡还是先有蛋 *
+<!-- Example ID: 60730dc2-0d79-4416-8568-2a63323b3ce8 --->
+
+1\.
+```py
+>>> isinstance(3, int)
+True
+>>> isinstance(type, object)
+True
+>>> isinstance(object, type)
+True
+```
+那么到底谁是“最终”的基类呢？下边顺便列出更多的令人困惑的地方
+
+2\. 
+
+```py
+>>> class A: pass
+>>> isinstance(A, A)
+False
+>>> isinstance(type, type)
+True
+>>> isinstance(object, object)
+True
+```
+
+3\.
+
+```py
+>>> issubclass(int, object)
+True
+>>> issubclass(type, object)
+True
+>>> issubclass(object, type)
+False
+```
+
+
+#### 💡 说明
+
+- `type` 是 Python 中的[元类](https://realpython.com/python-metaclasses/)。
+- Python 中，**一切**皆对象，其中包括类及其对象（实例）。
+- `type` 类型是`object`类的元类，每个类（包括`type`）都直接或间接地继承自`object`。
+- 对象和类型之间没有真正的基类。上述片段中的令人困惑的地方之所以出现，是因为我们从 Python 类的角度考虑这些关系（issubclass 和 isinstance）。 `object`和`type`之间的关系不能在纯python中重现。 更准确地说，以下关系不能在纯 Python 中重现:
+    + A类是B类的一个实例，B类是A类的一个实例。
+    + A类是它自己的一个实例。
+- `object`和`type`之间的关系（既是彼此的实例，也是它们自己的实例）存在于 Python 中，这是源于实现层级上的“作弊”行为。
+
 
 ---
 
