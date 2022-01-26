@@ -57,6 +57,7 @@ PS: 如果你不是第一次读了, 你可以在[这里](https://github.com/satw
         - [> The chicken-egg problem/先有鸡还是先有蛋 *](#-the-chicken-egg-problem/先有鸡还是先有蛋-*)
         - [> Subclass relationships/子类关系 *](#-subclass-relationships子类关系-)
         - [> Methods equality and identity/方法的相等性和唯一性 *](#-Methods-equality-and-identity/方法的相等性和唯一性-)
+        - [> All-true-ation/返回True的all函数 *](#-All-true-ation/返回True的all函数-)
         - [> The mysterious key type conversion/神秘的键型转换 *](#-the-mysterious-key-type-conversion神秘的键型转换-)
         - [> Let's see if you can guess this?/看看你能否猜到这一点?](#-lets-see-if-you-can-guess-this看看你能否猜到这一点)
     - [Section: Appearances are deceptive!/外表是靠不住的!](#section-appearances-are-deceptive外表是靠不住的)
@@ -1499,6 +1500,45 @@ True
 ```
 
 * 每次 Python 调用实例方法时都必须创建新的“方法”对象，并且每次都必须修改参数以插入 `self` 严重影响性能。CPython 3.7 [解决了这个问题](https://bugs.python.org/issue26110) 。通过引入新的操作码来处理调用方法而不创建临时方法对象。这仅在实际调用访问的函数时使用，因此这里的代码片段不受影响，仍然会生成方法:)
+
+
+---
+
+### > All-true-ation/返回True的all函数 *
+
+<!-- Example ID: dfe6d845-e452-48fe-a2da-0ed3869a8042 -->
+
+```py
+>>> all([True, True, True])
+True
+>>> all([True, True, False])
+False
+
+>>> all([])
+True
+>>> all([[]])
+False
+>>> all([[[]]])
+True
+```
+
+为什么会有这种True-False的变化？
+
+#### 💡 说明
+
+- `all` 函数的实现等价于：
+
+- ```py
+  def all(iterable):
+      for element in iterable:
+          if not element:
+              return False
+      return True
+  ```
+
+- `all([])` 返回 `True` 因为可迭代对象为空。 
+- `all([[]])` 返回 `False` 因为传入的数组有一个元素 `[]`， 在Python中，空列表为假。
+- `all([[[]]])` 和更高的递归变体总是`True`。 这是因为传递的数组的单个元素（`[[...]]`）不再是空的，而有值的列表为真。
 
 
 ---
