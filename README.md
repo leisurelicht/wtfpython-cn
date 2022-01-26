@@ -69,6 +69,7 @@ PS: 如果你不是第一次读了, 你可以在[这里](https://github.com/satw
         - [> Modifying a dictionary while iterating over it/迭代字典时的修改](#-modifying-a-dictionary-while-iterating-over-it迭代字典时的修改)
         - [> Stubborn `del` operator/坚强的 `del` *](#-stubborn-del-operator坚强的-del-)
         - [> Deleting a list item while iterating/迭代列表时删除元素](#-deleting-a-list-item-while-iterating迭代列表时删除元素)
+        - [> Lossy zip of iterators/丢三落四的zip *](#->-Lossy-zip-of-iterators/丢三落四的zip-)
         - [> Loop variables leaking out!/循环变量泄漏!](#-loop-variables-leaking-out循环变量泄漏)
         - [> Beware of default mutable arguments!/当心默认的可变参数!](#-beware-of-default-mutable-arguments当心默认的可变参数)
         - [> Catching the Exceptions/捕获异常](#-catching-the-exceptions捕获异常)
@@ -1973,6 +1974,62 @@ for idx, item in enumerate(list_4):
 
 * 参考这个StackOverflow的[回答](https://stackoverflow.com/questions/45946228/what-happens-when-you-try-to-delete-a-list-element-while-iterating-over-it)来解释这个例子
 * 关于Python中字典的类似例子, 可以参考这个Stackoverflow的[回答](https://stackoverflow.com/questions/45877614/how-to-change-all-the-dictionary-keys-in-a-for-loop-with-d-items).
+
+
+---
+
+### > Lossy zip of iterators/丢三落四的zip *
+<!-- Example ID: c28ed154-e59f-4070-8eb6-8967a4acac6d --->
+
+```py
+>>> numbers = list(range(7))
+>>> numbers
+[0, 1, 2, 3, 4, 5, 6]
+>>> first_three, remaining = numbers[:3], numbers[3:]
+>>> first_three, remaining
+([0, 1, 2], [3, 4, 5, 6])
+>>> numbers_iter = iter(numbers)
+>>> list(zip(numbers_iter, first_three)) 
+[(0, 0), (1, 1), (2, 2)]
+# so far so good, let's zip the remaining
+>>> list(zip(numbers_iter, remaining))
+[(4, 3), (5, 4), (6, 5)]
+```
+
+`numbers` 列表中的元素 `3` 哪里去了？
+
+#### 💡 说明
+
+- 根据Python [文档](https://docs.python.org/3.3/library/functions.html#zip)， `zip` 函数的大概实现如下：
+
+    ```py
+    def zip(*iterables):
+        sentinel = object()
+        iterators = [iter(it) for it in iterables]
+        while iterators:
+            result = []
+            for it in iterators:
+                elem = next(it, sentinel)
+                if elem is sentinel: return
+                result.append(elem)
+            yield tuple(result)
+    ```
+
+- 该函数接受任意数量的可迭代对象，通过调用 `next` 函数将它们的每个项目添加到 `result` 列表中，并在任一可迭代对象耗尽时停止。
+- 这里需要注意的是，当任一可迭代对象用尽时，`result` 列表中的现有元素将被丢弃。这就是 `numbers_iter` 中的 `3` 所发生的情况。
+- 使用 zip 执行上述操作的正确方法是:
+
+    ```py
+    >>> numbers = list(range(7))
+    >>> numbers_iter = iter(numbers)
+    >>> list(zip(first_three, numbers_iter))
+    [(0, 0), (1, 1), (2, 2)]
+    >>> list(zip(remaining, numbers_iter))
+    [(3, 3), (4, 4), (5, 5), (6, 6)]
+    ```
+
+    `zip` 的第一个参数应当是有最少元素的那个。
+
 
 ---
 
