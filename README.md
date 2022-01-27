@@ -97,6 +97,7 @@ PS: 如果你不是第一次读了, 你可以在[这里](https://github.com/satw
         - [> Let's make a giant string!/来做个巨大的字符串吧!](#-lets-make-a-giant-string来做个巨大的字符串吧)
         - [> Slowing down `dict` lookups/让字典的查找慢下来 *](#-Slowing-down-dict-lookups让字典的查找慢下来-)
         - [> Explicit typecast of strings/字符串的显式类型转换](#-explicit-typecast-of-strings字符串的显式类型转换)
+        - [> Bloating instance `dict`s/变臃肿的`dict`实例们 *](#-Bloating-instance-dicts/变臃肿的dict实例们-)
         - [> Minor Ones/小知识点](#-minor-ones小知识点)
 - [Contributing/贡献](#contributing贡献)
 - [Acknowledgements/致谢](#acknowledgements致谢)
@@ -3168,6 +3169,72 @@ nan
 #### 💡 说明:
 
 `'inf'` 和 `'nan'` 是特殊的字符串(不区分大小写), 当显示转换成 `float` 型时, 它们分别用于表示数学意义上的 "无穷大" 和 "非数字".
+
+
+---
+
+### > Bloating instance `dict`s/变臃肿的`dict`实例们 *
+<!-- Example ID: fe706ab4-1615-c0ba-a078-76c98cbe3f48 --->
+
+```py
+import sys
+
+class SomeClass:
+    def __init__(self):
+        self.some_attr1 = 1
+        self.some_attr2 = 2
+        self.some_attr3 = 3
+        self.some_attr4 = 4
+
+
+def dict_size(o):
+    return sys.getsizeof(o.__dict__)
+
+```
+
+**Output:** (Python 3.8, 其他 Python 3 的版本也许稍有不同)
+```py
+>>> o1 = SomeClass()
+>>> o2 = SomeClass()
+>>> dict_size(o1)
+104
+>>> dict_size(o2)
+104
+>>> del o1.some_attr1
+>>> o3 = SomeClass()
+>>> dict_size(o3)
+232
+>>> dict_size(o1)
+232
+```
+
+让我们在一个新的解释器中再试一次：
+
+```py
+>>> o1 = SomeClass()
+>>> o2 = SomeClass()
+>>> dict_size(o1)
+104  # 意料之中
+>>> o1.some_attr5 = 5
+>>> o1.some_attr6 = 6
+>>> dict_size(o1)
+360
+>>> dict_size(o2)
+272
+>>> o3 = SomeClass()
+>>> dict_size(o3)
+232
+```
+
+是什么让那些字典变得臃肿？ 为什么新创建的对象也会变臃肿？
+
+#### 💡 说明
++ CPython 能够在多个字典中重用相同的“键”对象。 这添加在 [PEP 412](https://www.python.org/dev/peps/pep-0412/) 中，目的是减少内存使用，特别是在实例字典中 —— 键（实例属性）几乎在所有实例都通用。
++ 这种优化对于实例字典来说是十分自然的，但如果某些假设被打破，它就会被禁用。
++ 密钥共享字典不支持删除；如果删除了实例属性，则字典是“未共享的”，并且同一类的所有未来实例都禁用密钥共享。
++ 另外，如果字典键已被调整大小（因为插入了新键），它们保持共享*仅当*它们被一个完全单一的字典使用时（这允许在第一个创建的实例的 `__init__` 中添加许多属性，而不会导致“取消共享”）。如果发生调整大小时存在多个实例，则为同一类的所有未来实例禁用密钥共享：CPython 无法判断您的实例是否正在使用相同的属性集，并决定放弃尝试共享它们的键值。
++ 一个小提示，如果你的目标是降低程序的内存占用：不要删除实例属性，并确保在 `__init__` 中初始化所有的属性！
+
 
 ---
 
