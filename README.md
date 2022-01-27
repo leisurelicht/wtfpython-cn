@@ -80,6 +80,7 @@ PS: 如果你不是第一次读了, 你可以在[这里](https://github.com/satw
         - [> Rounding like a banker/像银行家一样舍入 *](#-rounding-like-a-banker/像银行家一样舍入-)
         - [> Needle in a Haystack/大海捞针](#-needle-in-a-haystack大海捞针)
         - [> Splitsies/分割函数](#-Splitsies分割函数-)
+        - [> Wild imports/通配符导入方式 *](#-Wild-imports通配符导入方式-)
     - [Section: The Hidden treasures!/隐藏的宝藏!](#section-the-hidden-treasures隐藏的宝藏)
         - [> Okay Python, Can you make me fly?/Python, 可否带我飞? *](#-okay-python-can-you-make-me-flypython-可否带我飞-)
         - [> `goto`, but why?/`goto`, 但为什么? *](#-goto-but-whygoto-但为什么-)
@@ -2539,6 +2540,68 @@ tuple()
 
 ---
 
+### > Wild imports/通配符导入方式 *
+<!-- Example ID: 83deb561-bd55-4461-bb5e-77dd7f411e1c --->
+<!-- read-only -->
+
+```py
+# File: module.py
+
+def some_weird_name_func_():
+    print("works!")
+
+def _another_weird_name_func():
+    print("works!")
+
+```
+
+**Output**
+
+```py
+>>> from module import *
+>>> some_weird_name_func_()
+"works!"
+>>> _another_weird_name_func()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name '_another_weird_name_func' is not defined
+```
+
+#### 💡 说明
+
+- 通常建议不要使用通配符导入。第一个明显的原因是，在通配符导入中，带有前导下划线的名称不会被导入。这可能会导致运行时出错。
+- 如果我们使用 `from ... import a, b, c` 语法，上面的 `NameError` 就不会发生。
+
+    ```py
+    >>> from module import some_weird_name_func_, _another_weird_name_func
+    >>> _another_weird_name_func()
+    works!
+    ```
+
+- 如果你真的想使用通配符导入，那么你必须在你的模块中定义列表`__all__`，它包含一系列公共对象，当我们进行通配符导入时，列表中的这些对象将被导入。
+
+    ```py
+    __all__ = ['_another_weird_name_func']
+
+    def some_weird_name_func_():
+        print("works!")
+
+    def _another_weird_name_func():
+        print("works!")
+    ```
+    **Output**
+
+    ```py
+    >>> _another_weird_name_func()
+    "works!"
+    >>> some_weird_name_func_()
+    Traceback (most recent call last):
+      File "<stdin>", line 1, in <module>
+    NameError: name 'some_weird_name_func_' is not defined
+    ```
+
+
+---
 
 ## Section: The Hidden treasures!/隐藏的宝藏!
 
