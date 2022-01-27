@@ -79,6 +79,7 @@ PS: 如果你不是第一次读了, 你可以在[这里](https://github.com/satw
         - [> Name resolution ignoring class scope/忽略类作用域的名称解析](#-name-resolution-ignoring-class-scope忽略类作用域的名称解析)
         - [> Rounding like a banker/像银行家一样舍入 *](#-rounding-like-a-banker/像银行家一样舍入-)
         - [> Needle in a Haystack/大海捞针](#-needle-in-a-haystack大海捞针)
+        - [> Splitsies/分割函数](#-Splitsies分割函数-)
     - [Section: The Hidden treasures!/隐藏的宝藏!](#section-the-hidden-treasures隐藏的宝藏)
         - [> Okay Python, Can you make me fly?/Python, 可否带我飞? *](#-okay-python-can-you-make-me-flypython-可否带我飞-)
         - [> `goto`, but why?/`goto`, 但为什么? *](#-goto-but-whygoto-但为什么-)
@@ -2497,6 +2498,44 @@ tuple()
 * `()` 是一个特殊的标记，表示空元组.
 
 ---
+
+### > Splitsies/分割函数 *
+<!-- Example ID: ec3168ba-a81a-4482-afb0-691f1cc8d65a --->
+
+```py
+>>> 'a'.split()
+['a']
+
+# is same as
+>>> 'a'.split(' ')
+['a']
+
+# but
+>>> len(''.split())
+0
+
+# isn't the same as
+>>> len(''.split(' '))
+1
+```
+
+#### 💡 说明
+
+- 起初人们可能会认为 split 的默认分隔符是单个空格 `' '`，但根据 [文档](https://docs.python.org/3/library/stdtypes.html#str.split)：
+    >  如果 sep 未指定或为 `None`，则应用不同的拆分算法：连续的空格被视为单个分隔符，如果字符串有前导或尾随空格，则结果将在开头或结尾不包含空字符串。因此，使用 `None` 分隔符拆分空字符串或仅包含空格的字符串将返回 `[]`。
+    > 如果给定 sep，连续的分隔符不会组合在一起，并被视为分隔空字符串（例如，`'1,,2'.split(',')` 返回 `['1', '', '2 ']`）。使用指定的分隔符拆分空字符串会返回 `['']`。
+- Noticing how the leading and trailing whitespaces are handled in the following snippet will make things clear,
+- 注意以下代码段中如何处理前导和尾随空格，促进更深入的理解：
+
+    ```py
+    >>> ' a '.split(' ')
+    ['', 'a', '']
+    >>> ' a '.split()
+    ['a']
+    >>> ''.split(' ')
+    ['']
+    ```
+
 
 ---
 
