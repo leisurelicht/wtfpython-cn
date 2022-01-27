@@ -81,6 +81,7 @@ PS: 如果你不是第一次读了, 你可以在[这里](https://github.com/satw
         - [> Needle in a Haystack/大海捞针](#-needle-in-a-haystack大海捞针)
         - [> Splitsies/分割函数](#-Splitsies分割函数-)
         - [> Wild imports/通配符导入方式 *](#-Wild-imports通配符导入方式-)
+        - [> All sorted?/都排序了吗？ *](#-All-sorted都排序了吗-)
     - [Section: The Hidden treasures!/隐藏的宝藏!](#section-the-hidden-treasures隐藏的宝藏)
         - [> Okay Python, Can you make me fly?/Python, 可否带我飞? *](#-okay-python-can-you-make-me-flypython-可否带我飞-)
         - [> `goto`, but why?/`goto`, 但为什么? *](#-goto-but-whygoto-但为什么-)
@@ -2599,6 +2600,49 @@ NameError: name '_another_weird_name_func' is not defined
       File "<stdin>", line 1, in <module>
     NameError: name 'some_weird_name_func_' is not defined
     ```
+
+
+---
+
+
+### > All sorted?/都排序了吗？ *
+
+<!-- Example ID: e5ff1eaf-8823-4738-b4ce-b73f7c9d5511 -->
+
+```py
+>>> x = 7, 8, 9
+>>> sorted(x) == x
+False
+>>> sorted(x) == sorted(x)
+True
+
+>>> y = reversed(x)
+>>> sorted(y) == sorted(y)
+False
+```
+
+#### 💡 说明
+
+- `sorted` 方法一定返回列表类型, 比较列表与元组在Python中一定返回 `False`. 
+
+- ```py
+  >>> [] == tuple()
+  False
+  >>> x = 7, 8, 9
+  >>> type(x), type(sorted(x))
+  (tuple, list)
+  ```
+
+- 与 `sorted` 不同，`reversed` 方法返回一个迭代器。为什么？因为排序需要就地修改迭代器或使用额外的容器（列表），而反向可以简单地通过从最后一个索引迭代到第一个索引来工作。
+
+- 所以在比较 `sorted(y) == sorted(y)` 时，第一次调用 `sorted()` 会消耗迭代器 `y`，下一次调用只会返回一个空列表。
+
+  ```py
+  >>> x = 7, 8, 9
+  >>> y = reversed(x)
+  >>> sorted(y), sorted(y)
+  ([7, 8, 9], [])
+  ```
 
 
 ---
