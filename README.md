@@ -77,6 +77,7 @@ PS: 如果你不是第一次读了, 你可以在[这里](https://github.com/satw
         - [> The out of scope variable/外部作用域变量](#-the-out-of-scope-variable外部作用域变量)
         - [> Be careful with chained operations/小心链式操作](#-be-careful-with-chained-operations小心链式操作)
         - [> Name resolution ignoring class scope/忽略类作用域的名称解析](#-name-resolution-ignoring-class-scope忽略类作用域的名称解析)
+        - [> Rounding like a banker/像银行家一样舍入 *](#-rounding-like-a-banker/像银行家一样舍入-)
         - [> Needle in a Haystack/大海捞针](#-needle-in-a-haystack大海捞针)
     - [Section: The Hidden treasures!/隐藏的宝藏!](#section-the-hidden-treasures隐藏的宝藏)
         - [> Okay Python, Can you make me fly?/Python, 可否带我飞? *](#-okay-python-can-you-make-me-flypython-可否带我飞-)
@@ -2394,6 +2395,60 @@ class SomeClass:
 - 类定义中嵌套的作用域会忽略类内的名称绑定.
 - 生成器表达式有它自己的作用域.
 - 从 Python 3.X 开始, 列表推导式也有自己的作用域.
+
+
+---
+
+### > Rounding like a banker/像银行家一样舍入 *
+
+让我们实现一个简单的函数来获取列表的中间元素：
+
+```py
+def get_middle(some_list):
+    mid_index = round(len(some_list) / 2)
+    return some_list[mid_index - 1]
+```
+
+**Python 3.x:**
+```py
+>>> get_middle([1])  # looks good
+1
+>>> get_middle([1,2,3])  # looks good
+2
+>>> get_middle([1,2,3,4,5])  # huh?
+2
+>>> len([1,2,3,4,5]) / 2  # good
+2.5
+>>> round(len([1,2,3,4,5]) / 2)  # why?
+2
+```
+
+似乎 Python 将 2.5 舍入到 2。
+
+#### 💡 说明
+
+- - 这不是浮点精度错误，实际上，这种行为是故意的。从 Python 3.0 开始，`round()` 使用[银行进位法](https://en.wikipedia.org/wiki/Rounding#Round_half_to_even)，其中 0.5 小数四舍五入到最接近的 **偶数** ：
+
+```py
+>>> round(0.5)
+0
+>>> round(1.5)
+2
+>>> round(2.5)
+2
+>>> import numpy  # numpy的结果也是一样
+>>> numpy.round(0.5)
+0.0
+>>> numpy.round(1.5)
+2.0
+>>> numpy.round(2.5)
+2.0
+```
+
+- 这是 [IEEE 754](https://en.wikipedia.org/wiki/IEEE_754#Rounding_rules) 中描述的关于0.5分位舍入的推荐方法。然而，另一种方法（从零取整）大部分时间都是在学校教授的，所以银行进位法可能并不为人所知。此外，一些最流行的编程语言（例如：JavaScript、Java、C/C++、Ruby、Rust）也不使用银行进位法。因此，这对 Python 来说还是比较特殊的，在四舍五入时可能会导致混淆。
+- 了解更多信息，请参阅文档 [round()](https://docs.python.org/3/library/functions.html#round) 或 [this stackoverflow thread](https://stackoverflow.com/questions/10825926/python -3-x-rounding-behavior) 
+- 请注意，`get_middle([1])` 只返回1，因为它的索引是 `round(0.5) - 1 = 0 - 1 = -1`，返回列表中的最后一个元素。
+
 
 ---
 
