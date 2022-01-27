@@ -95,6 +95,7 @@ PS: 如果你不是第一次读了, 你可以在[这里](https://github.com/satw
     - [Section: Miscellaneous/杂项](#section-miscellaneous杂项)
         - [> `+=` is faster/更快的 `+=` ](#--is-faster更快的-)
         - [> Let's make a giant string!/来做个巨大的字符串吧!](#-lets-make-a-giant-string来做个巨大的字符串吧)
+        - [> Slowing down `dict` lookups/让字典的查找慢下来 *](#-Slowing-down-dict-lookups让字典的查找慢下来-)
         - [> Explicit typecast of strings/字符串的显式类型转换](#-explicit-typecast-of-strings字符串的显式类型转换)
         - [> Minor Ones/小知识点](#-minor-ones小知识点)
 - [Contributing/贡献](#contributing贡献)
@@ -2933,7 +2934,7 @@ Ellipsis
     注意：这适用于任意数量的维度。您甚至可以在第一个和最后一个维度中选择切片并以这种方式忽略中间的切片(`n_dimensional_array[firs_dim_slice, ..., last_dim_slice]`)
 
      + 在 [类型提示](https://docs.python.org/3/library/typing.html)中仅表示类型的一部分（如 `(Callable[..., int]` 或 `Tuple[ str, ...]`))
-     
+
      + 您也可以使用省略号作为默认函数参数（在您想要区分“无参数”和“传递None值”场景的情况下）。
 
 
@@ -3090,6 +3091,44 @@ def convert_list_to_string(l, iters):
   >>> timeit(add_string_with_plus(100000)) # 执行时间二次增加
   1 loops, best of 3: 1.09 s per loop
   ```
+
+
+---
+
+### > Slowing down `dict` lookups/让字典的查找慢下来 *
+<!-- Example ID: c9c26ce6-df0c-47f7-af0b-966b9386d4c3 --->
+
+```py
+some_dict = {str(i): 1 for i in range(1_000_000)}
+another_dict = {str(i): 1 for i in range(1_000_000)}
+```
+
+**Output:**
+```py
+>>> %timeit some_dict['5']
+28.6 ns ± 0.115 ns per loop (mean ± std. dev. of 7 runs, 10000000 loops each)
+>>> some_dict[1] = 1
+>>> %timeit some_dict['5']
+37.2 ns ± 0.265 ns per loop (mean ± std. dev. of 7 runs, 10000000 loops each)
+
+>>> %timeit another_dict['5']
+28.5 ns ± 0.142 ns per loop (mean ± std. dev. of 7 runs, 10000000 loops each)
+>>> another_dict[1]  # Trying to access a key that doesn't exist
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+KeyError: 1
+>>> %timeit another_dict['5']
+38.5 ns ± 0.0913 ns per loop (mean ± std. dev. of 7 runs, 10000000 loops each)
+```
+
+为什么相同的查找会变得越来越慢？
+
+#### 💡 说明
++ CPython 有一个通用的字典查找函数，可以处理所有类型的键（`str`、`int`、任何对象...），以及一个专门用于处理仅由 `str` 键组成的字典的常见情况。
++ 专用函数（在 CPython 的 [源](https://github.com/python/cpython/blob/522691c46e2ae51faaad5bbbce7d959dd61770df/Objects/dictobject.c#L841) 中名为 `lookdict_unicode`）知道所有现有的键（包括查找的 key) 是字符串，并使用更快和更简单的字符串比较来比较键，而不是调用 `__eq__` 方法。
++ 第一次使用非 `str` 键访问 `dict` 实例时，会对其进行修改，以便将来的查找使用通用函数。
++ 这个过程对于特定的 `dict` 实例是不可逆的，并且键甚至不必存在于字典中。 这就是为什么对不存在的键进行查找具有相同副作用的原因。
+
 
 ---
 
