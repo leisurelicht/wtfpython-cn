@@ -89,6 +89,7 @@ PS: 如果你不是第一次读了, 你可以在[这里](https://github.com/satw
         - [> Let's meet Friendly Language Uncle For Life/让生活更友好 *](#-lets-meet-friendly-language-uncle-for-life让生活更友好-)
         - [> Even Python understands that love is complicated/连Python也知道爱是难言的 *](#-even-python-understands-that-love-is-complicated连Python也知道爱是难言的-)
         - [> Yes, it exists!/是的, 它存在!](#-yes-it-exists是的-它存在)
+        - [> Ellipsis/省略 *](#-Ellipsis省略-)
         - [> Inpinity/无限 *](#-inpinity无限-)
         - [> Mangling time!修饰时间! *](#-mangling-time修饰时间-)
     - [Section: Miscellaneous/杂项](#section-miscellaneous杂项)
@@ -2864,6 +2865,77 @@ Try block executed successfully...
 #### 💡 说明:
 - 循环后的 `else` 子句只会在循环没有触发 `break` 语句, 正常结束的情况下才会执行.
 - try 之后的 `else` 子句也被称为 "完成子句", 因为在 `try` 语句中到达 `else` 子句意味着try块实际上已成功完成.
+
+
+---
+
+### > Ellipsis/省略 *
+<!-- Example ID: 969b7100-ab3d-4a7d-ad7d-a6be16181b2b --->
+
+```py
+def some_func():
+    Ellipsis
+```
+
+**Output**
+```py
+>>> some_func()
+# 没有输出，也没有报错
+
+>>> SomeRandomString
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'SomeRandomString' is not defined
+
+>>> Ellipsis
+Ellipsis
+```
+
+#### 💡 说明
+- 在 Python 中，`Ellipsis` 是一个全局可用的内置对象，相当于`...`。
+
+    ```py
+    >>> ...
+    Ellipsis
+    ```
+
+- 省略号可用于多种用途，
+    + 作为尚未编写的代码的占位符（就像`pass`语句）
+    + 在切片语法中表示完整切片的其余维度
+
+    ```py
+    >>> import numpy as np
+    >>> three_dimensional_array = np.arange(8).reshape(2, 2, 2)
+    array([
+        [
+            [0, 1],
+            [2, 3]
+        ],
+
+        [
+            [4, 5],
+            [6, 7]
+        ]
+    ])
+    ```
+
+    所以我们的 `three_dimensional_array` 是一个数组的数组的数组。假设我们要打印所有最内层数组的第二个元素（索引 `1`），我们可以使用 Ellipsis 绕过所有前面的维度
+
+    ```py
+    >>> three_dimensional_array[:,:,1]
+    array([[1, 3],
+       [5, 7]])
+    >>> three_dimensional_array[..., 1] # 使用Ellipsis.
+    array([[1, 3],
+       [5, 7]])
+    ```
+
+    注意：这适用于任意数量的维度。您甚至可以在第一个和最后一个维度中选择切片并以这种方式忽略中间的切片(`n_dimensional_array[firs_dim_slice, ..., last_dim_slice]`)
+
+     + 在 [类型提示](https://docs.python.org/3/library/typing.html)中仅表示类型的一部分（如 `(Callable[..., int]` 或 `Tuple[ str, ...]`))
+     
+     + 您也可以使用省略号作为默认函数参数（在您想要区分“无参数”和“传递None值”场景的情况下）。
+
 
 ---
 
