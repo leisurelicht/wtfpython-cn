@@ -32,7 +32,7 @@ PS: 如果你不是第一次读了, 你可以在[这里](https://github.com/satw
     - [Section: Strain your brain!/大脑运动!](#section-strain-your-brain大脑运动)
         - [> First things first!/要事优先 *](#-First-things-first!/要事优先-*)
         - [> Strings can be tricky sometimes/微妙的字符串 *](#-strings-can-be-tricky-sometimes微妙的字符串-)
-        - [> Time for some hash brownies!/是时候来点蛋糕了!](#-time-for-some-hash-brownies是时候来点蛋糕了)
+        - [> Hash brownies/是时候来点蛋糕了!](#-Hash-brownies是时候来点蛋糕了)
         - [> Return return everywhere!/到处返回！](#-return-return-everywhere到处返回)
         - [> Deep down, we're all the same./本质上,我们都一样. *](#-deep-down-were-all-the-same本质上我们都一样-)
         - [> Disorder within order/有序中潜藏着无序 *](#-disorder-within-order/有序中潜藏着无序-*)
@@ -352,42 +352,82 @@ False # 3.7 版本返回结果为 True
 
 ---
 
-### > Time for some hash brownies!/是时候来点蛋糕了!
+### > Hash brownies/是时候来点蛋糕了!
 * hash brownie指一种含有大麻成分的蛋糕, 所以这里是句双关
+* 这里保留原作者对于标题的翻译
+<!-- Example ID: eb17db53-49fd-4b61-85d6-345c5ca213ff --->
+
 
 1\.
 ```py
 some_dict = {}
-some_dict[5.5] = "Ruby"
-some_dict[5.0] = "JavaScript"
+some_dict[5.5] = "JavaScript"
+some_dict[5.0] = "Ruby"
 some_dict[5] = "Python"
 ```
 
 **Output:**
+
 ```py
 >>> some_dict[5.5]
-"Ruby"
->>> some_dict[5.0]
+"JavaScript"
+>>> some_dict[5.0] # "Python" 消除了 "Ruby" 的存在?
 "Python"
->>> some_dict[5]
+>>> some_dict[5] 
+"Python"
+
+>>> complex_five = 5 + 0j
+>>> type(complex_five)
+complex
+>>> some_dict[complex_five]
 "Python"
 ```
 
-"Python" 消除了 "JavaScript" 的存在?
+为什么到处都是Python?
 
-#### 💡 说明:
 
-* Python 字典通过检查键值是否相等和比较哈希值来确定两个键是否相同.
-* 具有相同值的不可变对象在Python中始终具有相同的哈希值.
+#### 💡 说明
+
+
+* 这个 StackOverflow的 [回答](https://stackoverflow.com/a/32211042/4354153) 漂亮地解释了这背后的基本原理.
+
+* Python 字典中键的唯一性是根据 *等价性*，而不是同一性。 因此，即使 `5`、`5.0` 和 `5 + 0j` 是不同类型的不同对象，由于它们是相等的，它们不能都在同一个 `dict`（或 `set`）中。 只要您插入其中任何一个，尝试查找任何不同但等价的键都将使用原始映射值成功（而不是因“KeyError”而失败）：
+
   ```py
-  >>> 5 == 5.0
+  >>> 5 == 5.0 == 5 + 0j
   True
-  >>> hash(5) == hash(5.0)
+  >>> 5 is not 5.0 is not 5 + 0j
+  True
+  >>> some_dict = {}
+  >>> some_dict[5.0] = "Ruby"
+  >>> 5.0 in some_dict
+  True
+  >>> (5 in some_dict) and (5 + 0j in some_dict)
   True
   ```
-  **注意:** 具有不同值的对象也可能具有相同的哈希值（哈希冲突）.
-* 当执行 `some_dict[5] = "Python"` 语句时, 因为Python将 `5` 和 `5.0` 识别为 `some_dict` 的同一个键, 所以已有值 "JavaScript" 就被 "Python" 覆盖了.
-* 这个 StackOverflow的 [回答](https://stackoverflow.com/a/32211042/4354153) 漂亮地解释了这背后的基本原理.
+
+* 这在赋值的时候也会生效。因此，当您执行 `some_dict[5] = "Python"` 时，Python 会找到具有等价键值 `5.0 -> "Ruby"` 的现有项，覆盖其值，并保留原始键值。
+
+  ```py
+  >>> some_dict
+  {5.0: 'Ruby'}
+  >>> some_dict[5] = "Python"
+  >>> some_dict
+  {5.0: 'Python'}
+  ```
+* 那么我们如何将键值更新为`5`（而不是`5.0`）？ 我们实际上不能原地更新，但是我们可以先删除键（`del some_dict[5.0]`），然后重新赋值（`some_dict[5]`）得到整数`5` 作为键而不是浮点数 `5.0`，尽管这属于极少数情况。
+
+* Python 是如何在包含 `5.0` 的字典中找到 `5` 的？ Python 只需要花费常数时间，而无需使用哈希函数遍历每一项。当 Python 在 dict 中查找键 `foo` 时，它首先计算 `hash(foo)`（以常数时间运行）。因为在 Python 中，要求相等的对象具有相同的哈希值（此处为[文档](https://docs.python.org/3/reference/datamodel.html#object.__hash__)），`5` 、`5.0` 和 `5 + 0j` 具有相同的哈希值。
+
+  ```py
+  >>> 5 == 5.0 == 5 + 0j
+  True
+  >>> hash(5) == hash(5.0) == hash(5 + 0j)
+  True
+  ```
+
+  **注意：** 反之不一定正确：具有相等哈希值的对象本身可能不相等。（这是[哈希冲突](https://en.wikipedia.org/wiki/Collision_(computer_science)）造成的，这也会降低哈希运算的性能。）
+
 
 ---
 
