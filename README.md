@@ -33,7 +33,7 @@ PS: 如果你不是第一次读了, 你可以在[这里](https://github.com/satw
         - [> First things first!/要事优先 *](#-First-things-first!/要事优先-*)
         - [> Strings can be tricky sometimes/微妙的字符串 *](#-strings-can-be-tricky-sometimes微妙的字符串-)
         - [> Hash brownies/是时候来点蛋糕了!](#-Hash-brownies是时候来点蛋糕了)
-        - [> Return return everywhere!/到处返回！](#-return-return-everywhere到处返回)
+        - [> Keep trying.../不停的try *](#-Keep-trying不停的try-)
         - [> Deep down, we're all the same./本质上,我们都一样. *](#-deep-down-were-all-the-same本质上我们都一样-)
         - [> Disorder within order/有序中潜藏着无序 *](#-disorder-within-order/有序中潜藏着无序-*)
         - [> For what?/为什么?](#-for-what为什么)
@@ -431,7 +431,8 @@ complex
 
 ---
 
-### > Return return everywhere!/到处返回！
+### > Keep trying.../不停的try *
+<!-- Example ID: b4349443-e89f-4d25-a109-8616be9d41a --->
 
 ```py
 def some_func():
@@ -439,18 +440,56 @@ def some_func():
         return 'from_try'
     finally:
         return 'from_finally'
+
+def another_func(): 
+    for _ in range(3):
+        try:
+            continue
+        finally:
+            print("Finally!")
+
+def one_more_func(): # A gotcha!
+    try:
+        for i in range(3):
+            try:
+                1 / i
+            except ZeroDivisionError:
+                # Let's throw it here and handle it outside for loop
+                raise ZeroDivisionError("A trivial divide by zero error")
+            finally:
+                print("Iteration", i)
+                break
+    except ZeroDivisionError as e:
+        print("Zero division error occurred", e)
 ```
 
 **Output:**
+
 ```py
 >>> some_func()
 'from_finally'
+
+>>> another_func()
+Finally!
+Finally!
+Finally!
+
+>>> 1 / 0
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ZeroDivisionError: division by zero
+
+>>> one_more_func()
+Iteration 0
+
 ```
 
 #### 💡 说明:
 
 - 当在 "try...finally" 语句的 `try` 中执行 `return`, `break` 或 `continue` 后, `finally` 子句依然会执行.
 - 函数的返回值由最后执行的 `return` 语句决定. 由于 `finally` 子句一定会执行, 所以 `finally` 子句中的 `return` 将始终是最后执行的语句.
+- 这里需要注意的是，如果 finally 子句执行 `return` 或 `break` 语句，临时保存的异常将被丢弃。
+
 
 ---
 
