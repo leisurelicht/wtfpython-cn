@@ -38,7 +38,7 @@ PS: 如果你不是第一次读了, 你可以在[这里](https://github.com/satw
         - [> Disorder within order/有序中潜藏着无序 *](#-disorder-within-order/有序中潜藏着无序-*)
         - [> For what?/为什么?](#-for-what为什么)
         - [> Evaluation time discrepancy/执行时机差异](#-evaluation-time-discrepancy执行时机差异)
-        - [> `is` is not what it is!/出人意料的`is`!](#-is-is-not-what-it-is出人意料的is)
+        - [> How not to use `is` operator/为什么不使用 `is` 操作符](#-How-not-to-use-`is`-operator/为什么不使用-`is`-操作符-)
         - [> A tic-tac-toe where X wins in the first attempt!/一蹴即至!](#-a-tic-tac-toe-where-x-wins-in-the-first-attempt一蹴即至)
         - [> The sticky output function/麻烦的输出](#-the-sticky-output-function麻烦的输出)
         - [> `is not ...` is not `is (not ...)`/`is not ...` 不是 `is (not ...)`](#-is-not--is-not-is-not-is-not--不是-is-not-)
@@ -766,9 +766,12 @@ array_4 = [400, 500, 600]
 
 ---
 
-### > `is` is not what it is!/出人意料的`is`!
+### > How not to use `is` operator/为什么不使用 `is` 操作符
+<!-- Example ID: 230fa2ac-ab36-4ad1-b675-5f5a1c1a6217 --->
 
 下面是一个在互联网上非常有名的例子.
+
+1\.
 
 ```py
 >>> a = 256
@@ -780,10 +783,37 @@ True
 >>> b = 257
 >>> a is b
 False
+```
 
->>> a = 257; b = 257
+2\.
+
+```py
+>>> a = []
+>>> b = []
+>>> a is b
+False
+
+>>> a = tuple()
+>>> b = tuple()
 >>> a is b
 True
+```
+
+3\.
+**Output**
+
+```py
+>>> a, b = 257, 257
+>>> a is b
+True
+```
+
+**Output (Python 3.7.x specifically)**
+
+```py
+>>> a, b = 257, 257
+>>> a is b
+False
 ```
 
 #### 💡 说明:
@@ -830,6 +860,8 @@ Python 通过这种创建小整数池的方式来避免小整数频繁的申请�
 
 这里解释器并没有智能到能在执行 `y = 257` 时意识到我们已经创建了一个整数 `257`, 所以它在内存中又新建了另一个对象.
 
+类似的优化也适用于其他**不可变**对象，例如空元组。由于列表是可变的，这就是为什么 `[] is []` 将返回 `False` 而 `() is ()` 将返回 `True`。 这解释了我们的第二个代码段。而第三个呢：
+
 **当 `a` 和 `b` 在同一行中使用相同的值初始化时，会指向同一个对象.**
 
 ```py
@@ -847,7 +879,16 @@ Python 通过这种创建小整数池的方式来避免小整数频繁的申请�
 ```
 
 * 当 a 和 b 在同一行中被设置为 `257` 时, Python 解释器会创建一个新对象, 然后同时引用第二个变量. 如果你在不同的行上进行, 它就不会 "知道" 已经存在一个 `257` 对象了.
-* 这是一种特别为交互式环境做的编译器优化. 当你在实时解释器中输入两行的时候, 他们会单独编译, 因此也会单独进行优化. 如果你在 `.py` 文件中尝试这个例子, 则不会看到相同的行为, 因为文件是一次性编译的.
+* 这是一种特别为交互式环境做的编译器优化. 当你在实时解释器中输入两行的时候, 他们会单独编译, 因此也会单独进行优化. 如果你在 `.py` 文件中尝试这个例子, 则不会看到相同的行为, 因为文件是一次性编译的。这种优化不仅限于整数，它也适用于其他不可变数据类型，例如字符串（查看示例“微妙的字符串”）和浮点数，
+
+  ```py
+  >>> a, b = 257.0, 257.0
+  >>> a is b
+  True
+  ```
+
+* 为什么这不适用于 Python 3.7？ 大概是因为此类编译器优化是特定于实现的（即可能随版本、操作系统等而变化）。我仍在试图弄清楚导致问题的具体实现更改，您可以查看此 [问题](https://github.com/satwikkansal/wtfpython/issues/100) 以获取更新。
+
 
 ---
 
