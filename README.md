@@ -40,7 +40,7 @@ PS: 如果你不是第一次读了, 你可以在[这里](https://github.com/satw
         - [> Evaluation time discrepancy/执行时机差异](#-evaluation-time-discrepancy执行时机差异)
         - [> How not to use `is` operator/为什么不使用 `is` 操作符](#-How-not-to-use-`is`-operator/为什么不使用-`is`-操作符-)
         - [> A tic-tac-toe where X wins in the first attempt!/一蹴即至!](#-a-tic-tac-toe-where-x-wins-in-the-first-attempt一蹴即至)
-        - [> The sticky output function/麻烦的输出](#-the-sticky-output-function麻烦的输出)
+        - [> Schrödinger's variable/薛定谔的变量 *](#-Schrödingers-variable薛定谔的变量-)
         - [> `is not ...` is not `is (not ...)`/`is not ...` 不是 `is (not ...)`](#-is-not--is-not-is-not-is-not--不是-is-not-)
         - [> The surprising comma/意外的逗号](#-the-surprising-comma意外的逗号)
         - [> Backslashes at the end of string/字符串末尾的反斜杠](#-backslashes-at-the-end-of-string字符串末尾的反斜杠)
@@ -937,7 +937,8 @@ board = [row]*3
 
 ---
 
-### > The sticky output function/麻烦的输出
+### > Schrödinger's variable/薛定谔的变量 *
+<!-- Example ID: 4dc42f77-94cb-4eb5-a120-8203d3ed7604 --->
 
 ```py
 funcs = []
@@ -973,22 +974,46 @@ funcs_results = [func() for func in funcs]
 
 - 当在循环内部定义一个函数时, 如果该函数在其主体中使用了循环变量, 则闭包函数将与循环变量绑定, 而不是它的值. 因此, 所有的函数都是使用最后分配给变量的值来进行计算的.
 
-- 可以通过将循环变量作为命名变量传递给函数来获得预期的结果. **为什么这样可行?** 因为这会在函数内再次定义一个局部变量.
+- 可以通过将循环变量作为命名变量传递给函数来获得预期的结果. **为什么这样可行?** 因为这会在函数内再次定义一个局部变量。我们可以看到它使用了来自上下文的`x`（即*不是*局部变量）：
+（译者注: inspect位于Python标准库中，该模块用于收集python对象的信息，可以获取类或函数的参数的信息，源码，解析堆栈，对对象进行类型检查等等，Python3.3+版本支持getclosurevars函数）
+```py
+>>> import inspect
+>>> inspect.getclosurevars(funcs[0])
+ClosureVars(nonlocals={}, globals={'x': 6}, builtins={}, unbound=set())
+```
 
-    ```py
-    funcs = []
-    for x in range(7):
-        def some_func(x=x):
-            return x
-        funcs.append(some_func)
-    ```
+由于 `x` 是一个全局值，我们可以通过更新 `x` 来更改 `funcs` 用来查找和返回的值：
 
-    **Output:**
-    ```py
-    >>> funcs_results = [func() for func in funcs]
-    >>> funcs_results
-    [0, 1, 2, 3, 4, 5, 6]
-    ```
+```py
+>>> x = 42
+>>> [func() for func in funcs]
+[42, 42, 42, 42, 42, 42, 42]
+```
+
+* 要获得想要的结果，您可以将循环变量作为命名变量传递给函数。 **为什么会这样？** 因为这会在函数的作用域内定义变量。 它将不再进入周围（全局）范围来查找变量值，而是会创建一个局部变量来存储该时间点的“x”值。
+
+```py
+funcs = []
+for x in range(7):
+    def some_func(x=x):
+        return x
+    funcs.append(some_func)
+```
+
+**Output:**
+```py
+>>> funcs_results = [func() for func in funcs]
+>>> funcs_results
+[0, 1, 2, 3, 4, 5, 6]
+```
+
+此时，不再使用全局变量 `x`：
+
+```py
+>>> inspect.getclosurevars(funcs[0])
+ClosureVars(nonlocals={}, globals={}, builtins={}, unbound=set())
+```
+
 
 ---
 
