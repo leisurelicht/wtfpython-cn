@@ -1173,31 +1173,41 @@ for item in mixed_list:
 
 2\.
 ```py
-another_dict = {}
-another_dict[True] = "JavaScript"
-another_dict[1] = "Ruby"
-another_dict[1.0] = "Python"
-```
-
-**Output:**
-```py
->>> another_dict[True]
-"Python"
+>>> some_bool = True
+>>> "wtf" * some_bool
+'wtf'
+>>> some_bool = False
+>>> "wtf" * some_bool
+''
 ```
 
 3\.
 ```py
->>> some_bool = True
->>> "wtf"*some_bool
-'wtf'
->>> some_bool = False
->>> "wtf"*some_bool
-''
+def tell_truth():
+    True = False
+    if True == False:
+        print("I have lost faith in truth!")
 ```
+
+**Output (< 3.x):**
+
+```py
+>>> tell_truth()
+I have lost faith in truth!
+```
+
 
 #### 💡 说明:
 
 * 布尔值是 `int` 的子类
+    ```py
+    >>> issubclass(bool, int)
+    True
+    >>> issubclass(int, bool)
+    False
+    ```
+
+* 因此，`True` 和 `False` 是 `int` 的实例
   ```py
   >>> isinstance(True, int)
   True
@@ -1205,13 +1215,21 @@ another_dict[1.0] = "Python"
   True
   ```
 
-* 所以 `True` 的整数值是 `1`, 而 `False` 的整数值是 `0`.
+*  `True` 的整数值是 `1`, 而 `False` 的整数值是 `0`
+
   ```py
-  >>> True == 1 == 1.0 and False == 0 == 0.0
-  True
+  >>> int(True)
+  1
+  >>> int(False)
+  0
   ```
 
 * 关于其背后的原理, 请看这个 StackOverflow 的[回答](https://stackoverflow.com/a/8169049/4354153).
+
+* 最初，Python 没有 `bool` 类型（人们使用 0 表示假，使用非零值，如 1 表示真）。`True`、`False` 和 `bool` 类型在 2.x 版本中被添加，但为了向后兼容，`True` 和 `False` 不能成为常量。它们只是内置变量，可以重新分配它们
+
+* Python 3 向后不兼容，问题终于得到解决，因此最后一个代码段不适用于 Python 3.x！
+
 
 ---
 
