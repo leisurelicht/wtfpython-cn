@@ -78,7 +78,7 @@ PS: 如果你不是第一次读了, 你可以在[这里](https://github.com/satw
         - [> Be careful with chained operations/小心链式操作](#-be-careful-with-chained-operations小心链式操作)
         - [> Name resolution ignoring class scope/忽略类作用域的名称解析](#-name-resolution-ignoring-class-scope忽略类作用域的名称解析)
         - [> Rounding like a banker/像银行家一样舍入 *](#-rounding-like-a-banker/像银行家一样舍入-)
-        - [> Needle in a Haystack/大海捞针](#-needle-in-a-haystack大海捞针)
+        - [> Needles in a Haystack/大海捞针](#-needles-in-a-haystack大海捞针)
         - [> Splitsies/分割函数](#-Splitsies分割函数-)
         - [> Wild imports/通配符导入方式 *](#-Wild-imports通配符导入方式-)
         - [> All sorted?/都排序了吗？ *](#-All-sorted都排序了吗-)
@@ -2662,7 +2662,10 @@ def get_middle(some_list):
 
 ---
 
-### > Needle in a Haystack/大海捞针
+### > Needles in a Haystack/大海捞针
+<!-- Example ID: 52a199b1-989a-4b28-8910-dff562cebba9 --->
+
+迄今为止，每一位Python开发者都会遇到类似以下的情况。
 
 1\.
 ```py
@@ -2674,8 +2677,6 @@ x, y = (0, 1) if True else None, None
 >>> x, y  # 期望的结果是 (0, 1)
 ((0, 1), None)
 ```
-
-几乎每个 Python 程序员都遇到过类似的情况.
 
 2\.
 ```py
@@ -2692,6 +2693,7 @@ print(t)
 ```
 
 **Output:**
+
 ```py
 one
 two
@@ -2701,10 +2703,128 @@ e
 tuple()
 ```
 
+3\.
+
+```
+ten_words_list = [
+    "some",
+    "very",
+    "big",
+    "list",
+    "that"
+    "consists",
+    "of",
+    "exactly",
+    "ten",
+    "words"
+]
+```
+
+**Output**
+
+```py
+>>> len(ten_words_list)
+9
+```
+
+4\. 不够健壮的断言机制
+
+```py
+a = "python"
+b = "javascript"
+```
+
+**Output:**
+
+```py
+# 带有失败警告信息的assert表达式
+>>> assert(a == b, "Both languages are different")
+# 未引发 AssertionError 
+```
+
+5\.
+
+```py
+some_list = [1, 2, 3]
+some_dict = {
+  "key_1": 1,
+  "key_2": 2,
+  "key_3": 3
+}
+
+some_list = some_list.append(4) 
+some_dict = some_dict.update({"key_4": 4})
+```
+
+**Output:**
+
+```py
+>>> print(some_list)
+None
+>>> print(some_dict)
+None
+```
+
+6\.
+
+```py
+def some_recursive_func(a):
+    if a[0] == 0:
+        return
+    a[0] -= 1
+    some_recursive_func(a)
+    return a
+
+def similar_recursive_func(a):
+    if a == 0:
+        return a
+    a -= 1
+    similar_recursive_func(a)
+    return a
+```
+
+**Output:**
+
+```py
+>>> some_recursive_func([5, 0])
+[0, 0]
+>>> similar_recursive_func(5)
+4
+```
+
 #### 💡 说明:
 * 对于 1, 正确的语句是 `x, y = (0, 1) if True else (None, None)`.
 * 对于 2, 正确的语句是 `t = ('one',)` 或者 `t = 'one',` (缺少逗号) 否则解释器会认为 `t` 是一个字符串, 并逐个字符对其进行迭代.
 * `()` 是一个特殊的标记，表示空元组.
+* 对于 3，正如您可能已经弄清楚的那样，列表中的第5个元素（"that"）后面缺少一个逗号。因此，通过隐式字符串字面连接，
+
+  ```py
+  >>> ten_words_list
+  ['some', 'very', 'big', 'list', 'thatconsists', 'of', 'exactly', 'ten', 'words']
+  ```
+
+* 在第4个代码段中没有引发"AssertionError"，因为我们不是断言单个表达式 `a == b`，而是断言整个元组。以下代码段将说明问题，
+
+  ```py
+  >>> a = "python"
+  >>> b = "javascript"
+  >>> assert a == b
+  Traceback (most recent call last):
+      File "<stdin>", line 1, in <module>
+  AssertionError
+  
+  >>> assert (a == b, "Values are not equal")
+  <stdin>:1: SyntaxWarning: assertion is always true, perhaps remove parentheses?
+  
+  >>> assert a == b, "Values are not equal"
+  Traceback (most recent call last):
+      File "<stdin>", line 1, in <module>
+  AssertionError: Values are not equal
+  ```
+* 至于第五个片段，大多数修改序列/映射对象项的方法，如`list.append`、`dict.update`、`list.sort`等，都在原地修改对象并返回`None`。这背后的基本原理是通过原地操作，避免复制对象来提高性能(参考[这里](https://docs.python.org/3/faq/design.html#why-doesn-t-list-sort-return-the-sorted-list))。
+* 最后一个应该相当明显，可变对象（如`list`）可以在函数中更改，不可变对象（`a -= 1`）的重新赋值则不属于值的改变。
+* 了解这些细节可以在程序长期运行中，为您节省数小时的调试工作。
+
 
 ---
 
