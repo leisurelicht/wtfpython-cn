@@ -32,56 +32,51 @@ PS: 如果你不是第一次读了, 你可以在[这里](https://github.com/satw
     - [Section: Strain your brain!/大脑运动!](#section-strain-your-brain大脑运动)
         - [> First things first!/要事优先 *](#-First-things-first!/要事优先-*)
         - [> Strings can be tricky sometimes/微妙的字符串 *](#-strings-can-be-tricky-sometimes微妙的字符串-)
+        - [> Be careful with chained operations/小心链式操作](#-be-careful-with-chained-operations小心链式操作)
+        - [> How not to use `is` operator/为什么不使用 `is` 操作符](#-How-not-to-use-is-operator/为什么不使用-is-操作符-)
         - [> Hash brownies/是时候来点蛋糕了!](#-Hash-brownies是时候来点蛋糕了)
-        - [> Keep trying.../不停的try *](#-Keep-trying不停的try-)
         - [> Deep down, we're all the same./本质上,我们都一样. *](#-deep-down-were-all-the-same本质上我们都一样-)
         - [> Disorder within order/有序中潜藏着无序 *](#-disorder-within-order/有序中潜藏着无序-*)
+        - [> Keep trying.../不停的try *](#-Keep-trying不停的try-)
         - [> For what?/为什么?](#-for-what为什么)
         - [> Evaluation time discrepancy/执行时机差异](#-evaluation-time-discrepancy执行时机差异)
-        - [> How not to use `is` operator/为什么不使用 `is` 操作符](#-How-not-to-use-`is`-operator/为什么不使用-`is`-操作符-)
+        - [> `is not ...` is not `is (not ...)` / `is not ...` 不是 `is (not ...)`](#-is-not--is-not-is-not-is-not--不是-is-not-)
         - [> A tic-tac-toe where X wins in the first attempt!/一蹴即至!](#-a-tic-tac-toe-where-x-wins-in-the-first-attempt一蹴即至)
         - [> Schrödinger's variable/薛定谔的变量 *](#-Schrödingers-variable薛定谔的变量-)
-        - [> `is not ...` is not `is (not ...)`/`is not ...` 不是 `is (not ...)`](#-is-not--is-not-is-not-is-not--不是-is-not-)
-        - [> The surprising comma/意外的逗号](#-the-surprising-comma意外的逗号)
-        - [> Strings and the backslashes/字符串与反斜杠](#-strings-and-the-backslashes字符串与反斜杠-)
-        - [> not knot!/别纠结!](#-not-knot别纠结)
-        - [> Half triple-quoted strings/三个引号](#-half-triple-quoted-strings三个引号)
-        - [> Midnight time doesn't exist?/不存在的午夜?](#-midnight-time-doesnt-exist不存在的午夜)
-        - [> What's wrong with booleans?/布尔你咋了?](#-whats-wrong-with-booleans布尔你咋了)
-        - [> Class attributes and instance attributes/类属性和实例属性](#-class-attributes-and-instance-attributes类属性和实例属性)
-        - [> yielding None/生成 None](#-yielding-none生成-none)
-        - [> Yielding from... return!/生成器里的return *](#-Yielding-from-return/生成器里的return-)
-        - [> Mutating the immutable!/强人所难](#-mutating-the-immutable强人所难)
-        - [> The disappearing variable from outer scope/消失的外部变量](#-the-disappearing-variable-from-outer-scope消失的外部变量)
-        - [> When True is actually False/真亦假](#-when-true-is-actually-false真亦假)
-        - [> From filled to None in one instruction.../从有到无...](#-from-filled-to-none-in-one-instruction从有到无)
         - [> The chicken-egg problem/先有鸡还是先有蛋 *](#-the-chicken-egg-problem/先有鸡还是先有蛋-*)
         - [> Subclass relationships/子类关系 *](#-subclass-relationships子类关系-)
         - [> Methods equality and identity/方法的相等性和唯一性 *](#-Methods-equality-and-identity/方法的相等性和唯一性-)
         - [> All-true-ation/返回True的all函数 *](#-All-true-ation/返回True的all函数-)
+        - [> The surprising comma/意外的逗号](#-the-surprising-comma意外的逗号)
+        - [> Strings and the backslashes/字符串与反斜杠](#-strings-and-the-backslashes字符串与反斜杠)
+        - [> not knot!/别纠结!](#-not-knot别纠结)
+        - [> Half triple-quoted strings/三个引号](#-half-triple-quoted-strings三个引号)
+        - [> What's wrong with booleans?/布尔你咋了?](#-whats-wrong-with-booleans布尔你咋了)
+        - [> Class attributes and instance attributes/类属性和实例属性](#-class-attributes-and-instance-attributes类属性和实例属性)
+        - [> yielding None/生成 None](#-yielding-none生成-none)
+        - [> Yielding from... return!/生成器里的return *](#-Yielding-from-return/生成器里的return-)
+        - [> Nan-reflexivity/Nan的自反性](#-Nan-reflexivityNan的自反性)
+        - [> Mutating the immutable!/强人所难](#-mutating-the-immutable强人所难)
+        - [> The disappearing variable from outer scope/消失的外部变量](#-the-disappearing-variable-from-outer-scope消失的外部变量)
         - [> The mysterious key type conversion/神秘的键型转换 *](#-the-mysterious-key-type-conversion神秘的键型转换-)
         - [> Let's see if you can guess this?/看看你能否猜到这一点?](#-lets-see-if-you-can-guess-this看看你能否猜到这一点)
-    - [Section: Appearances are deceptive!/外表是靠不住的!](#section-appearances-are-deceptive外表是靠不住的)
-        - [> Skipping lines?/跳过一行?](#-skipping-lines跳过一行)
-        - [> Teleportation/空间移动 *](#-teleportation空间移动-)
-        - [> Well, something is fishy.../嗯, 有些可疑...](#-well-something-is-fishy嗯有些可疑)
-    - [Section: Watch out for the landmines!/小心地雷!](#section-watch-out-for-the-landmines小心地雷)
+    - [Section: Slippery Slopes/滑坡谬误](#section-slippery-slopes滑坡谬误)
         - [> Modifying a dictionary while iterating over it/迭代字典时的修改](#-modifying-a-dictionary-while-iterating-over-it迭代字典时的修改)
         - [> Stubborn `del` operator/坚强的 `del` *](#-stubborn-del-operator坚强的-del-)
+        - [> The out of scope variable/外部作用域变量](#-the-out-of-scope-variable外部作用域变量)
         - [> Deleting a list item while iterating/迭代列表时删除元素](#-deleting-a-list-item-while-iterating迭代列表时删除元素)
         - [> Lossy zip of iterators/丢三落四的zip *](#->-Lossy-zip-of-iterators/丢三落四的zip-)
         - [> Loop variables leaking out!/循环变量泄漏!](#-loop-variables-leaking-out循环变量泄漏)
         - [> Beware of default mutable arguments!/当心默认的可变参数!](#-beware-of-default-mutable-arguments当心默认的可变参数)
         - [> Catching the Exceptions/捕获异常](#-catching-the-exceptions捕获异常)
         - [> Same operands, different story!/同人不同命!](#-same-operands-different-story同人不同命)
-        - [> The out of scope variable/外部作用域变量](#-the-out-of-scope-variable外部作用域变量)
-        - [> Be careful with chained operations/小心链式操作](#-be-careful-with-chained-operations小心链式操作)
         - [> Name resolution ignoring class scope/忽略类作用域的名称解析](#-name-resolution-ignoring-class-scope忽略类作用域的名称解析)
         - [> Rounding like a banker/像银行家一样舍入 *](#-rounding-like-a-banker/像银行家一样舍入-)
         - [> Needles in a Haystack/大海捞针](#-needles-in-a-haystack大海捞针)
         - [> Splitsies/分割函数](#-Splitsies分割函数-)
         - [> Wild imports/通配符导入方式 *](#-Wild-imports通配符导入方式-)
         - [> All sorted?/都排序了吗？ *](#-All-sorted都排序了吗-)
+        - [> Midnight time doesn't exist?/不存在的午夜?](#-midnight-time-doesnt-exist不存在的午夜)
     - [Section: The Hidden treasures!/隐藏的宝藏!](#section-the-hidden-treasures隐藏的宝藏)
         - [> Okay Python, Can you make me fly?/Python, 可否带我飞? *](#-okay-python-can-you-make-me-flypython-可否带我飞-)
         - [> `goto`, but why?/`goto`, 但为什么? *](#-goto-but-whygoto-但为什么-)
@@ -92,11 +87,14 @@ PS: 如果你不是第一次读了, 你可以在[这里](https://github.com/satw
         - [> Ellipsis/省略 *](#-Ellipsis省略-)
         - [> Inpinity/无限 *](#-inpinity无限-)
         - [> Let's mangle/修饰时间! *](#-Lets-mangle修饰时间-)
+    - [Section: Appearances are deceptive!/外表是靠不住的!](#section-appearances-are-deceptive外表是靠不住的)
+        - [> Skipping lines?/跳过一行?](#-skipping-lines跳过一行)
+        - [> Teleportation/空间移动 *](#-teleportation空间移动-)
+        - [> Well, something is fishy.../嗯, 有些可疑...](#-well-something-is-fishy嗯有些可疑)
     - [Section: Miscellaneous/杂项](#section-miscellaneous杂项)
         - [> `+=` is faster/更快的 `+=` ](#--is-faster更快的-)
         - [> Let's make a giant string!/来做个巨大的字符串吧!](#-lets-make-a-giant-string来做个巨大的字符串吧)
         - [> Slowing down `dict` lookups/让字典的查找慢下来 *](#-Slowing-down-dict-lookups让字典的查找慢下来-)
-        - [> Nan-reflexivity/Nan的自反性](#-Nan-reflexivityNan的自反性)
         - [> Bloating instance `dict`s/变臃肿的`dict`实例们 *](#-Bloating-instance-dicts/变臃肿的dict实例们-)
         - [> Minor Ones/小知识点](#-minor-ones小知识点)
 - [Contributing/贡献](#contributing贡献)
@@ -352,6 +350,178 @@ False # 3.7 版本返回结果为 True
 
 ---
 
+### > Be careful with chained operations/小心链式操作
+
+```py
+>>> (False == False) in [False] # 可以理解
+False
+>>> False == (False in [False]) # 可以理解
+False
+>>> False == False in [False] # 为毛?
+True
+
+>>> True is False == False
+False
+>>> False is False is False
+True
+
+>>> 1 > 0 < 1
+True
+>>> (1 > 0) < 1
+False
+>>> 1 > (0 < 1)
+False
+```
+
+#### 💡 说明:
+
+根据 https://docs.python.org/2/reference/expressions.html#not-in
+
+> 形式上, 如果 a, b, c, ..., y, z 是表达式, 而 op1, op2, ..., opN 是比较运算符, 那么除了每个表达式最多只出现一次以外 a op1 b op2 c ... y opN z 就等于 a op1 b and b op2 c and ... y opN z.
+
+虽然上面的例子似乎很愚蠢, 但是像 `a == b == c` 或 `0 <= x <= 100` 就很棒了.
+
+* `False is False is False` 相当于 `(False is False) and (False is False)`
+* `True is False == False` 相当于 `True is False and False == False`, 由于语句的第一部分 (`True is False`) 等于 `False`, 因此整个表达式的结果为 `False`.
+* `1 > 0 < 1` 相当于 `1 > 0 and 0 < 1`, 所以最终结果为 `True`.
+* 表达式 `(1 > 0) < 1` 相当于 `True < 1` 且
+  ```py
+  >>> int(True)
+  1
+  >>> True + 1 # 与这个例子无关，只是好玩
+  2
+  ```
+  所以, `1 < 1` 等于 `False`
+
+
+---
+
+### > How not to use `is` operator/为什么不使用 `is` 操作符
+<!-- Example ID: 230fa2ac-ab36-4ad1-b675-5f5a1c1a6217 --->
+
+下面是一个在互联网上非常有名的例子.
+
+1\.
+
+```py
+>>> a = 256
+>>> b = 256
+>>> a is b
+True
+
+>>> a = 257
+>>> b = 257
+>>> a is b
+False
+```
+
+2\.
+
+```py
+>>> a = []
+>>> b = []
+>>> a is b
+False
+
+>>> a = tuple()
+>>> b = tuple()
+>>> a is b
+True
+```
+
+3\.
+**Output**
+
+```py
+>>> a, b = 257, 257
+>>> a is b
+True
+```
+
+**Output (Python 3.7.x specifically)**
+
+```py
+>>> a, b = 257, 257
+>>> a is b
+False
+```
+
+#### 💡 说明:
+
+**`is` 和 `==` 的区别**
+
+* `is` 运算符检查两个运算对象是否引用自同一对象 (即, 它检查两个运算对象是否相同).
+* `==` 运算符比较两个运算对象的值是否相等.
+* 因此 `is` 代表引用相同, `==` 代表值相等. 下面的例子可以很好的说明这点,
+  ```py
+  >>> [] == []
+  True
+  >>> [] is [] # 这两个空列表位于不同的内存地址.
+  False
+  ```
+
+**`256` 是一个已经存在的对象, 而 `257` 不是**
+
+当你启动Python 的时候, 数值为 `-5` 到 `256` 的对象就已经被分配好了. 这些数字因为经常被使用, 所以会被提前准备好.
+
+Python 通过这种创建小整数池的方式来避免小整数频繁的申请和销毁内存空间.
+
+引用自 https://docs.python.org/3/c-api/long.html
+> 当前的实现为-5到256之间的所有整数保留一个整数对象数组, 当你创建了一个该范围内的整数时, 你只需要返回现有对象的引用. 所以改变1的值是有可能的. 我怀疑这种行为在Python中是未定义行为. :-)
+
+```py
+>>> id(256)
+10922528
+>>> a = 256
+>>> b = 256
+>>> id(a)
+10922528
+>>> id(b)
+10922528
+>>> id(257)
+140084850247312
+>>> x = 257
+>>> y = 257
+>>> id(x)
+140084850247440
+>>> id(y)
+140084850247344
+```
+
+这里解释器并没有智能到能在执行 `y = 257` 时意识到我们已经创建了一个整数 `257`, 所以它在内存中又新建了另一个对象.
+
+类似的优化也适用于其他**不可变**对象，例如空元组。由于列表是可变的，这就是为什么 `[] is []` 将返回 `False` 而 `() is ()` 将返回 `True`。 这解释了我们的第二个代码段。而第三个呢：
+
+**当 `a` 和 `b` 在同一行中使用相同的值初始化时，会指向同一个对象.**
+
+```py
+>>> a, b = 257, 257
+>>> id(a)
+140640774013296
+>>> id(b)
+140640774013296
+>>> a = 257
+>>> b = 257
+>>> id(a)
+140640774013392
+>>> id(b)
+140640774013488
+```
+
+* 当 a 和 b 在同一行中被设置为 `257` 时, Python 解释器会创建一个新对象, 然后同时引用第二个变量. 如果你在不同的行上进行, 它就不会 "知道" 已经存在一个 `257` 对象了.
+* 这是一种特别为交互式环境做的编译器优化. 当你在实时解释器中输入两行的时候, 他们会单独编译, 因此也会单独进行优化. 如果你在 `.py` 文件中尝试这个例子, 则不会看到相同的行为, 因为文件是一次性编译的。这种优化不仅限于整数，它也适用于其他不可变数据类型，例如字符串（查看示例“微妙的字符串”）和浮点数，
+
+  ```py
+  >>> a, b = 257.0, 257.0
+  >>> a is b
+  True
+  ```
+
+* 为什么这不适用于 Python 3.7？ 大概是因为此类编译器优化是特定于实现的（即可能随版本、操作系统等而变化）。我仍在试图弄清楚导致问题的具体实现更改，您可以查看此 [问题](https://github.com/satwikkansal/wtfpython/issues/100) 以获取更新。
+
+
+---
+
 ### > Hash brownies/是时候来点蛋糕了!
 * hash brownie指一种含有大麻成分的蛋糕, 所以这里是句双关
 * 这里保留原作者对于标题的翻译
@@ -427,68 +597,6 @@ complex
   ```
 
   **注意：** 反之不一定正确：具有相等哈希值的对象本身可能不相等。（这是[哈希冲突](https://en.wikipedia.org/wiki/Collision_(computer_science)）造成的，这也会降低哈希运算的性能。）
-
-
----
-
-### > Keep trying.../不停的try *
-<!-- Example ID: b4349443-e89f-4d25-a109-8616be9d41a --->
-
-```py
-def some_func():
-    try:
-        return 'from_try'
-    finally:
-        return 'from_finally'
-
-def another_func(): 
-    for _ in range(3):
-        try:
-            continue
-        finally:
-            print("Finally!")
-
-def one_more_func(): # A gotcha!
-    try:
-        for i in range(3):
-            try:
-                1 / i
-            except ZeroDivisionError:
-                # Let's throw it here and handle it outside for loop
-                raise ZeroDivisionError("A trivial divide by zero error")
-            finally:
-                print("Iteration", i)
-                break
-    except ZeroDivisionError as e:
-        print("Zero division error occurred", e)
-```
-
-**Output:**
-
-```py
->>> some_func()
-'from_finally'
-
->>> another_func()
-Finally!
-Finally!
-Finally!
-
->>> 1 / 0
-Traceback (most recent call last):
-  File "<stdin>", line 1, in <module>
-ZeroDivisionError: division by zero
-
->>> one_more_func()
-Iteration 0
-
-```
-
-#### 💡 说明:
-
-- 当在 "try...finally" 语句的 `try` 中执行 `return`, `break` 或 `continue` 后, `finally` 子句依然会执行.
-- 函数的返回值由最后执行的 `return` 语句决定. 由于 `finally` 子句一定会执行, 所以 `finally` 子句中的 `return` 将始终是最后执行的语句.
-- 这里需要注意的是，如果 finally 子句执行 `return` 或 `break` 语句，临时保存的异常将被丢弃。
 
 
 ---
@@ -645,6 +753,68 @@ TypeError: unhashable type: 'dict'
 
 ---
 
+### > Keep trying.../不停的try *
+<!-- Example ID: b4349443-e89f-4d25-a109-8616be9d41a --->
+
+```py
+def some_func():
+    try:
+        return 'from_try'
+    finally:
+        return 'from_finally'
+
+def another_func(): 
+    for _ in range(3):
+        try:
+            continue
+        finally:
+            print("Finally!")
+
+def one_more_func(): # A gotcha!
+    try:
+        for i in range(3):
+            try:
+                1 / i
+            except ZeroDivisionError:
+                # Let's throw it here and handle it outside for loop
+                raise ZeroDivisionError("A trivial divide by zero error")
+            finally:
+                print("Iteration", i)
+                break
+    except ZeroDivisionError as e:
+        print("Zero division error occurred", e)
+```
+
+**Output:**
+
+```py
+>>> some_func()
+'from_finally'
+
+>>> another_func()
+Finally!
+Finally!
+Finally!
+
+>>> 1 / 0
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ZeroDivisionError: division by zero
+
+>>> one_more_func()
+Iteration 0
+
+```
+
+#### 💡 说明:
+
+- 当在 "try...finally" 语句的 `try` 中执行 `return`, `break` 或 `continue` 后, `finally` 子句依然会执行.
+- 函数的返回值由最后执行的 `return` 语句决定. 由于 `finally` 子句一定会执行, 所以 `finally` 子句中的 `return` 将始终是最后执行的语句.
+- 这里需要注意的是，如果 finally 子句执行 `return` 或 `break` 语句，临时保存的异常将被丢弃。
+
+
+---
+
 ### > For what?/为什么?
 
 ```py
@@ -766,128 +936,19 @@ array_4 = [400, 500, 600]
 
 ---
 
-### > How not to use `is` operator/为什么不使用 `is` 操作符
-<!-- Example ID: 230fa2ac-ab36-4ad1-b675-5f5a1c1a6217 --->
-
-下面是一个在互联网上非常有名的例子.
-
-1\.
+### > `is not ...` is not `is (not ...)`/`is not ...` 不是 `is (not ...)`
 
 ```py
->>> a = 256
->>> b = 256
->>> a is b
+>>> 'something' is not None
 True
-
->>> a = 257
->>> b = 257
->>> a is b
-False
-```
-
-2\.
-
-```py
->>> a = []
->>> b = []
->>> a is b
-False
-
->>> a = tuple()
->>> b = tuple()
->>> a is b
-True
-```
-
-3\.
-**Output**
-
-```py
->>> a, b = 257, 257
->>> a is b
-True
-```
-
-**Output (Python 3.7.x specifically)**
-
-```py
->>> a, b = 257, 257
->>> a is b
+>>> 'something' is (not None)
 False
 ```
 
 #### 💡 说明:
 
-**`is` 和 `==` 的区别**
-
-* `is` 运算符检查两个运算对象是否引用自同一对象 (即, 它检查两个运算对象是否相同).
-* `==` 运算符比较两个运算对象的值是否相等.
-* 因此 `is` 代表引用相同, `==` 代表值相等. 下面的例子可以很好的说明这点,
-  ```py
-  >>> [] == []
-  True
-  >>> [] is [] # 这两个空列表位于不同的内存地址.
-  False
-  ```
-
-**`256` 是一个已经存在的对象, 而 `257` 不是**
-
-当你启动Python 的时候, 数值为 `-5` 到 `256` 的对象就已经被分配好了. 这些数字因为经常被使用, 所以会被提前准备好.
-
-Python 通过这种创建小整数池的方式来避免小整数频繁的申请和销毁内存空间.
-
-引用自 https://docs.python.org/3/c-api/long.html
-> 当前的实现为-5到256之间的所有整数保留一个整数对象数组, 当你创建了一个该范围内的整数时, 你只需要返回现有对象的引用. 所以改变1的值是有可能的. 我怀疑这种行为在Python中是未定义行为. :-)
-
-```py
->>> id(256)
-10922528
->>> a = 256
->>> b = 256
->>> id(a)
-10922528
->>> id(b)
-10922528
->>> id(257)
-140084850247312
->>> x = 257
->>> y = 257
->>> id(x)
-140084850247440
->>> id(y)
-140084850247344
-```
-
-这里解释器并没有智能到能在执行 `y = 257` 时意识到我们已经创建了一个整数 `257`, 所以它在内存中又新建了另一个对象.
-
-类似的优化也适用于其他**不可变**对象，例如空元组。由于列表是可变的，这就是为什么 `[] is []` 将返回 `False` 而 `() is ()` 将返回 `True`。 这解释了我们的第二个代码段。而第三个呢：
-
-**当 `a` 和 `b` 在同一行中使用相同的值初始化时，会指向同一个对象.**
-
-```py
->>> a, b = 257, 257
->>> id(a)
-140640774013296
->>> id(b)
-140640774013296
->>> a = 257
->>> b = 257
->>> id(a)
-140640774013392
->>> id(b)
-140640774013488
-```
-
-* 当 a 和 b 在同一行中被设置为 `257` 时, Python 解释器会创建一个新对象, 然后同时引用第二个变量. 如果你在不同的行上进行, 它就不会 "知道" 已经存在一个 `257` 对象了.
-* 这是一种特别为交互式环境做的编译器优化. 当你在实时解释器中输入两行的时候, 他们会单独编译, 因此也会单独进行优化. 如果你在 `.py` 文件中尝试这个例子, 则不会看到相同的行为, 因为文件是一次性编译的。这种优化不仅限于整数，它也适用于其他不可变数据类型，例如字符串（查看示例“微妙的字符串”）和浮点数，
-
-  ```py
-  >>> a, b = 257.0, 257.0
-  >>> a is b
-  True
-  ```
-
-* 为什么这不适用于 Python 3.7？ 大概是因为此类编译器优化是特定于实现的（即可能随版本、操作系统等而变化）。我仍在试图弄清楚导致问题的具体实现更改，您可以查看此 [问题](https://github.com/satwikkansal/wtfpython/issues/100) 以获取更新。
+- `is not` 是个单独的二元运算符, 与分别使用 `is` 和 `not` 不同.
+-  如果操作符两侧的变量指向同一个对象, 则 `is not` 的结果为 `False`, 否则结果为 `True`.
 
 
 ---
@@ -1017,19 +1078,216 @@ ClosureVars(nonlocals={}, globals={}, builtins={}, unbound=set())
 
 ---
 
-### > `is not ...` is not `is (not ...)`/`is not ...` 不是 `is (not ...)`
+### > The chicken-egg problem/先有鸡还是先有蛋 *
+<!-- Example ID: 60730dc2-0d79-4416-8568-2a63323b3ce8 --->
+
+1\.
+```py
+>>> isinstance(3, int)
+True
+>>> isinstance(type, object)
+True
+>>> isinstance(object, type)
+True
+```
+那么到底谁是“最终”的基类呢？下边顺便列出更多的令人困惑的地方
+
+2\. 
 
 ```py
->>> 'something' is not None
+>>> class A: pass
+>>> isinstance(A, A)
+False
+>>> isinstance(type, type)
 True
->>> 'something' is (not None)
+>>> isinstance(object, object)
+True
+```
+
+3\.
+
+```py
+>>> issubclass(int, object)
+True
+>>> issubclass(type, object)
+True
+>>> issubclass(object, type)
 False
 ```
 
+
+#### 💡 说明
+
+- `type` 是 Python 中的[元类](https://realpython.com/python-metaclasses/)。
+- Python 中，**一切**皆对象，其中包括类及其对象（实例）。
+- `type` 类型是`object`类的元类，每个类（包括`type`）都直接或间接地继承自`object`。
+- 对象和类型之间没有真正的基类。上述片段中的令人困惑的地方之所以出现，是因为我们从 Python 类的角度考虑这些关系（issubclass 和 isinstance）。 `object`和`type`之间的关系不能在纯python中重现。 更准确地说，以下关系不能在纯 Python 中重现:
+    + A类是B类的一个实例，B类是A类的一个实例。
+    + A类是它自己的一个实例。
+- `object`和`type`之间的关系（既是彼此的实例，也是它们自己的实例）存在于 Python 中，这是源于实现层级上的“作弊”行为。
+
+
+---
+
+### > Subclass relationships/子类关系 *
+
+**Output:**
+```py
+>>> from collections import Hashable
+>>> issubclass(list, object)
+True
+>>> issubclass(object, Hashable)
+True
+>>> issubclass(list, Hashable)
+False
+```
+
+子类关系应该是可传递的, 对吧? (即, 如果 `A` 是 `B` 的子类, `B` 是 `C` 的子类, 那么 `A` _应该_ 是 `C` 的子类.)
+
 #### 💡 说明:
 
-- `is not` 是个单独的二元运算符, 与分别使用 `is` 和 `not` 不同.
--  如果操作符两侧的变量指向同一个对象, 则 `is not` 的结果为 `False`, 否则结果为 `True`.
+* Python 中的子类关系并不一定是传递的. 任何人都可以在元类中随意定义 `__subclasscheck__`.
+* 当 `issubclass(cls, Hashable)` 被调用时, 它只是在 `cls` 中寻找 `__hash__` 方法或者从继承的父类中寻找 `__hash__` 方法.
+* 由于 `object` is 可散列的(hashable), 但是 `list` 是不可散列的, 所以它打破了这种传递关系.
+* 在[这里](https://www.naftaliharris.com/blog/python-subclass-intransitivity/)可以找到更详细的解释.
+
+---
+
+### > Methods equality and identity/方法的相等性和唯一性 *
+<!-- Example ID: 94802911-48fe-4242-defa-728ae893fa32 --->
+
+1.
+```py
+class SomeClass:
+    def method(self):
+        pass
+
+    @classmethod
+    def classm(cls):
+        pass
+
+    @staticmethod
+    def staticm():
+        pass
+```
+
+**Output:**
+```py
+>>> print(SomeClass.method is SomeClass.method)
+True
+>>> print(SomeClass.classm is SomeClass.classm)
+False
+>>> print(SomeClass.classm == SomeClass.classm)
+True
+>>> print(SomeClass.staticm is SomeClass.staticm)
+True
+```
+访问 `classm` 两次，我们得到一个相等的对象，但不是*同一个*？ 让我们看看 `SomeClass` 的实例会发生什么：
+
+2.
+```py
+o1 = SomeClass()
+o2 = SomeClass()
+```
+
+**Output:**
+```py
+>>> print(o1.method == o2.method)
+False
+>>> print(o1.method == o1.method)
+True
+>>> print(o1.method is o1.method)
+False
+>>> print(o1.classm is o1.classm)
+False
+>>> print(o1.classm == o1.classm == o2.classm == SomeClass.classm)
+True
+>>> print(o1.staticm is o1.staticm is o2.staticm is SomeClass.staticm)
+True
+```
+
+访问 ` classm` or `method` 两次, 为 `SomeClass` 的同一个实例创建了相等但是*不同*的对象。
+
+#### 💡 说明
+* 函数是[描述符](https://docs.python.org/3/howto/descriptor.html)。每当将函数作为属性访问时，就会调用描述符，创建一个方法对象，该对象将函数与拥有该属性的对象“绑定”。如果被调用，该方法调用函数，隐式传递绑定对象作为第一个参数（这就是我们如何将 self 作为第一个参数获取，尽管没有显式传递它）。
+
+```py
+>>> o1.method
+<bound method SomeClass.method of <__main__.SomeClass object at ...>>
+```
+
+* 多次访问该属性，每次都会创建一个方法对象！ 因此，`o1.method is o1.method` 永远不会是真的。但是，将函数作为类属性（而不是实例）访问并不会创建方法对象，所以 `SomeClass.method is SomeClass.method` 是真的。
+
+```py
+>>> SomeClass.method
+<function SomeClass.method at ...>
+```
+
+* `classmethod` 将函数转换为类方法。 类方法是描述符，当被访问时，它会创建一个绑定*类本身*的方法对象，而不是对象本身。
+
+```py
+>>> o1.classm
+<bound method SomeClass.classm of <class '__main__.SomeClass'>>
+```
+
+* 与函数不同，`classmethod` 在作为类属性访问时也会创建一个方法（在这种情况下，它们绑定类，而不是类的类型）。 所以 `SomeClass.classm is SomeClass.classm` 是假的。
+
+```py
+>>> SomeClass.classm
+<bound method SomeClass.classm of <class '__main__.SomeClass'>>
+```
+
+* 当两个函数相等并且绑定的对象相同时，方法对象比较相等。 所以`o1.method == o1.method` 为真，尽管它们在内存中是两个不同的对象。
+* `staticmethod` 将函数转换为“无操作”描述符，它按原样返回函数。没有方法对象被创建，所以 `is` 的比较运算为真。
+
+```py
+>>> o1.staticm
+<function SomeClass.staticm at ...>
+>>> SomeClass.staticm
+<function SomeClass.staticm at ...>
+```
+
+* 每次 Python 调用实例方法时都必须创建新的“方法”对象，并且每次都必须修改参数以插入 `self` 严重影响性能。CPython 3.7 [解决了这个问题](https://bugs.python.org/issue26110) 。通过引入新的操作码来处理调用方法而不创建临时方法对象。这仅在实际调用访问的函数时使用，因此这里的代码片段不受影响，仍然会生成方法:)
+
+
+---
+
+### > All-true-ation/返回True的all函数 *
+
+<!-- Example ID: dfe6d845-e452-48fe-a2da-0ed3869a8042 -->
+
+```py
+>>> all([True, True, True])
+True
+>>> all([True, True, False])
+False
+
+>>> all([])
+True
+>>> all([[]])
+False
+>>> all([[[]]])
+True
+```
+
+为什么会有这种True-False的变化？
+
+#### 💡 说明
+
+- `all` 函数的实现等价于：
+
+- ```py
+  def all(iterable):
+      for element in iterable:
+          if not element:
+              return False
+      return True
+  ```
+
+- `all([])` 返回 `True` 因为可迭代对象为空。 
+- `all([[]])` 返回 `False` 因为传入的数组有一个元素 `[]`， 在Python中，空列表为假。
+- `all([[[]]])` 和更高的递归变体总是`True`。 这是因为传递的数组的单个元素（`[[...]]`）不再是空的，而有值的列表为真。
+
 
 ---
 
@@ -1160,36 +1418,6 @@ wtfpython
   ```
 + `'''` 和 `"""` 在 Python中也是字符串定界符, Python 解释器在先遇到三个引号的的时候会尝试再寻找三个终止引号作为定界符, 如果不存在则会导致 `SyntaxError` 异常.
 
----
-
-### > Midnight time doesn't exist?/不存在的午夜?
-
-```py
-from datetime import datetime
-
-midnight = datetime(2018, 1, 1, 0, 0)
-midnight_time = midnight.time()
-
-noon = datetime(2018, 1, 1, 12, 0)
-noon_time = noon.time()
-
-if midnight_time:
-    print("Time at midnight is", midnight_time)
-
-if noon_time:
-    print("Time at noon is", noon_time)
-```
-
-**Output:**
-```sh
-('Time at noon is', datetime.time(12, 0))
-```
-
-midnight_time 并没有被输出.
-
-#### 💡 说明:
-
-在Python 3.5之前, 如果 `datetime.time` 对象存储的UTC的午夜时间(译: 就是 `00:00`), 那么它的布尔值会被认为是 `False`. 当使用 `if obj:` 语句来检查 `obj` 是否为 `null` 或者某些“空”值的时候, 很容易出错.
 
 ---
 
@@ -1446,6 +1674,78 @@ def some_func(x):
 
 ---
 
+### > Nan-reflexivity/Nan的自反性
+<!-- Example ID: 59bee91a-36e0-47a4-8c7d-aa89bf1d3976 --->
+
+1\.
+```py
+a = float('inf')
+b = float('nan')
+c = float('-iNf')  # 这些字符串不区分大小写
+d = float('nan')
+```
+
+**Output:**
+```py
+>>> a
+inf
+>>> b
+nan
+>>> c
+-inf
+>>> float('some_other_string')
+ValueError: could not convert string to float: some_other_string
+>>> a == -c #inf==inf
+True
+>>> None == None # None==None
+True
+>>> b == d #但是 nan!=nan
+False
+>>> 50/a
+0.0
+>>> a/a
+nan
+>>> 23 + b
+nan
+```
+
+2\.
+
+```py
+>>> x = float('nan')
+>>> y = x / x
+>>> y is y # 同一性(identity)具备
+True
+>>> y == y # y不具备相等性(equality)
+False
+>>> [y] == [y] # 但包含y的列表验证相等性(equality)成功了
+True
+```
+
+#### 💡 说明:
+
+`'inf'` 和 `'nan'` 是特殊的字符串(不区分大小写), 当显示转换成 `float` 型时, 它们分别用于表示数学意义上的 "无穷大" 和 "非数字".
+- 由于根据 IEEE 标准 `NaN != NaN`，遵守此规则打破了 Python 中集合元素的自反性假设，即如果 `x` 是 `list` 等集合的一部分，则比较等运算的实现基于假设`x == x`。由于这个假设，在比较两个元素时首先比较身份`identity`（因为它更快），并且仅在身份不匹配时才比较值。以下片段将更清楚地说明，
+
+  ```py
+  >>> x = float('nan')
+  >>> x == x, [x] == [x]
+  (False, True)
+  >>> y = float('nan')
+  >>> y == y, [y] == [y]
+  (False, True)
+  >>> x == y, [x] == [y]
+  (False, False)
+  ```
+
+  由于 `x` 和 `y` 的身份`identity`不同，所以考虑的值也不同； 因此这次比较返回“False”。
+
+
+- 感兴趣可以阅读 [Reflexivity, and other pillars of civilization](https://bertrandmeyer.com/2010/02/06/reflexivity-and-other-pillars-of-civilization/)
+
+
+---
+
 ### > Mutating the immutable!/强人所难
 
 ```py
@@ -1561,266 +1861,6 @@ NameError: name 'e' is not defined
     # 没有打印任何内容!
     ```
 
----
-
-### > When True is actually False/真亦假
-
-```py
-True = False
-if True == False:
-    print("I've lost faith in truth!")
-```
-
-**Output:**
-```
-I've lost faith in truth!
-```
-
-#### 💡 说明:
-
-- 最初, Python 并没有 `bool` 型 (人们用0表示假值, 用非零值比如1作为真值). 后来他们添加了 `True`, `False`, 和 `bool` 型, 但是, 为了向后兼容, 他们没法把 `True` 和 `False` 设置为常量, 只是设置成了内置变量.
-- Python 3 由于不再需要向后兼容, 终于可以修复这个问题了, 所以这个例子无法在 Python 3.x 中执行!
-
----
-
-### > From filled to None in one instruction.../从有到无...
-
-```py
-some_list = [1, 2, 3]
-some_dict = {
-  "key_1": 1,
-  "key_2": 2,
-  "key_3": 3
-}
-
-some_list = some_list.append(4)
-some_dict = some_dict.update({"key_4": 4})
-```
-
-**Output:**
-```py
->>> print(some_list)
-None
->>> print(some_dict)
-None
-```
-
-#### 💡 说明:
-
-大多数修改序列/映射对象的方法, 比如 `list.append`, `dict.update`, `list.sort` 等等. 都是原地修改对象并返回 `None`. 这样做的理由是, 如果操作可以原地完成, 就可以避免创建对象的副本来提高性能. (参考[这里](http://docs.python.org/2/faq/design.html#why-doesn-t-list-sort-return-the-sorted-list))
-
----
-
-### > The chicken-egg problem/先有鸡还是先有蛋 *
-<!-- Example ID: 60730dc2-0d79-4416-8568-2a63323b3ce8 --->
-
-1\.
-```py
->>> isinstance(3, int)
-True
->>> isinstance(type, object)
-True
->>> isinstance(object, type)
-True
-```
-那么到底谁是“最终”的基类呢？下边顺便列出更多的令人困惑的地方
-
-2\. 
-
-```py
->>> class A: pass
->>> isinstance(A, A)
-False
->>> isinstance(type, type)
-True
->>> isinstance(object, object)
-True
-```
-
-3\.
-
-```py
->>> issubclass(int, object)
-True
->>> issubclass(type, object)
-True
->>> issubclass(object, type)
-False
-```
-
-
-#### 💡 说明
-
-- `type` 是 Python 中的[元类](https://realpython.com/python-metaclasses/)。
-- Python 中，**一切**皆对象，其中包括类及其对象（实例）。
-- `type` 类型是`object`类的元类，每个类（包括`type`）都直接或间接地继承自`object`。
-- 对象和类型之间没有真正的基类。上述片段中的令人困惑的地方之所以出现，是因为我们从 Python 类的角度考虑这些关系（issubclass 和 isinstance）。 `object`和`type`之间的关系不能在纯python中重现。 更准确地说，以下关系不能在纯 Python 中重现:
-    + A类是B类的一个实例，B类是A类的一个实例。
-    + A类是它自己的一个实例。
-- `object`和`type`之间的关系（既是彼此的实例，也是它们自己的实例）存在于 Python 中，这是源于实现层级上的“作弊”行为。
-
-
----
-
-### > Subclass relationships/子类关系 *
-
-**Output:**
-```py
->>> from collections import Hashable
->>> issubclass(list, object)
-True
->>> issubclass(object, Hashable)
-True
->>> issubclass(list, Hashable)
-False
-```
-
-子类关系应该是可传递的, 对吧? (即, 如果 `A` 是 `B` 的子类, `B` 是 `C` 的子类, 那么 `A` _应该_ 是 `C` 的子类.)
-
-#### 💡 说明:
-
-* Python 中的子类关系并不一定是传递的. 任何人都可以在元类中随意定义 `__subclasscheck__`.
-* 当 `issubclass(cls, Hashable)` 被调用时, 它只是在 `cls` 中寻找 `__hash__` 方法或者从继承的父类中寻找 `__hash__` 方法.
-* 由于 `object` is 可散列的(hashable), 但是 `list` 是不可散列的, 所以它打破了这种传递关系.
-* 在[这里](https://www.naftaliharris.com/blog/python-subclass-intransitivity/)可以找到更详细的解释.
-
----
-
-### > Methods equality and identity/方法的相等性和唯一性 *
-<!-- Example ID: 94802911-48fe-4242-defa-728ae893fa32 --->
-
-1.
-```py
-class SomeClass:
-    def method(self):
-        pass
-
-    @classmethod
-    def classm(cls):
-        pass
-
-    @staticmethod
-    def staticm():
-        pass
-```
-
-**Output:**
-```py
->>> print(SomeClass.method is SomeClass.method)
-True
->>> print(SomeClass.classm is SomeClass.classm)
-False
->>> print(SomeClass.classm == SomeClass.classm)
-True
->>> print(SomeClass.staticm is SomeClass.staticm)
-True
-```
-访问 `classm` 两次，我们得到一个相等的对象，但不是*同一个*？ 让我们看看 `SomeClass` 的实例会发生什么：
-
-2.
-```py
-o1 = SomeClass()
-o2 = SomeClass()
-```
-
-**Output:**
-```py
->>> print(o1.method == o2.method)
-False
->>> print(o1.method == o1.method)
-True
->>> print(o1.method is o1.method)
-False
->>> print(o1.classm is o1.classm)
-False
->>> print(o1.classm == o1.classm == o2.classm == SomeClass.classm)
-True
->>> print(o1.staticm is o1.staticm is o2.staticm is SomeClass.staticm)
-True
-```
-
-访问 ` classm` or `method` 两次, 为 `SomeClass` 的同一个实例创建了相等但是*不同*的对象。
-
-#### 💡 说明
-* 函数是[描述符](https://docs.python.org/3/howto/descriptor.html)。每当将函数作为属性访问时，就会调用描述符，创建一个方法对象，该对象将函数与拥有该属性的对象“绑定”。如果被调用，该方法调用函数，隐式传递绑定对象作为第一个参数（这就是我们如何将 self 作为第一个参数获取，尽管没有显式传递它）。
-
-```py
->>> o1.method
-<bound method SomeClass.method of <__main__.SomeClass object at ...>>
-```
-
-* 多次访问该属性，每次都会创建一个方法对象！ 因此，`o1.method is o1.method` 永远不会是真的。但是，将函数作为类属性（而不是实例）访问并不会创建方法对象，所以 `SomeClass.method is SomeClass.method` 是真的。
-
-```py
->>> SomeClass.method
-<function SomeClass.method at ...>
-```
-
-* `classmethod` 将函数转换为类方法。 类方法是描述符，当被访问时，它会创建一个绑定*类本身*的方法对象，而不是对象本身。
-
-```py
->>> o1.classm
-<bound method SomeClass.classm of <class '__main__.SomeClass'>>
-```
-
-* 与函数不同，`classmethod` 在作为类属性访问时也会创建一个方法（在这种情况下，它们绑定类，而不是类的类型）。 所以 `SomeClass.classm is SomeClass.classm` 是假的。
-
-```py
->>> SomeClass.classm
-<bound method SomeClass.classm of <class '__main__.SomeClass'>>
-```
-
-* 当两个函数相等并且绑定的对象相同时，方法对象比较相等。 所以`o1.method == o1.method` 为真，尽管它们在内存中是两个不同的对象。
-* `staticmethod` 将函数转换为“无操作”描述符，它按原样返回函数。没有方法对象被创建，所以 `is` 的比较运算为真。
-
-```py
->>> o1.staticm
-<function SomeClass.staticm at ...>
->>> SomeClass.staticm
-<function SomeClass.staticm at ...>
-```
-
-* 每次 Python 调用实例方法时都必须创建新的“方法”对象，并且每次都必须修改参数以插入 `self` 严重影响性能。CPython 3.7 [解决了这个问题](https://bugs.python.org/issue26110) 。通过引入新的操作码来处理调用方法而不创建临时方法对象。这仅在实际调用访问的函数时使用，因此这里的代码片段不受影响，仍然会生成方法:)
-
-
----
-
-### > All-true-ation/返回True的all函数 *
-
-<!-- Example ID: dfe6d845-e452-48fe-a2da-0ed3869a8042 -->
-
-```py
->>> all([True, True, True])
-True
->>> all([True, True, False])
-False
-
->>> all([])
-True
->>> all([[]])
-False
->>> all([[[]]])
-True
-```
-
-为什么会有这种True-False的变化？
-
-#### 💡 说明
-
-- `all` 函数的实现等价于：
-
-- ```py
-  def all(iterable):
-      for element in iterable:
-          if not element:
-              return False
-      return True
-  ```
-
-- `all([])` 返回 `True` 因为可迭代对象为空。 
-- `all([[]])` 返回 `False` 因为传入的数组有一个元素 `[]`， 在Python中，空列表为假。
-- `all([[[]]])` 和更高的递归变体总是`True`。 这是因为传递的数组的单个元素（`[[...]]`）不再是空的，而有值的列表为真。
-
 
 ---
 
@@ -1934,120 +1974,10 @@ a, b = a[b] = {}, 5
   True
   ```
 
----
 
 ---
 
-## Section: Appearances are deceptive!/外表是靠不住的!
-
-### > Skipping lines?/跳过一行?
-
-**Output:**
-```py
->>> value = 11
->>> valuе = 32
->>> value
-11
-```
-
-什么鬼?
-
-**注意:** 如果你想要重现的话最简单的方法是直接复制上面的代码片段到你的文件或命令行里.
-
-#### 💡 说明:
-
-一些非西方字符虽然看起来和英语字母相同, 但会被解释器识别为不同的字母.
-
-```py
->>> ord('е') # 西里尔语的 'e' (Ye)
-1077
->>> ord('e') # 拉丁语的 'e', 用于英文并使用标准键盘输入
-101
->>> 'е' == 'e'
-False
-
->>> value = 42 # 拉丁语 e
->>> valuе = 23 # 西里尔语 'e', Python 2.x 的解释器在这会抛出 `SyntaxError` 异常
->>> value
-42
-```
-
-内置的 `ord()` 函数可以返回一个字符的 Unicode [代码点](https://en.wikipedia.org/wiki/Code_point), 这里西里尔语 'e' 和拉丁语 'e' 的代码点不同证实了上述例子.
-
----
-
-### > Teleportation/空间移动 *
-
-```py
-import numpy as np
-
-def energy_send(x):
-    # 初始化一个 numpy 数组
-    np.array([float(x)])
-
-def energy_receive():
-    # 返回一个空的 numpy 数组
-    return np.empty((), dtype=np.float).tolist()
-```
-
-**Output:**
-```py
->>> energy_send(123.456)
->>> energy_receive()
-123.456
-```
-
-谁来给我发个诺贝尔奖?
-
-#### 💡 说明:
-
-* 注意在 `energy_send` 函数中创建的 numpy 数组并没有返回, 因此内存空间被释放并可以被重新分配.
-* `numpy.empty()` 直接返回下一段空闲内存，而不重新初始化. 而这个内存点恰好就是刚刚释放的那个(通常情况下, 并不绝对).
-
----
-
-### > Well, something is fishy.../嗯，有些可疑...
-
-```py
-def square(x):
-    """
-    一个通过加法计算平方的简单函数.
-    """
-    sum_so_far = 0
-    for counter in range(x):
-        sum_so_far = sum_so_far + x
-  return sum_so_far
-```
-
-**Output (Python 2.x):**
-
-```py
->>> square(10)
-10
-```
-
-难道不应该是100吗?
-
-**注意:** 如果你无法重现, 可以尝试运行这个文件[mixed_tabs_and_spaces.py](/mixed_tabs_and_spaces.py).
-
-#### 💡 说明:
-
-* **不要混用制表符(tab)和空格(space)!** 在上面的例子中, return 的前面是"1个制表符", 而其他部分的代码前面是 "4个空格".
-* Python是这么处理制表符的:
-  > 首先, 制表符会从左到右依次被替换成8个空格, 直到被替换后的字符总数是八的倍数 <...>
-* 因此, `square` 函数最后一行的制表符会被替换成8个空格, 导致return语句进入循环语句里面.
-* Python 3 很友好, 在这种情况下会自动抛出错误.
-
-    **Output (Python 3.x):**
-    ```py
-    TabError: inconsistent use of tabs and spaces in indentation
-    ```
-
----
-
----
-
-## Section: Watch out for the landmines!/小心地雷!
+## Section: Slippery Slopes/滑坡谬误
 
 
 ### > Modifying a dictionary while iterating over it/迭代字典时的修改
@@ -2126,6 +2056,91 @@ Deleted!
 + 在第二个例子中, `y.__del__()` 之所以未被调用, 是因为前一条语句 (`>>> y`) 对同一对象创建了另一个引用, 从而防止在执行 `del y` 后对象的引用数变为0.
 + 调用 `globals` 导致引用被销毁, 因此我们可以看到 "Deleted!" 终于被输出了.
 + (译: 这其实是 Python 交互解释器的特性, 它会自动让 `_` 保存上一个表达式输出的值, 详细可以看[这里](https://www.cnblogs.com/leisurelylicht/p/diao-pi-de-kong-zhi-tai.html).)
+
+
+---
+
+### > The out of scope variable/外部作用域变量
+<!-- Example ID: 75c03015-7be9-4289-9e22-4f5fdda056f7 --->
+
+1\.
+```py
+a = 1
+def some_func():
+    return a
+
+def another_func():
+    a += 1
+    return a
+```
+
+2\.
+```py
+def some_closure_func():
+    a = 1
+    def some_inner_func():
+        return a
+    return some_inner_func()
+
+def another_closure_func():
+    a = 1
+    def another_inner_func():
+        a += 1
+        return a
+    return another_inner_func()
+```
+
+**Output:**
+```py
+>>> some_func()
+1
+>>> another_func()
+UnboundLocalError: local variable 'a' referenced before assignment
+
+>>> some_closure_func()
+1
+>>> another_closure_func()
+UnboundLocalError: local variable 'a' referenced before assignment
+```
+
+#### 💡 说明:
+* 当你在作用域中对变量进行赋值时, 变量会变成该作用域内的局部变量. 因此 `a` 会变成 `another_func` 函数作用域中的局部变量, 但它在函数作用域中并没有被初始化, 所以会引发错误.
+* 想要在 `another_func` 中修改外部作用域变量 `a` 的话, 可以使用 `global` 关键字.
+  ```py
+  def another_func()
+      global a
+      a += 1
+      return a
+  ```
+
+  **Output:**
+  ```py
+  >>> another_func()
+  2
+  ```
+
+* 在 `another_closure_func` 函数中，`a` 会变成 `another_inner_func` 函数作用域中的局部变量, 但它在同一作用域中并没有被初始化, 所以会引发错误。
+* 想要在 `another_inner_func` 中修改外部作用域变量 `a` 的话, 可以使用 `nonlocal` 关键字。nonlocal 表达式用于（除全局作用域外）最近一级的外部作用域。
+
+  ```py
+  def another_func():
+      a = 1
+      def another_inner_func():
+          nonlocal a
+          a += 1
+          return a
+      return another_inner_func()
+  ```
+
+  **Output:**
+  ```py
+  >>> another_func()
+  2
+  ```
+
+*  `global` and `nonlocal` 关键字告诉 `Python` 解释器，不要声明新变量，而是在相应的外部作用域中查找变量。
+* 可以阅读[这个](https://sebastianraschka.com/Articles/2014_python_scope_and_namespaces.html)简短却很棒的指南, 了解更多关于 Python 中命名空间和作用域的工作原理。
+
 
 ---
 
@@ -2480,134 +2495,6 @@ a += [5, 6, 7, 8]
 
 * 表达式 `a += [5,6,7,8]` 实际上是使用的是 "extend" 函数, 所以 `a` 和 `b` 仍然指向已被修改的同一列表.
 
----
-
-### > The out of scope variable/外部作用域变量
-<!-- Example ID: 75c03015-7be9-4289-9e22-4f5fdda056f7 --->
-
-1\.
-```py
-a = 1
-def some_func():
-    return a
-
-def another_func():
-    a += 1
-    return a
-```
-
-2\.
-```py
-def some_closure_func():
-    a = 1
-    def some_inner_func():
-        return a
-    return some_inner_func()
-
-def another_closure_func():
-    a = 1
-    def another_inner_func():
-        a += 1
-        return a
-    return another_inner_func()
-```
-
-**Output:**
-```py
->>> some_func()
-1
->>> another_func()
-UnboundLocalError: local variable 'a' referenced before assignment
-
->>> some_closure_func()
-1
->>> another_closure_func()
-UnboundLocalError: local variable 'a' referenced before assignment
-```
-
-#### 💡 说明:
-* 当你在作用域中对变量进行赋值时, 变量会变成该作用域内的局部变量. 因此 `a` 会变成 `another_func` 函数作用域中的局部变量, 但它在函数作用域中并没有被初始化, 所以会引发错误.
-* 想要在 `another_func` 中修改外部作用域变量 `a` 的话, 可以使用 `global` 关键字.
-  ```py
-  def another_func()
-      global a
-      a += 1
-      return a
-  ```
-
-  **Output:**
-  ```py
-  >>> another_func()
-  2
-  ```
-
-* 在 `another_closure_func` 函数中，`a` 会变成 `another_inner_func` 函数作用域中的局部变量, 但它在同一作用域中并没有被初始化, 所以会引发错误。
-* 想要在 `another_inner_func` 中修改外部作用域变量 `a` 的话, 可以使用 `nonlocal` 关键字。nonlocal 表达式用于（除全局作用域外）最近一级的外部作用域。
-
-  ```py
-  def another_func():
-      a = 1
-      def another_inner_func():
-          nonlocal a
-          a += 1
-          return a
-      return another_inner_func()
-  ```
-
-  **Output:**
-  ```py
-  >>> another_func()
-  2
-  ```
-
-*  `global` and `nonlocal` 关键字告诉 `Python` 解释器，不要声明新变量，而是在相应的外部作用域中查找变量。
-* 可以阅读[这个](https://sebastianraschka.com/Articles/2014_python_scope_and_namespaces.html)简短却很棒的指南, 了解更多关于 Python 中命名空间和作用域的工作原理。
-
-
----
-
-### > Be careful with chained operations/小心链式操作
-
-```py
->>> (False == False) in [False] # 可以理解
-False
->>> False == (False in [False]) # 可以理解
-False
->>> False == False in [False] # 为毛?
-True
-
->>> True is False == False
-False
->>> False is False is False
-True
-
->>> 1 > 0 < 1
-True
->>> (1 > 0) < 1
-False
->>> 1 > (0 < 1)
-False
-```
-
-#### 💡 说明:
-
-根据 https://docs.python.org/2/reference/expressions.html#not-in
-
-> 形式上, 如果 a, b, c, ..., y, z 是表达式, 而 op1, op2, ..., opN 是比较运算符, 那么除了每个表达式最多只出现一次以外 a op1 b op2 c ... y opN z 就等于 a op1 b and b op2 c and ... y opN z.
-
-虽然上面的例子似乎很愚蠢, 但是像 `a == b == c` 或 `0 <= x <= 100` 就很棒了.
-
-* `False is False is False` 相当于 `(False is False) and (False is False)`
-* `True is False == False` 相当于 `True is False and False == False`, 由于语句的第一部分 (`True is False`) 等于 `False`, 因此整个表达式的结果为 `False`.
-* `1 > 0 < 1` 相当于 `1 > 0 and 0 < 1`, 所以最终结果为 `True`.
-* 表达式 `(1 > 0) < 1` 相当于 `True < 1` 且
-  ```py
-  >>> int(True)
-  1
-  >>> True + 1 # 与这个例子无关，只是好玩
-  2
-  ```
-  所以, `1 < 1` 等于 `False`
 
 ---
 
@@ -2977,7 +2864,6 @@ NameError: name '_another_weird_name_func' is not defined
 
 ---
 
-
 ### > All sorted?/都排序了吗？ *
 
 <!-- Example ID: e5ff1eaf-8823-4738-b4ce-b73f7c9d5511 -->
@@ -3020,9 +2906,41 @@ False
 
 ---
 
+### > Midnight time doesn't exist?/不存在的午夜?
+
+```py
+from datetime import datetime
+
+midnight = datetime(2018, 1, 1, 0, 0)
+midnight_time = midnight.time()
+
+noon = datetime(2018, 1, 1, 12, 0)
+noon_time = noon.time()
+
+if midnight_time:
+    print("Time at midnight is", midnight_time)
+
+if noon_time:
+    print("Time at noon is", noon_time)
+```
+
+**Output:**
+```sh
+('Time at noon is', datetime.time(12, 0))
+```
+
+midnight_time 并没有被输出.
+
+#### 💡 说明:
+
+在Python 3.5之前, 如果 `datetime.time` 对象存储的UTC的午夜时间(译: 就是 `00:00`), 那么它的布尔值会被认为是 `False`. 当使用 `if obj:` 语句来检查 `obj` 是否为 `null` 或者某些“空”值的时候, 很容易出错.
+
+
+---
+
 ## Section: The Hidden treasures!/隐藏的宝藏!
 
-This section contains few of the lesser-known interesting things about Python that most beginners like me are unaware of (well, not anymore).
+本节包含了一些像我这样的大多数初学者都不知道的关于Python的鲜为人知的有趣的事情（好吧，现在不是了）。
 
 ### > Okay Python, Can you make me fly?/Python, 可否带我飞? *
 
@@ -3421,6 +3339,114 @@ AttributeError: 'A' object has no attribute '__variable'
 
 ---
 
+## Section: Appearances are deceptive!/外表是靠不住的!
+
+### > Skipping lines?/跳过一行?
+
+**Output:**
+```py
+>>> value = 11
+>>> valuе = 32
+>>> value
+11
+```
+
+什么鬼?
+
+**注意:** 如果你想要重现的话最简单的方法是直接复制上面的代码片段到你的文件或命令行里.
+
+#### 💡 说明:
+
+一些非西方字符虽然看起来和英语字母相同, 但会被解释器识别为不同的字母.
+
+```py
+>>> ord('е') # 西里尔语的 'e' (Ye)
+1077
+>>> ord('e') # 拉丁语的 'e', 用于英文并使用标准键盘输入
+101
+>>> 'е' == 'e'
+False
+
+>>> value = 42 # 拉丁语 e
+>>> valuе = 23 # 西里尔语 'e', Python 2.x 的解释器在这会抛出 `SyntaxError` 异常
+>>> value
+42
+```
+
+内置的 `ord()` 函数可以返回一个字符的 Unicode [代码点](https://en.wikipedia.org/wiki/Code_point), 这里西里尔语 'e' 和拉丁语 'e' 的代码点不同证实了上述例子.
+
+---
+
+### > Teleportation/空间移动 *
+
+```py
+import numpy as np
+
+def energy_send(x):
+    # 初始化一个 numpy 数组
+    np.array([float(x)])
+
+def energy_receive():
+    # 返回一个空的 numpy 数组
+    return np.empty((), dtype=np.float).tolist()
+```
+
+**Output:**
+```py
+>>> energy_send(123.456)
+>>> energy_receive()
+123.456
+```
+
+谁来给我发个诺贝尔奖?
+
+#### 💡 说明:
+
+* 注意在 `energy_send` 函数中创建的 numpy 数组并没有返回, 因此内存空间被释放并可以被重新分配.
+* `numpy.empty()` 直接返回下一段空闲内存，而不重新初始化. 而这个内存点恰好就是刚刚释放的那个(通常情况下, 并不绝对).
+
+---
+
+### > Well, something is fishy.../嗯，有些可疑...
+
+```py
+def square(x):
+    """
+    一个通过加法计算平方的简单函数.
+    """
+    sum_so_far = 0
+    for counter in range(x):
+        sum_so_far = sum_so_far + x
+  return sum_so_far
+```
+
+**Output (Python 2.x):**
+
+```py
+>>> square(10)
+10
+```
+
+难道不应该是100吗?
+
+**注意:** 如果你无法重现, 可以尝试运行这个文件[mixed_tabs_and_spaces.py](/mixed_tabs_and_spaces.py).
+
+#### 💡 说明:
+
+* **不要混用制表符(tab)和空格(space)!** 在上面的例子中, return 的前面是"1个制表符", 而其他部分的代码前面是 "4个空格".
+* Python是这么处理制表符的:
+  > 首先, 制表符会从左到右依次被替换成8个空格, 直到被替换后的字符总数是八的倍数 <...>
+* 因此, `square` 函数最后一行的制表符会被替换成8个空格, 导致return语句进入循环语句里面.
+* Python 3 很友好, 在这种情况下会自动抛出错误.
+
+    **Output (Python 3.x):**
+    ```py
+    TabError: inconsistent use of tabs and spaces in indentation
+    ```
+
+
+---
+
 ## Section: Miscellaneous/杂项
 
 
@@ -3558,78 +3584,6 @@ KeyError: 1
 + 专用函数（在 CPython 的 [源](https://github.com/python/cpython/blob/522691c46e2ae51faaad5bbbce7d959dd61770df/Objects/dictobject.c#L841) 中名为 `lookdict_unicode`）知道所有现有的键（包括查找的 key) 是字符串，并使用更快和更简单的字符串比较来比较键，而不是调用 `__eq__` 方法。
 + 第一次使用非 `str` 键访问 `dict` 实例时，会对其进行修改，以便将来的查找使用通用函数。
 + 这个过程对于特定的 `dict` 实例是不可逆的，并且键甚至不必存在于字典中。 这就是为什么对不存在的键进行查找具有相同副作用的原因。
-
-
----
-
-### > Nan-reflexivity/Nan的自反性
-<!-- Example ID: 59bee91a-36e0-47a4-8c7d-aa89bf1d3976 --->
-
-1\.
-```py
-a = float('inf')
-b = float('nan')
-c = float('-iNf')  # 这些字符串不区分大小写
-d = float('nan')
-```
-
-**Output:**
-```py
->>> a
-inf
->>> b
-nan
->>> c
--inf
->>> float('some_other_string')
-ValueError: could not convert string to float: some_other_string
->>> a == -c #inf==inf
-True
->>> None == None # None==None
-True
->>> b == d #但是 nan!=nan
-False
->>> 50/a
-0.0
->>> a/a
-nan
->>> 23 + b
-nan
-```
-
-2\.
-
-```py
->>> x = float('nan')
->>> y = x / x
->>> y is y # 同一性(identity)具备
-True
->>> y == y # y不具备相等性(equality)
-False
->>> [y] == [y] # 但包含y的列表验证相等性(equality)成功了
-True
-```
-
-#### 💡 说明:
-
-`'inf'` 和 `'nan'` 是特殊的字符串(不区分大小写), 当显示转换成 `float` 型时, 它们分别用于表示数学意义上的 "无穷大" 和 "非数字".
-- 由于根据 IEEE 标准 `NaN != NaN`，遵守此规则打破了 Python 中集合元素的自反性假设，即如果 `x` 是 `list` 等集合的一部分，则比较等运算的实现基于假设`x == x`。由于这个假设，在比较两个元素时首先比较身份`identity`（因为它更快），并且仅在身份不匹配时才比较值。以下片段将更清楚地说明，
-
-  ```py
-  >>> x = float('nan')
-  >>> x == x, [x] == [x]
-  (False, True)
-  >>> y = float('nan')
-  >>> y == y, [y] == [y]
-  (False, True)
-  >>> x == y, [x] == [y]
-  (False, False)
-  ```
-
-  由于 `x` 和 `y` 的身份`identity`不同，所以考虑的值也不同； 因此这次比较返回“False”。
-
-
-- 感兴趣可以阅读 [Reflexivity, and other pillars of civilization](https://bertrandmeyer.com/2010/02/06/reflexivity-and-other-pillars-of-civilization/)
 
 
 ---
@@ -3814,7 +3768,7 @@ def dict_size(o):
 
 [![Commit id][commit-image]][commit-url]
 
-[commit-url]: https://github.com/satwikkansal/wtfpython/commit/30e05a5973930c38cdb59f1c02b85b19b22ac531
+[commit-url]: https://github.com/satwikkansal/wtfpython/commit/cd4d7c0e340789bd001e5e9eae0e3c5bb7c7f7f1
 [commit-image]: https://img.shields.io/badge/Commit-30e05a-yellow.svg
 
 ## 996.icu
