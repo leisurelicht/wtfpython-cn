@@ -43,7 +43,7 @@ PS: 如果你不是第一次读了, 你可以在[这里](https://github.com/satw
         - [> Schrödinger's variable/薛定谔的变量 *](#-Schrödingers-variable薛定谔的变量-)
         - [> `is not ...` is not `is (not ...)`/`is not ...` 不是 `is (not ...)`](#-is-not--is-not-is-not-is-not--不是-is-not-)
         - [> The surprising comma/意外的逗号](#-the-surprising-comma意外的逗号)
-        - [> Backslashes at the end of string/字符串末尾的反斜杠](#-backslashes-at-the-end-of-string字符串末尾的反斜杠)
+        - [> Strings and the backslashes/字符串与反斜杠](#-strings-and-the-backslashes字符串与反斜杠-)
         - [> not knot!/别纠结!](#-not-knot别纠结)
         - [> Half triple-quoted strings/三个引号](#-half-triple-quoted-strings三个引号)
         - [> Midnight time doesn't exist?/不存在的午夜?](#-midnight-time-doesnt-exist不存在的午夜)
@@ -1062,30 +1062,51 @@ SyntaxError: invalid syntax
 - **注意:** 尾随逗号的问题已经在Python 3.6中被[修复](https://bugs.python.org/issue9232)了. 而这篇[帖子](https://bugs.python.org/issue9232#msg248399)中则简要讨论了Python中尾随逗号的不同用法.
 ---
 
-### > Backslashes at the end of string/字符串末尾的反斜杠
+### > Strings and the backslashes/字符串与反斜杠
+<!-- Example ID: 6ae622c3-6d99-4041-9b33-507bd1a4407b --->
 
 **Output:**
-```
->>> print("\\ C:\\")
-\ C:\
->>> print(r"\ C:")
-\ C:
->>> print(r"\ C:\")
+```py
+>>> print("\"")
+"
 
-    File "<stdin>", line 1
-      print(r"\ C:\")
-                     ^
+>>> print(r"\"")
+\"
+
+>>> print(r"\")
+File "<stdin>", line 1
+    print(r"\")
+              ^
 SyntaxError: EOL while scanning string literal
+
+>>> r'\'' == "\\'"
+True
 ```
 
 #### 💡 说明:
 
+- 在一般的python字符串中，反斜杠用于转义可能具有特殊含义的字符（如单引号、双引号和反斜杠本身）。
+
+    ```py
+    >>> "wt\"f"
+    'wt"f'
+    ```
+
 - 在以 `r` 开头的原始字符串中, 反斜杠并没有特殊含义.
-  ```py
-  >>> print(repr(r"wt\"f"))
-  'wt\\"f'
-  ```
-- 解释器所做的只是简单的改变了反斜杠的行为, 因此会直接放行反斜杠及后一个的字符. 这就是反斜杠在原始字符串末尾不起作用的原因.
+    ```py
+    >>> r'wt\"f' == 'wt\\"f'
+    True
+    >>> print(repr(r'wt\"f')
+    'wt\\"f'
+
+    >>> print("\n")
+
+    >>> print(r"\\n")
+    '\\n'
+    ```
+
+- 这意味着当解析器在原始字符串中遇到反斜杠时，它期望后面有另一个字符。 在我们的例子中（`print(r"\")`），反斜杠转义了尾随引号，使解析器没有终止引号（因此产生了`SyntaxError`）。 这就是为什么反斜杠在原始字符串末尾不起作用的原因。
+
 
 ---
 
