@@ -3051,6 +3051,7 @@ SyntaxError: not a chance
 ---
 
 ### > Let's meet Friendly Language Uncle For Life/让生活更友好 *
+<!-- Example ID: 6427fae6-e959-462d-85da-ce4c94ce41be --->
 
 **Output (Python 3.x)**
 ```py
@@ -3073,6 +3074,14 @@ True
   > 意识到 Python 3.0 里的 != 运算符是一个会引起手指疼痛的恐怖错误, FLUFL 将 <> 运算符恢复为唯一写法.
 - Uncle Barry 在 PEP 中还分享了其他东西; 你可以在[这里](https://www.python.org/dev/peps/pep-0401/)获得他们.
 - (译: 虽然文档中没写，但应该是只能在交互解释器中使用.)
+- 它在交互式环境中正常运行，但是当您通过 python 文件运行时它会引发 `SyntaxError`（请参阅此 [问题](https://github.com/satwikkansal/wtfpython/issues/94)）。您可以将表达式作为`eval` 或 `compile` 参数中使用。
+
+    ```py
+    from __future__ import barry_as_FLUFL
+    print(eval('"Ruby" <> "Python"'))
+    ```
+
+
 ---
 
 ### > Even Python understands that love is complicated/连Python也知道爱是难言的 *
