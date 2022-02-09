@@ -91,7 +91,7 @@ PS: 如果你不是第一次读了, 你可以在[这里](https://github.com/satw
         - [> Yes, it exists!/是的, 它存在!](#-yes-it-exists是的-它存在)
         - [> Ellipsis/省略 *](#-Ellipsis省略-)
         - [> Inpinity/无限 *](#-inpinity无限-)
-        - [> Mangling time!修饰时间! *](#-mangling-time修饰时间-)
+        - [> Let's mangle/修饰时间! *](#-Lets-mangle修饰时间-)
     - [Section: Miscellaneous/杂项](#section-miscellaneous杂项)
         - [> `+=` is faster/更快的 `+=` ](#--is-faster更快的-)
         - [> Let's make a giant string!/来做个巨大的字符串吧!](#-lets-make-a-giant-string来做个巨大的字符串吧)
@@ -3297,18 +3297,20 @@ Ellipsis
 
 ---
 
-### > Mangling time!/修饰时间! *
+### > Let's mangle/修饰时间! *
+<!-- Example ID: 37146d2d-9e67-43a9-8729-3c17934b910c --->
 
+1\.
 ```py
 class Yo(object):
     def __init__(self):
         self.__honey = True
-        self.bitch = True
+        self.bro = True
 ```
 
 **Output:**
 ```py
->>> Yo().bitch
+>>> Yo().bro
 True
 >>> Yo().__honey
 AttributeError: 'Yo' object has no attribute '__honey'
@@ -3316,15 +3318,60 @@ AttributeError: 'Yo' object has no attribute '__honey'
 True
 ```
 
+2\.
+```py
+class Yo(object):
+    def __init__(self):
+        # 这次试试对称形式
+        self.__honey__ = True
+        self.bro = True
+```
+
+**Output:**
+```py
+>>> Yo().bro
+True
+
+>>> Yo()._Yo__honey__
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'Yo' object has no attribute '_Yo__honey__'
+```
+
 为什么 `Yo()._Yo__honey` 能运行? 只有印度人理解.(译: 这个梗可能是指印度音乐人[Yo Yo Honey Singh](https://en.wikipedia.org/wiki/Yo_Yo_Honey_Singh))
+
+
+3\.
+
+```py
+_A__variable = "Some value"
+
+class A(object):
+    def some_func(self):
+        return __variable # 没在任何地方初始化
+```
+
+**Output:**
+```py
+>>> A().__variable
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'A' object has no attribute '__variable'
+
+>>> A().some_func()
+'Some value'
+```
+
 
 #### 💡 说明:
 
-* [名字修饰](https://en.wikipedia.org/wiki/Name_mangling) 用于避免不同命名空间之间名称冲突.
+* [命名修饰](https://en.wikipedia.org/wiki/Name_mangling) 用于避免不同命名空间之间名称冲突.
 * 在 Python 中, 解释器会通过给类中以 `__` (双下划线)开头且结尾最多只有一个下划线的类成员名称加上`_NameOfTheClass` 来修饰(mangles)名称.
 * 所以, 要访问 `__honey` 对象,我们需要加上 `_Yo` 以防止与其他类中定义的相同名称的属性发生冲突.
+* 但是为什么它在第二个片段中不起作用？ 因为命名修饰排除了以双下划线结尾的名称。
+* 第三个片段也是命名修饰的结果。 `return __variable` 语句中的 `__variable` 名称被修改为 `_A__variable`，这也恰好是我们在外部作用域中声明的变量的名称。
+* 此外，如果修饰后的变量名超过255个字符，则会进行截断。
 
----
 
 ---
 
