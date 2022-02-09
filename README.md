@@ -96,7 +96,7 @@ PS: 如果你不是第一次读了, 你可以在[这里](https://github.com/satw
         - [> `+=` is faster/更快的 `+=` ](#--is-faster更快的-)
         - [> Let's make a giant string!/来做个巨大的字符串吧!](#-lets-make-a-giant-string来做个巨大的字符串吧)
         - [> Slowing down `dict` lookups/让字典的查找慢下来 *](#-Slowing-down-dict-lookups让字典的查找慢下来-)
-        - [> Explicit typecast of strings/字符串的显式类型转换](#-explicit-typecast-of-strings字符串的显式类型转换)
+        - [> Nan-reflexivity/Nan的自反性](#-Nan-reflexivityNan的自反性)
         - [> Bloating instance `dict`s/变臃肿的`dict`实例们 *](#-Bloating-instance-dicts/变臃肿的dict实例们-)
         - [> Minor Ones/小知识点](#-minor-ones小知识点)
 - [Contributing/贡献](#contributing贡献)
@@ -3516,8 +3516,10 @@ KeyError: 1
 
 ---
 
-### > Explicit typecast of strings/字符串的显式类型转换
+### > Nan-reflexivity/Nan的自反性
+<!-- Example ID: 59bee91a-36e0-47a4-8c7d-aa89bf1d3976 --->
 
+1\.
 ```py
 a = float('inf')
 b = float('nan')
@@ -3549,9 +3551,39 @@ nan
 nan
 ```
 
+2\.
+
+```py
+>>> x = float('nan')
+>>> y = x / x
+>>> y is y # 同一性(identity)具备
+True
+>>> y == y # y不具备相等性(equality)
+False
+>>> [y] == [y] # 但包含y的列表验证相等性(equality)成功了
+True
+```
+
 #### 💡 说明:
 
 `'inf'` 和 `'nan'` 是特殊的字符串(不区分大小写), 当显示转换成 `float` 型时, 它们分别用于表示数学意义上的 "无穷大" 和 "非数字".
+- 由于根据 IEEE 标准 `NaN != NaN`，遵守此规则打破了 Python 中集合元素的自反性假设，即如果 `x` 是 `list` 等集合的一部分，则比较等运算的实现基于假设`x == x`。由于这个假设，在比较两个元素时首先比较身份`identity`（因为它更快），并且仅在身份不匹配时才比较值。以下片段将更清楚地说明，
+
+  ```py
+  >>> x = float('nan')
+  >>> x == x, [x] == [x]
+  (False, True)
+  >>> y = float('nan')
+  >>> y == y, [y] == [y]
+  (False, True)
+  >>> x == y, [x] == [y]
+  (False, False)
+  ```
+
+  由于 `x` 和 `y` 的身份`identity`不同，所以考虑的值也不同； 因此这次比较返回“False”。
+
+
+- 感兴趣可以阅读 [Reflexivity, and other pillars of civilization](https://bertrandmeyer.com/2010/02/06/reflexivity-and-other-pillars-of-civilization/)
 
 
 ---
