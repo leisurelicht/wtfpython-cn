@@ -2437,7 +2437,9 @@ a += [5, 6, 7, 8]
 ---
 
 ### > The out of scope variable/外部作用域变量
+<!-- Example ID: 75c03015-7be9-4289-9e22-4f5fdda056f7 --->
 
+1\.
 ```py
 a = 1
 def some_func():
@@ -2448,17 +2450,37 @@ def another_func():
     return a
 ```
 
+2\.
+```py
+def some_closure_func():
+    a = 1
+    def some_inner_func():
+        return a
+    return some_inner_func()
+
+def another_closure_func():
+    a = 1
+    def another_inner_func():
+        a += 1
+        return a
+    return another_inner_func()
+```
+
 **Output:**
 ```py
 >>> some_func()
 1
 >>> another_func()
 UnboundLocalError: local variable 'a' referenced before assignment
+
+>>> some_closure_func()
+1
+>>> another_closure_func()
+UnboundLocalError: local variable 'a' referenced before assignment
 ```
 
 #### 💡 说明:
 * 当你在作用域中对变量进行赋值时, 变量会变成该作用域内的局部变量. 因此 `a` 会变成 `another_func` 函数作用域中的局部变量, 但它在函数作用域中并没有被初始化, 所以会引发错误.
-* 可以阅读[这个](http://sebastianraschka.com/Articles/2014_python_scope_and_namespaces.html)简短却很棒的指南, 了解更多关于 Python 中命名空间和作用域的工作原理.
 * 想要在 `another_func` 中修改外部作用域变量 `a` 的话, 可以使用 `global` 关键字.
   ```py
   def another_func()
@@ -2472,6 +2494,29 @@ UnboundLocalError: local variable 'a' referenced before assignment
   >>> another_func()
   2
   ```
+
+* 在 `another_closure_func` 函数中，`a` 会变成 `another_inner_func` 函数作用域中的局部变量, 但它在同一作用域中并没有被初始化, 所以会引发错误。
+* 想要在 `another_inner_func` 中修改外部作用域变量 `a` 的话, 可以使用 `nonlocal` 关键字。nonlocal 表达式用于（除全局作用域外）最近一级的外部作用域。
+
+  ```py
+  def another_func():
+      a = 1
+      def another_inner_func():
+          nonlocal a
+          a += 1
+          return a
+      return another_inner_func()
+  ```
+
+  **Output:**
+  ```py
+  >>> another_func()
+  2
+  ```
+
+*  `global` and `nonlocal` 关键字告诉 `Python` 解释器，不要声明新变量，而是在相应的外部作用域中查找变量。
+* 可以阅读[这个](https://sebastianraschka.com/Articles/2014_python_scope_and_namespaces.html)简短却很棒的指南, 了解更多关于 Python 中命名空间和作用域的工作原理。
+
 
 ---
 
