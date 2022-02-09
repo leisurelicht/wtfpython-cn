@@ -3039,11 +3039,14 @@ from __future__ import braces
 SyntaxError: not a chance
 ```
 
-想用大括号? 没门! 觉得不爽, 请去用java.
+想用大括号 `braces`? 没门! 觉得不爽, 请去用java。那么，另一个令人惊讶的事情，找一找在 `__future__` 模块中，哪里引发了 `SyntaxError` [code](https://github.com/python/cpython/blob/master/Lib/__future__.py)?
 
 #### 💡 说明:
 + 通常 `__future__` 会提供 Python 未来版本的功能. 然而，这里的 “未来” 是一个讽刺.
 + 这是一个表达社区对此类问题态度的复活节彩蛋.
++ 代码实际上在[`future.c` 文件]中 (https://github.com/python/cpython/blob/025eb98dc0c1dc27404df6c544fc2944e0fa9f3a/Python/future.c#L49).
++ 当 CPython 编译器遇到 [future表达式](https://docs.python.org/3.3/reference/simple_stmts.html#future-statements) 时，它首先在 `future.c` 中运行相应的代码，然后再对其进行处理作为正常的`import`表达式。
+
 
 ---
 
