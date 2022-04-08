@@ -2,10 +2,9 @@
 <h1 align="center">What the f*ck Python! 🐍</h1>
 <p align="center">一些有趣且鲜为人知的 Python 特性.</p>
 
-<p align="center">
-<a href="https://github.com/satwikkansal/wtfpython">English</a>
-| <a href="#">中文</a>
-</p>
+翻译版本: [English](https://github.com/satwikkansal/wtfpython) | [Vietnamese Tiếng Việt](https://github.com/vuduclyunitn/wtfptyhon-vi) | [Spanish Español](https://github.com/JoseDeFreitas/wtfpython-es) | [Korean 한국어](https://github.com/buttercrab/wtfpython-ko) | [Add translation](https://github.com/satwikkansal/wtfpython/issues/new?title=Add%20translation%20for%20[LANGUAGE]&body=Expected%20time%20to%20finish:%20[X]%20weeks.%20I%27ll%20start%20working%20on%20it%20from%20[Y].)
+
+其他模式: [Interactive](...) 
 
 [![WTFPL 2.0][license-image]][license-url] [![Commit id][commit-image]][commit-url] [![996.icu][996.icu-image]][996.icu-url]
 
