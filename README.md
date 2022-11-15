@@ -2,7 +2,8 @@
 <h1 align="center">What the f*ck Python! 🐍</h1>
 <p align="center">一些有趣且鲜为人知的 Python 特性.</p>
 
-翻译版本: [English](https://github.com/satwikkansal/wtfpython) | [Vietnamese Tiếng Việt](https://github.com/vuduclyunitn/wtfptyhon-vi) | [Spanish Español](https://github.com/JoseDeFreitas/wtfpython-es) | [Korean 한국어](https://github.com/buttercrab/wtfpython-ko) | [Add translation](https://github.com/satwikkansal/wtfpython/issues/new?title=Add%20translation%20for%20[LANGUAGE]&body=Expected%20time%20to%20finish:%20[X]%20weeks.%20I%27ll%20start%20working%20on%20it%20from%20[Y].)
+翻译版本: [English](https://github.com/satwikkansal/wtfpython) | [Vietnamese Tiếng Việt](https://github.com/vuduclyunitn/wtfptyhon-vi) | [Spanish Español](https://web.archive.org/web/20220511161045/https://github.com/JoseDeFreitas/wtfpython-es) | [Korean 한국어](https://github.com/buttercrab/wtfpython-ko) | [Russian Русский](https://github.com/frontdevops/wtfpython) | [Add translation](https://github.com/satwikkansal/wtfpython/issues/new?title=Add%20translation%20for%20[LANGUAGE]&body=Expected%20time%20to%20finish:%20[X]%20weeks.%20I%27ll%20start%20working%20on%20it%20from%20[Y].)
+
 
 其他模式: [Interactive](https://mybinder.org/v2/gh/robertparley/wtfpython-cn/master?labpath=irrelevant%2Fwtf.ipynb) 
 
@@ -60,6 +61,7 @@ PS: 如果你不是第一次读了, 你可以在[这里](https://github.com/satw
         - [> The disappearing variable from outer scope/消失的外部变量](#-the-disappearing-variable-from-outer-scope消失的外部变量)
         - [> The mysterious key type conversion/神秘的键型转换 *](#-the-mysterious-key-type-conversion神秘的键型转换-)
         - [> Let's see if you can guess this?/看看你能否猜到这一点?](#-lets-see-if-you-can-guess-this看看你能否猜到这一点)
+        - [> Exceeds the limit for integer string conversion/整型转字符串越界](#-exceeds-the-limit-for-integer-string-conversion整型转字符串越界)
     - [Section: Slippery Slopes/滑坡谬误](#section-slippery-slopes滑坡谬误)
         - [> Modifying a dictionary while iterating over it/迭代字典时的修改](#-modifying-a-dictionary-while-iterating-over-it迭代字典时的修改)
         - [> Stubborn `del` operator/坚强的 `del` *](#-stubborn-del-operator坚强的-del-)
@@ -375,20 +377,20 @@ False
 
 #### 💡 说明:
 
-根据 https://docs.python.org/2/reference/expressions.html#not-in
+根据 https://docs.python.org/3/reference/expressions.html#comparisons
 
 > 形式上, 如果 a, b, c, ..., y, z 是表达式, 而 op1, op2, ..., opN 是比较运算符, 那么除了每个表达式最多只出现一次以外 a op1 b op2 c ... y opN z 就等于 a op1 b and b op2 c and ... y opN z.
 
 虽然上面的例子似乎很愚蠢, 但是像 `a == b == c` 或 `0 <= x <= 100` 就很棒了.
 
 * `False is False is False` 相当于 `(False is False) and (False is False)`
-* `True is False == False` 相当于 `True is False and False == False`, 由于语句的第一部分 (`True is False`) 等于 `False`, 因此整个表达式的结果为 `False`.
-* `1 > 0 < 1` 相当于 `1 > 0 and 0 < 1`, 所以最终结果为 `True`.
+* `True is False == False` 相当于 `(True is False) and (False == False)`, 由于语句的第一部分 (`True is False`) 等于 `False`, 因此整个表达式的结果为 `False`.
+* `1 > 0 < 1` 相当于 `(1 > 0) and (0 < 1)`, 所以最终结果为 `True`.
 * 表达式 `(1 > 0) < 1` 相当于 `True < 1` 且
   ```py
   >>> int(True)
   1
-  >>> True + 1 # 与这个例子无关，只是好玩
+  >>> True + 1 # 与这个例子无关，只是娱乐一下
   2
   ```
   所以, `1 < 1` 等于 `False`
@@ -1974,6 +1976,40 @@ a, b = a[b] = {}, 5
   True
   ```
 
+
+---
+
+### > Exceeds the limit for integer string conversion/整型转字符串越界
+```py
+>>> # Python 3.10.6
+>>> int("2" * 5432)
+
+>>> # Python 3.10.8
+>>> int("2" * 5432)
+```
+
+**Output:**
+```py
+>>> # Python 3.10.6
+222222222222222222222222222222222222222222222222222222222222222...
+
+>>> # Python 3.10.8
+Traceback (most recent call last):
+   ...
+ValueError: Exceeds the limit (4300) for integer string conversion:
+   value has 5432 digits; use sys.set_int_max_str_digits()
+   to increase the limit.
+```
+
+#### 💡 说明:
+
+* 对`int()`的调用在Python 3.10.6中运行良好，但在Python 3.10.8中引发ValueError。请注意，Python仍然可以处理大整数。只有在整型和字符串之间转换时才会出现此错误。
+* 幸运的是，当您希望操作超过允许的位数限制时，可以增加该限制的上限。为此，可以使用以下方法之一：
+    - 使用 -X int_max_str_digits 的命令行参数（例如， python3 -X int_max_str_digits=640）
+    - 使用来自sys模块的set_int_max_str_digits()函数
+    - 设定 PYTHONINTMAXSTRDIGITS 环境变量
+
+更多更改设置上限的操作细节查看[文档](https://docs.python.org/3/library/stdtypes.html#int-max-str-digits)。
 
 ---
 
@@ -3768,8 +3804,8 @@ def dict_size(o):
 
 [![Commit id][commit-image]][commit-url]
 
-[commit-url]: https://github.com/satwikkansal/wtfpython/commit/cd4d7c0e340789bd001e5e9eae0e3c5bb7c7f7f1
-[commit-image]: https://img.shields.io/badge/Commit-30e05a-yellow.svg
+[commit-url]: https://github.com/satwikkansal/wtfpython/commit/ea1e228407f2f7efc297e6b773aabf376f6def8e
+[commit-image]: https://img.shields.io/badge/Commit-ea1e22-yellow.svg
 
 ## 996.icu
 
