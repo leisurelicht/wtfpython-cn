@@ -2,13 +2,12 @@
 <h1 align="center">What the f*ck Python! 🐍</h1>
 <p align="center">一些有趣且鲜为人知的 Python 特性.</p>
 
-翻译版本: [English](https://github.com/satwikkansal/wtfpython) | [Vietnamese Tiếng Việt](https://github.com/vuduclyunitn/wtfptyhon-vi) | [Spanish Español](https://web.archive.org/web/20220511161045/https://github.com/JoseDeFreitas/wtfpython-es) | [Korean 한국어](https://github.com/buttercrab/wtfpython-ko) | [Russian Русский](https://github.com/frontdevops/wtfpython) | [Add translation](https://github.com/satwikkansal/wtfpython/issues/new?title=Add%20translation%20for%20[LANGUAGE]&body=Expected%20time%20to%20finish:%20[X]%20weeks.%20I%27ll%20start%20working%20on%20it%20from%20[Y].)
+翻译版本: [English](https://github.com/satwikkansal/wtfpython) | [Vietnamese Tiếng Việt](https://github.com/vuduclyunitn/wtfptyhon-vi) | [Spanish Español](https://web.archive.org/web/20220511161045/https://github.com/JoseDeFreitas/wtfpython-es) | [Korean 한국어](https://github.com/buttercrab/wtfpython-ko) | [Russian Русский](https://github.com/frontdevops/wtfpython) | [German Deutsch](https://github.com/BenSt099/wtfpython) | [Add translation](https://github.com/satwikkansal/wtfpython/issues/new?title=Add%20translation%20for%20[LANGUAGE]&body=Expected%20time%20to%20finish:%20[X]%20weeks.%20I%27ll%20start%20working%20on%20it%20from%20[Y].)
 
 
 其他模式: [Interactive](https://mybinder.org/v2/gh/robertparley/wtfpython-cn/master?labpath=irrelevant%2Fwtf.ipynb) 
 
-
-[![WTFPL 2.0][license-image]][license-url] [![Commit id][commit-image]][commit-url] [![996.icu][996.icu-image]][996.icu-url]
+[![WTFPL 2.0][license-image]][license-url]   [![Commit id][commit-image]][commit-url] 
 
 
 Python, 是一个设计优美的解释型高级语言, 它提供了很多能让程序员感到舒适的功能特性. 但有的时候, Python 的一些输出结果对于初学者来说似乎并不是那么一目了然.
@@ -1135,7 +1134,7 @@ False
 
 **Output:**
 ```py
->>> from collections import Hashable
+>>> from collections.abc import Hashable
 >>> issubclass(list, object)
 True
 >>> issubclass(object, Hashable)
@@ -3698,7 +3697,7 @@ def dict_size(o):
 
 * 看着奇怪但能正确运行的语句:
   + `[] = ()` 语句在语义上是正确的 (解包一个空的 `tuple` 并赋值给 `list`)
-  + `'a'[0][0][0][0][0]` 在语义上也是正确的, 因为在 Python 中字符串同时也是[序列](https://docs.python.org/3/glossary.html#term-sequence)(可迭代对象支持使用整数索引访问元素).
+  + `'a'[0][0][0][0][0]` 在语义上也是正确的, 因为 Python 不像C语言及其派生语言那样，具有字符数据类型。因此，从字符串中选择单个字符将返回单个字符串。
   + `3 --0-- 5 == 8` 和 `--5 == 5` 在语义上都是正确的, 且结果等于 `True`.(译: 3减负0等于3，再减负5相当于加5等于8；负的负5等于5.)
 
 * 鉴于 `a` 是一个数字, `++a` 和 `--a` 都是有效的 Python 语句, 但其效果与 C, C++ 或 Java 等不一样.
@@ -3796,7 +3795,7 @@ def dict_size(o):
 
 ## Need a pdf version?/需要来一份pdf版的?
 
-我收到一些想要pdf版本的需求. 你可以快速在[这](https://satwikkansal.xyz/wtfpython-pdf/)获得.
+你可以快速在[这](https://form.jotform.com/221593245656057)获得英文作者制作的版本.
 
 ## Follow Commit/追踪Commit
 
@@ -3804,12 +3803,6 @@ def dict_size(o):
 
 [![Commit id][commit-image]][commit-url]
 
-[commit-url]: https://github.com/satwikkansal/wtfpython/commit/ea1e228407f2f7efc297e6b773aabf376f6def8e
-[commit-image]: https://img.shields.io/badge/Commit-ea1e22-yellow.svg
+[commit-url]: https://github.com/satwikkansal/wtfpython/commit/19d4b075152d93e5bc75c5d08279338a895cfa27
+[commit-image]: https://img.shields.io/badge/Commit-19d4b0-yellow.svg
 
-## 996.icu
-
-[![996.icu][996.icu-image]][996.icu-url]
-
-[996.icu-url]: https://996.icu
-[996.icu-image]: https://img.shields.io/badge/link-996.icu-red.svg
