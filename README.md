@@ -7,7 +7,7 @@
 
 其他模式: [Interactive](https://mybinder.org/v2/gh/robertparley/wtfpython-cn/master?labpath=irrelevant%2Fwtf.ipynb) 
 
-[![WTFPL 2.0][license-image]][license-url]   [![Commit id][commit-image]][commit-url] 
+[![WTFPL 2.0][license-image]][license-url] [![Commit id][commit-image]][commit-url] [![996.icu][996.icu-image]][996.icu-url]
 
 
 Python, 是一个设计优美的解释型高级语言, 它提供了很多能让程序员感到舒适的功能特性. 但有的时候, Python 的一些输出结果对于初学者来说似乎并不是那么一目了然.
@@ -3806,3 +3806,9 @@ def dict_size(o):
 [commit-url]: https://github.com/satwikkansal/wtfpython/commit/19d4b075152d93e5bc75c5d08279338a895cfa27
 [commit-image]: https://img.shields.io/badge/Commit-19d4b0-yellow.svg
 
+## 996.icu
+
+[![996.icu][996.icu-image]][996.icu-url]
+
+[996.icu-url]: https://996.icu
+[996.icu-image]: https://img.shields.io/badge/link-996.icu-red.svg
