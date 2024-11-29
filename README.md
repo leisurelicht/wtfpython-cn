@@ -1,13 +1,13 @@
-<p align="center"><img src="/images/logo.png" alt=""></p>
+<p align="center"><img src="/images/logo.png#gh-light-mode-only" alt=""><img src="/images/logo-dark.png#gh-dark-mode-only" alt=""></p>
 <h1 align="center">What the f*ck Python! 🐍</h1>
 <p align="center">一些有趣且鲜为人知的 Python 特性.</p>
 
-原始版本：| [English](https://github.com/satwikkansal/wtfpython) 
+原始版本: | [English](https://github.com/satwikkansal/wtfpython) 
 
 翻译版本: | [Vietnamese Tiếng Việt](https://github.com/vuduclyunitn/wtfptyhon-vi) | [Spanish Español](https://web.archive.org/web/20220511161045/https://github.com/JoseDeFreitas/wtfpython-es) | [Korean 한국어](https://github.com/buttercrab/wtfpython-ko) | [Russian Русский](https://github.com/frontdevops/wtfpython) | [German Deutsch](https://github.com/BenSt099/wtfpython) | [Add translation](https://github.com/satwikkansal/wtfpython/issues/new?title=Add%20translation%20for%20[LANGUAGE]&body=Expected%20time%20to%20finish:%20[X]%20weeks.%20I%27ll%20start%20working%20on%20it%20from%20[Y].)
 
 
-其他模式: [Interactive](https://mybinder.org/v2/gh/robertparley/wtfpython-cn/master?labpath=irrelevant%2Fwtf.ipynb) 
+其他模式: | [Interactive](https://mybinder.org/v2/gh/robertparley/wtfpython-cn/master?labpath=irrelevant%2Fwtf.ipynb) 
 
 [![WTFPL 2.0][license-image]][license-url] [![Commit id][commit-image]][commit-url] [![996.icu][996.icu-image]][996.icu-url]
 
@@ -1357,7 +1357,7 @@ True
     ```py
     >>> r'wt\"f' == 'wt\\"f'
     True
-    >>> print(repr(r'wt\"f')
+    >>> print(repr(r'wt\"f'))
     'wt\\"f'
 
     >>> print("\n")
@@ -2607,7 +2607,7 @@ def get_middle(some_list):
 
 #### 💡 说明
 
-- - 这不是浮点精度错误，实际上，这种行为是故意的。从 Python 3.0 开始，`round()` 使用[银行进位法](https://en.wikipedia.org/wiki/Rounding#Round_half_to_even)，其中 0.5 小数四舍五入到最接近的 **偶数** ：
+- - 这不是浮点精度错误，实际上，这种行为是故意的。从 Python 3.0 开始，`round()` 使用[银行进位法](https://en.wikipedia.org/wiki/Rounding#Rounding_half_to_even)，其中 0.5 小数四舍五入到最接近的 **偶数** ：
 
 ```py
 >>> round(0.5)
@@ -3773,7 +3773,10 @@ def dict_size(o):
 * https://stackoverflow.com/questions/530530/python-2-x-gotchas-and-landmines
 * https://stackoverflow.com/questions/1011431/common-pitfalls-in-python
 * https://www.python.org/doc/humor/
+* https://github.com/cosmologicon/pywat#the-undocumented-converse-implication-operator
 * https://www.codementor.io/satwikkansal/python-practices-for-efficient-code-performance-memory-and-usability-aze6oiq65
+* https://github.com/wemake-services/wemake-python-styleguide/search?q=wtfpython&type=Issues
+* WFTPython discussion threads on [Hacker News](https://news.ycombinator.com/item?id=21862073) and [Reddit](https://www.reddit.com/r/programming/comments/edsh3q/what_the_fck_python_30_exploring_and/).
 
 # 🎓 License/许可
 
@@ -3805,8 +3808,8 @@ def dict_size(o):
 
 [![Commit id][commit-image]][commit-url]
 
-[commit-url]: https://github.com/satwikkansal/wtfpython/commit/19d4b075152d93e5bc75c5d08279338a895cfa27
-[commit-image]: https://img.shields.io/badge/Commit-19d4b0-yellow.svg
+[commit-url]: https://github.com/satwikkansal/wtfpython/commit/ceec5fddb9894d3f1756b9bd3a63067b1efe3d21
+[commit-image]: https://img.shields.io/badge/Commit-ceec5fd-yellow.svg
 
 ## 996.icu
 
