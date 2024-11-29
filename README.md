@@ -2607,7 +2607,7 @@ def get_middle(some_list):
 
 #### 💡 说明
 
-- - 这不是浮点精度错误，实际上，这种行为是故意的。从 Python 3.0 开始，`round()` 使用[银行进位法](https://en.wikipedia.org/wiki/Rounding#Round_half_to_even)，其中 0.5 小数四舍五入到最接近的 **偶数** ：
+- - 这不是浮点精度错误，实际上，这种行为是故意的。从 Python 3.0 开始，`round()` 使用[银行进位法](https://en.wikipedia.org/wiki/Rounding#Rounding_half_to_even)，其中 0.5 小数四舍五入到最接近的 **偶数** ：
 
 ```py
 >>> round(0.5)
@@ -3773,7 +3773,10 @@ def dict_size(o):
 * https://stackoverflow.com/questions/530530/python-2-x-gotchas-and-landmines
 * https://stackoverflow.com/questions/1011431/common-pitfalls-in-python
 * https://www.python.org/doc/humor/
+* https://github.com/cosmologicon/pywat#the-undocumented-converse-implication-operator
 * https://www.codementor.io/satwikkansal/python-practices-for-efficient-code-performance-memory-and-usability-aze6oiq65
+* https://github.com/wemake-services/wemake-python-styleguide/search?q=wtfpython&type=Issues
+* WFTPython discussion threads on [Hacker News](https://news.ycombinator.com/item?id=21862073) and [Reddit](https://www.reddit.com/r/programming/comments/edsh3q/what_the_fck_python_30_exploring_and/).
 
 # 🎓 License/许可
 
