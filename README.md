@@ -3808,8 +3808,8 @@ def dict_size(o):
 
 [![Commit id][commit-image]][commit-url]
 
-[commit-url]: https://github.com/satwikkansal/wtfpython/commit/19d4b075152d93e5bc75c5d08279338a895cfa27
-[commit-image]: https://img.shields.io/badge/Commit-19d4b0-yellow.svg
+[commit-url]: https://github.com/satwikkansal/wtfpython/commit/ceec5fddb9894d3f1756b9bd3a63067b1efe3d21
+[commit-image]: https://img.shields.io/badge/Commit-ceec5fd-yellow.svg
 
 ## 996.icu
 
